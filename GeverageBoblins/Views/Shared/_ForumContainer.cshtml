@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Forum>
+<!--Start of Forums Container (Forum Title + Subforum List + Collapsible Button)-->
+
+@foreach (var forum in Model)
+{
+    <section class="forum-container">
+
+        <!--Forum Header-->
+        <div class="bg-gradient row" aria-expanded="true">
+
+            <h2 class="col-6 list-title-font">@forum.Name</h2>
+            <a class="col-6" data-bs-toggle="collapse" href="#mainForums" role="button" aria-expanded="true"
+               aria-controls="mainForums">
+                <i class="fa-solid fa-minus icon-right" style="color: #2d293c;"></i>
+                <i class="fa-solid fa-plus icon-right" style="color: #2d293c;"></i>
+            </a>
+
+        </div>
+
+        <div class="show" id="mainForums">
+
+            <!--Forum List of Subforums-->
+            <ul>
+
+                <!--Subforum-->
+                <li>
+
+                    <div class="background-dark row std-height">
+
+                        Subforum goes here
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+}
+<!--End of Forums Container-->
