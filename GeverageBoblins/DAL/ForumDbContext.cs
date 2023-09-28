@@ -12,6 +12,12 @@ namespace GeverageBoblins.DAL
         }
 
         public DbSet<Forum> Forums { get; set; }
+        public DbSet<Subforum> Subforums { get; set; }
 
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
     }
 }

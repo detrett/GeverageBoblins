@@ -9,29 +9,37 @@
         <div class="bg-gradient row" aria-expanded="true">
 
             <h2 class="col-6 list-title-font">@forum.Name</h2>
-            <a class="col-6" data-bs-toggle="collapse" href="#mainForums" role="button" aria-expanded="true"
-               aria-controls="mainForums">
+
+            <a class="col-6" href="#collapseContent-@forum.ForumId" data-bs-toggle="collapse" data-target="collapseContent-@forum.ForumId" role="button" aria-expanded="true"
+               aria-controls="collapseContent-@forum.ForumId">
                 <i class="fa-solid fa-minus icon-right" style="color: #2d293c;"></i>
                 <i class="fa-solid fa-plus icon-right" style="color: #2d293c;"></i>
             </a>
 
         </div>
 
-        <div class="show" id="mainForums">
+        <div class="show" id="collapseContent-@forum.ForumId">
 
-            <!--Forum List of Subforums-->
             <ul>
+                @{
+                    var count = 0;
+                    foreach (var subforum in forum.Subforums)
+                    {
+                        if (count%2 > 0)
+                        {
+                            subforum.BackgroundColor = "light";
+                        }
+                        else
+                        {
+                            subforum.BackgroundColor = "dark";
+                        }
+                        @await Html.PartialAsync("_SubforumContainer", subforum);
 
-                <!--Subforum-->
-                <li>
-
-                    <div class="background-dark row std-height">
-
-                        Subforum goes here
-
-                    </div>
-                </li>
+                        count++;
+                    }
+                }
             </ul>
+
         </div>
     </section>
 }

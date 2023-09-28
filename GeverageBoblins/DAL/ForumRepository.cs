@@ -7,7 +7,7 @@ namespace GeverageBoblins.DAL
     {
         private readonly ForumDbContext _db;
 
-        public ForumRepository(ForumDbContext db) 
+        public ForumRepository(ForumDbContext db)
         {
             _db = db;
         }

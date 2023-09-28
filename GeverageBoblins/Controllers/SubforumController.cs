@@ -2,32 +2,29 @@
 using GeverageBoblins.Models;
 using GeverageBoblins.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 
 namespace GeverageBoblins.Controllers
 {
-    public class ForumController : Controller
+    public class SubforumController : Controller
     {
-        // Injecting the Forum's Repository
-        private readonly IForumRepository _forumRepository;
+        // Injecting the Subforum's Repository
+        private readonly ISubforumRepository _subforumRepository;
 
-        public ForumController(IForumRepository forumRepository)
+        public SubforumController(ISubforumRepository subforumRepository)
         {
-            _forumRepository = forumRepository;
+            _subforumRepository = subforumRepository;
         }
-
 
         // This method creates a container for a forum
         public async Task<IActionResult> Container()
         {
             // Get Data
-            var forums = await _forumRepository.GetAll();
+            var subforums = await _subforumRepository.GetAll();
 
             // Make ViewModel with Data and return it
-            var forumListViewModel = new ForumListViewModel(forums, "Container");
-            return View(forumListViewModel);
+            var subforumListViewModel = new SubforumListViewModel(subforums, "Container");
+            return View(subforumListViewModel);
         }
 
         // CRUD
@@ -36,20 +33,20 @@ namespace GeverageBoblins.Controllers
         // Redirect the user to a form to input the data
         [HttpGet]
         public IActionResult Create()
-        {     
+        {
             return View();
-        }     
-              
+        }
+
         // Inject data into the DB
         [HttpPost]
-        public async Task<IActionResult> Create(Forum forum)
+        public async Task<IActionResult> Create(Subforum subforum)
         {
             if (ModelState.IsValid)
             {
-                await _forumRepository.Create(forum);
+                await _subforumRepository.Create(subforum);
                 return RedirectToAction(nameof(Container));
             }
-            return View(forum);
+            return View(subforum);
         }
 
         // READ
@@ -57,11 +54,11 @@ namespace GeverageBoblins.Controllers
         public async Task<IActionResult> Details(int id)
         {
             // Get Data
-            var item = await _forumRepository.GetForumById(id);
+            var item = await _subforumRepository.GetSubforumById(id);
 
             if (item == null)
             {
-                return BadRequest("Forum not found.");
+                return BadRequest("Subforum not found.");
             }
 
             return View(item);
@@ -72,9 +69,9 @@ namespace GeverageBoblins.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            var item = await _forumRepository.GetForumById(id);
+            var item = await _subforumRepository.GetSubforumById(id);
 
-            if (item == null) 
+            if (item == null)
             {
                 return NotFound();
             }
@@ -83,15 +80,15 @@ namespace GeverageBoblins.Controllers
 
         // Inject updated data into the DB
         [HttpPost]
-        public async Task<IActionResult> Update(Forum forum)
+        public async Task<IActionResult> Update(Subforum subforum)
         {
             if (ModelState.IsValid)
             {
-                await _forumRepository.Update(forum);
+                await _subforumRepository.Update(subforum);
 
                 return RedirectToAction(nameof(Container));
             }
-            return View(forum);
+            return View(subforum);
         }
 
         // DELETE
@@ -99,7 +96,7 @@ namespace GeverageBoblins.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var item = await _forumRepository.GetForumById(id);
+            var item = await _subforumRepository.GetSubforumById(id);
             if (item == null)
             {
                 return NotFound();
@@ -111,7 +108,7 @@ namespace GeverageBoblins.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _forumRepository.Delete(id);
+            await _subforumRepository.Delete(id);
             return RedirectToAction(nameof(Container));
         }
 

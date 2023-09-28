@@ -10,5 +10,7 @@ namespace GeverageBoblins.Models
             ErrorMessage = "The Name must be numbers or letters and between 2 to 20 characters long.")]
         public string Name { get; set; } = string.Empty; // Example: 'Main Forum'
 
+        public virtual List<Subforum>? Subforums { get; set; }
+
     }
 }

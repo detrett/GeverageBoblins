@@ -1,0 +1,65 @@
+﻿@model Subforum
+
+<!--Subforum Container-->
+<li>
+
+    <div class="background-@Model.BackgroundColor row std-height">
+
+        <!--Bubble icon-->
+        <div class="col-1 icon-container hidden-mobile">
+            <a href="Subforum.html" title="Go to Subforum">
+                <i class="fa-regular fa-message fa-2xl" style="color: #2d293c;"></i>
+            </a>
+        </div>
+
+        <!--Forum title + description -->
+        <div class="col-9 col-md-4 forum-title-container-sm">
+            <a href="Subforum.html" class="forum-title-font std-link"
+               title="Go to @Model.Name">@Model.Name</a>
+
+            <p class="margin-bt-12">
+                @Model.Description
+            </p>
+
+        </div>
+
+        <div class="col-2 icon-container">
+
+            <ul>
+
+                <!--Last poster user picture-->
+                <li class="centered">
+                    <a href="#" title="Go to User Profile">
+                        <i class="fa-regular fa-circle-user fa-2xl" style="color: #2d293c;"></i>
+                    </a>
+                </li>
+
+                <!-- Only for mobile viewing : date of last post -->
+                <li class="only-mobile">
+                    <p class="date-font">Today</p>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="col-md-5 forum-title-container-sm hidden-mobile">
+
+            <!--Last post thread title-->
+            <a href="#" class="thread-title-font-lg" title="Go to Thread">
+                Drink of the Year 2023
+                Winner Awards!
+            </a>
+
+            <!--Last post username and date-->
+            <p class="std-subtitle-font">
+                By <a href="#" class="adminTitle"
+                      title="Go to User Profile">Fizzy</a>, 8 hours ago
+            </p>
+
+
+        </div>
+    </div>
+</li>
+
+<!--End of Forums Container-->

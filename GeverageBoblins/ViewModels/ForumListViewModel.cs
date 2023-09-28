@@ -6,6 +6,7 @@ namespace GeverageBoblins.ViewModels
     {
 
         public IEnumerable<Forum> Forums;
+
         public string? CurrentViewName;
 
         public ForumListViewModel(IEnumerable<Forum> forums, string? currentViewName) 
