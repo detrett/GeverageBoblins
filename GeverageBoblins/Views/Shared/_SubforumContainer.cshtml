@@ -1,5 +1,4 @@
 ﻿@model Subforum
-
 <!--Subforum Container-->
 <li>
 
@@ -47,7 +46,33 @@
 
             <!--Last post thread title-->
             <a href="#" class="thread-title-font-lg" title="Go to Thread">
-                @Model.Threads[0].Name
+                <!--The following block of code finds which thread in the subforum hast the latest comment, in order to use that thread's title-->
+                @{
+                    var trueLastComment = new Comment
+                    {
+                        ThreadId = 1,
+                        AuthorId = 1,
+                        CreatedAt = new DateTime()
+                    };
+
+                    foreach (var thread in Model.Threads)
+                    {
+                        var lastComment = thread.Comments.LastOrDefault();
+                        var value = DateTime.Compare(lastComment.CreatedAt, trueLastComment.CreatedAt);
+                        if (value > 0)
+                        {
+                            trueLastComment = lastComment;
+                        }
+                    }
+                    var threadId = trueLastComment.ThreadId;
+                    foreach (var thread in Model.Threads)
+                    {
+                        if (thread.ThreadId == threadId)
+                        {
+                            @thread.Name
+                        }
+                    }
+                }
             </a>
 
             <!--Last post username and date-->
