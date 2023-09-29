@@ -13,6 +13,9 @@ namespace GeverageBoblins.DAL
 
         public DbSet<Forum> Forums { get; set; }
         public DbSet<Subforum> Subforums { get; set; }
+        public DbSet<Models.Thread> Threads { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

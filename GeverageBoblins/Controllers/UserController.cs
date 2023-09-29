@@ -2,29 +2,28 @@
 using GeverageBoblins.Models;
 using GeverageBoblins.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
 
 namespace GeverageBoblins.Controllers
 {
-    public class SubforumController : Controller
+    public class UserController : Controller
     {
         // Injecting the Subforum's Repository
-        private readonly ISubforumRepository _subforumRepository;
+        private readonly IUserRepository _userRepository;
 
-        public SubforumController(ISubforumRepository subforumRepository)
+        public UserController(IUserRepository userRepository)
         {
-            _subforumRepository = subforumRepository;
+            _userRepository = userRepository;
         }
-        
+
         // This method creates a container for a subforum
         public async Task<IActionResult> Container()
         {
             // Get Data
-            var subforums = await _subforumRepository.GetAll();
+            var users = await _userRepository.GetAll();
 
             // Make ViewModel with Data and return it
-            var subforumListViewModel = new SubforumListViewModel(subforums, "Container");
-            return View(subforumListViewModel);
+            var userListViewModel = new UserListViewModel(users, "Container");
+            return View(userListViewModel);
         }
 
         // CRUD
@@ -39,14 +38,14 @@ namespace GeverageBoblins.Controllers
 
         // Inject data into the DB
         [HttpPost]
-        public async Task<IActionResult> Create(Subforum subforum)
+        public async Task<IActionResult> Create(User user)
         {
             if (ModelState.IsValid)
             {
-                await _subforumRepository.Create(subforum);
+                await _userRepository.Create(user);
                 return RedirectToAction(nameof(Container));
             }
-            return View(subforum);
+            return View(user);
         }
 
         // READ
@@ -54,11 +53,11 @@ namespace GeverageBoblins.Controllers
         public async Task<IActionResult> Details(int id)
         {
             // Get Data
-            var item = await _subforumRepository.GetSubforumById(id);
+            var item = await _userRepository.GetUserById(id);
 
             if (item == null)
             {
-                return BadRequest("Subforum not found.");
+                return BadRequest("User not found.");
             }
 
             return View(item);
@@ -69,7 +68,7 @@ namespace GeverageBoblins.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            var item = await _subforumRepository.GetSubforumById(id);
+            var item = await _userRepository.GetUserById(id);
 
             if (item == null)
             {
@@ -80,15 +79,15 @@ namespace GeverageBoblins.Controllers
 
         // Inject updated data into the DB
         [HttpPost]
-        public async Task<IActionResult> Update(Subforum subforum)
+        public async Task<IActionResult> Update(User user)
         {
             if (ModelState.IsValid)
             {
-                await _subforumRepository.Update(subforum);
+                await _userRepository.Update(user);
 
                 return RedirectToAction(nameof(Container));
             }
-            return View(subforum);
+            return View(user);
         }
 
         // DELETE
@@ -96,7 +95,7 @@ namespace GeverageBoblins.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var item = await _subforumRepository.GetSubforumById(id);
+            var item = await _userRepository.GetUserById(id);
             if (item == null)
             {
                 return NotFound();
@@ -108,7 +107,7 @@ namespace GeverageBoblins.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _subforumRepository.Delete(id);
+            await _userRepository.Delete(id);
             return RedirectToAction(nameof(Container));
         }
 
@@ -116,6 +115,5 @@ namespace GeverageBoblins.Controllers
         {
             return View();
         }
-
     }
 }

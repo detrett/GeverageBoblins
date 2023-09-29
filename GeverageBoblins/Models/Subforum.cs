@@ -14,5 +14,7 @@ namespace GeverageBoblins.Models
 
         public string? BackgroundColor { get; set; } // Options: 'dark' or 'light'
 
+        public virtual List<Models.Thread>? Threads { get; set; } // List of threads inside of a subforum
+
     }
 }
