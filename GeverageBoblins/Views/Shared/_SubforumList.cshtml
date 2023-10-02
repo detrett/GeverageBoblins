@@ -1,0 +1,132 @@
+﻿@model Subforum
+<!--Subforum List-->
+<li>
+
+    <div class="background-@Model.BackgroundColor row std-height">
+
+        <!--Bubble icon-->
+        <div class="col-1 icon-container hidden-mobile">
+            <a href="Subforum.html" title="Go to Subforum">
+                <i class="fa-regular fa-message fa-2xl" style="color: #2d293c;"></i>
+            </a>
+        </div>
+
+        <!--Forum title + description -->
+        <div class="col-9 col-md-4 forum-title-container-sm">
+            <a asp-action="container" asp-controller="subforum" asp-route-id="@Model.SubforumId"
+               class="forum-title-font std-link" title="Go to @Model.Name">@Model.Name</a>
+
+            <p class="margin-bt-12">
+                @Model.Description
+            </p>
+
+        </div>
+
+        <div class="col-2 icon-container">
+
+            <ul>
+
+                <!--Last poster user picture-->
+                <li class="centered">
+                    <a href="#" title="Go to User Profile">
+                        <i class="fa-regular fa-circle-user fa-2xl" style="color: #2d293c;"></i>
+                    </a>
+                </li>
+
+                <!-- Only for mobile viewing : date of last post -->
+                <li class="only-mobile">
+                    <p class="date-font">Today</p>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="col-md-5 forum-title-container-sm hidden-mobile">
+
+            <!--Last post thread title-->
+            <a href="#" class="thread-title-font-lg" title="Go to Thread">
+                <!--The following block of code finds which thread in the subforum has the latest comment, in order to use that thread's title-->
+                @{
+                    var trueLastComment = new Comment
+                    {
+                        ThreadId = 1,
+                        UserId = 1,
+                        CreatedAt = new DateTime()
+                    };
+
+                    foreach (var thread in Model.Threads)
+                    {
+                        var lastComment = thread.Comments.LastOrDefault();
+                        var value = DateTime.Compare(lastComment.CreatedAt, trueLastComment.CreatedAt);
+                        if (value > 0)
+                        {
+                            trueLastComment = lastComment;
+                        }
+                    }
+                    var threadId = trueLastComment.ThreadId;
+                    foreach (var thread in Model.Threads)
+                    {
+                        if (thread.ThreadId == threadId)
+                        {
+                            @thread.Name
+                        }
+                    }
+                }
+            </a>
+
+            <!--Last post username and date-->
+            <p class="std-subtitle-font">
+                By
+                @{
+                    if (trueLastComment.User.Rank == "admin")
+                    {
+                        <a href="#" class="adminTitle"
+                           title="Go to User Profile">
+                            <!--The following block of code determines the last commented thread's author-->
+                            @trueLastComment.User.Name
+                        </a>
+                    }
+                    else if (trueLastComment.User.Rank == "mod")
+                    {
+                        <a href="#" class="modTitle"
+                           title="Go to User Profile">
+                            <!--The following block of code determines the last commented thread's author-->
+                            @trueLastComment.User.Name
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="#" class="memberTitle"
+                           title="Go to User Profile">
+                            <!--The following block of code determines the last commented thread's author-->
+                            @trueLastComment.User.Name
+                        </a>
+                    }
+                }, 
+
+                <!--The following block of code determines the best way to display the date since the last comment-->
+                @{
+                    TimeSpan ts = DateTime.Now.Subtract(trueLastComment.CreatedAt);
+                    var output = "";
+
+                    if (ts.TotalHours < 1)
+                        output = $"{ts.TotalMinutes} minutes ago";
+                    else if (ts.TotalDays < 1)
+                        output = $"{ts.TotalHours} hours ago";
+                    else if (ts.TotalDays < 2)
+                        output = "yesterday";
+                    else if (ts.TotalDays < 5)
+                        output = $"on {trueLastComment.CreatedAt.DayOfWeek}";
+                    else output = $"on {trueLastComment.CreatedAt.ToString("M")}";
+
+                    @output
+                }
+            </p>
+
+
+        </div>
+    </div>
+</li>
+
+<!--End of Forums Container-->

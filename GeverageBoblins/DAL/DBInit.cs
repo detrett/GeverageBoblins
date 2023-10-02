@@ -20,56 +20,56 @@ namespace GeverageBoblins.DAL
                         Name = "Fizzy",
                         Email = "easyfizzy@bg.com",
                         Password = "bestadmin",
-                        Rank = "Administrator"
+                        Rank = "admin"
                     },
                     new User
                     {
                         Name = "bubbletrouble",
                         Email = "mrbubbles@bg.com",
                         Password = "newuser",
-                        Rank = "Member"
+                        Rank = "member"
                     },
                     new User
                     {
                         Name = "Turbo",
                         Email = "master_turbo@bg.com",
                         Password = "JustTurbo",
-                        Rank = "Member"
+                        Rank = "member"
                     },
                     new User
                     {
                         Name = "m0nst3r4dd1ct",
                         Email = "monsterpunch@monster.com",
                         Password = "punch",
-                        Rank = "Moderator"
+                        Rank = "mod"
                     },
                     new User
                     {
                         Name = "hydration_nation",
                         Email = "h2o@bg.com",
                         Password = "water",
-                        Rank = "Member"
+                        Rank = "member"
                     },
                     new User
                     {
                         Name = "aGeverageBoblin",
                         Email = "aGeverageBoblin@bg.com",
                         Password = "geverage",
-                        Rank = "Member"
+                        Rank = "member"
                     },
                     new User
                     {
                         Name = "The Hierophant",
                         Email = "numberv@bg.com",
                         Password = "hierophant",
-                        Rank = "Moderator"
+                        Rank = "mod"
                     },
                     new User
                     {
                         Name = "Scratchy",
                         Email = "scratchy@bg.com",
                         Password = "scratchy",
-                        Rank = "Member"
+                        Rank = "member"
                     }
             };
 
@@ -78,98 +78,98 @@ namespace GeverageBoblins.DAL
                     // 8 newer comments
                     new Comment
                     {
-                        AuthorId = 1,
+                        UserId = 1,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2023, 9, 29, 11, 20, 55)
                     },
                     new Comment
                     {
-                        AuthorId = 2,
+                        UserId = 2,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2023, 9, 28, 11, 20, 55)
                     },
                     new Comment
                     {
-                        AuthorId = 3,
+                        UserId = 3,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2023, 9, 27, 11, 20, 55)
                     },
                     new Comment
                     {
-                        AuthorId = 4,
+                        UserId = 4,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2023, 9, 26, 11, 20, 55)
                     },
                     new Comment
                     {
-                        AuthorId = 5,
+                        UserId = 5,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2023, 9, 25, 11, 20, 55)
                     },
                     new Comment
-                    {
-                        AuthorId = 6,
+                    {   
+                        UserId = 6,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2023, 9, 24, 11, 20, 55)
                     },
                     new Comment
                     {
-                        AuthorId = 7,
+                        UserId = 7,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2023, 9, 23, 11, 20, 55)
                     },
                     new Comment
                     {
-                        AuthorId = 8,
+                        UserId = 8,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2023, 9, 22, 11, 20, 55)
                     },
                     // 8 older comments
                     new Comment
                     {
-                        AuthorId = 8,
+                        UserId = 8,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2022, 9, 22, 11, 20, 55)
                     },
                     new Comment
                     {
-                        AuthorId = 7,
+                        UserId = 7,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2022, 9, 23, 11, 20, 55)
                     },
                     new Comment
                     {
-                        AuthorId = 6,
+                        UserId = 6,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2022, 9, 24, 11, 20, 55)
                     },
                     new Comment
                     {
-                        AuthorId = 5,
+                        UserId = 5,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2022, 9, 25, 11, 20, 55)
                     },
                     new Comment
                     {
-                        AuthorId = 4,
+                        UserId = 4,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2022, 9, 26, 11, 20, 55)
                     },
                     new Comment
                     {
-                        AuthorId = 3,
+                        UserId = 3,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2022, 9, 27, 11, 20, 55)
                     },
                     new Comment
                     {
-                        AuthorId = 2,
+                        UserId = 2,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2022, 9, 28, 11, 20, 55)
                     },
                     new Comment
                     {
-                        AuthorId = 1,
+                        UserId = 1,
                         Body = "Lorem ipsum...",
                         CreatedAt = new DateTime(2022, 9, 29, 11, 20, 55)
                     }
@@ -180,147 +180,211 @@ namespace GeverageBoblins.DAL
                     // 16 Threads. 2 per subforum. 1 older, 1 newer.
                     new Models.Thread
                     {
-                        AuthorId = 1,
+                        UserId = 1,
                         Name = "Drink of the Year 2023 Winner Awards!",
                         Comments = new List<Comment>
                         {
                             comments[0]
-                        }
+                        },
+                        IsLocked = true,
+                        IsAnnouncement = true,
+                        IsPinned = true,
+                        IsFeatured = false
                     },
                     new Models.Thread
                     {
-                        AuthorId = 2,
+                        UserId = 2,
                         Name = "Hi everyone :)",
                         Comments = new List<Comment>
                         {
                             comments[1]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = false,
+                        IsPinned = false,
+                        IsFeatured = false
                     },
                     new Models.Thread
                     {
-                        AuthorId = 3,
+                        UserId = 3,
                         Name = "Alright here we go... Pepsi Vs Coke!!",
                         Comments = new List<Comment>
                         {
                             comments[2]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = false,
+                        IsPinned = false,
+                        IsFeatured = true
                     },
                     new Models.Thread
                     {
-                        AuthorId = 4,
+                        UserId = 4,
                         Name = "Definitive Monster flavours tier list",
                         Comments = new List<Comment>
                         {
                             comments[3]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = false,
+                        IsPinned = true,
+                        IsFeatured = false
                     },
                     new Models.Thread
                     {
-                        AuthorId = 5,
+                        UserId = 5,
                         Name = "WaterTok - Is flavoured water still considered water? ",
                         Comments = new List<Comment>
                         {
                             comments[4]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = false,
+                        IsPinned = false,
+                        IsFeatured = false
                     },
                     new Models.Thread
                     {
-                        AuthorId = 6,
+                        UserId = 6,
                         Name = "Just tried Kombucha for the first time",
                         Comments = new List<Comment>
                         {
                             comments[5]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = false,
+                        IsPinned = false,
+                        IsFeatured = false
                     },
                     new Models.Thread
                     {
-                        AuthorId = 7,
+                        UserId = 7,
                         Name = "Control + V Thread",
                         Comments = new List<Comment>
                         {
                             comments[6]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = false,
+                        IsPinned = false,
+                        IsFeatured = true
                     },
                     new Models.Thread
                     {
-                        AuthorId = 8,
+                        UserId = 8,
                         Name = "Post your song of the day",
                         Comments = new List<Comment>
                         {
                             comments[7]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = false,
+                        IsPinned = false,
+                        IsFeatured = false
                     },
                     new Models.Thread
                     {
-                        AuthorId = 1,
+                        UserId = 1,
                         Name = "Updated list of moderators!",
                         Comments = new List<Comment>
                         {
                             comments[8]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = true,
+                        IsPinned = false,
+                        IsFeatured = false
                     },
                     new Models.Thread
                     {
-                        AuthorId = 2,
+                        UserId = 2,
                         Name = "Hello!",
                         Comments = new List<Comment>
                         {
                             comments[9]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = false,
+                        IsPinned = false,
+                        IsFeatured = false
                     },
                     new Models.Thread
                     {
-                        AuthorId = 3,
+                        UserId = 3,
                         Name = "What even is Bitter Kas?",
                         Comments = new List<Comment>
                         {
                             comments[10]
-                        }
+                        },
+                        IsLocked = true,
+                        IsAnnouncement = false,
+                        IsPinned = false,
+                        IsFeatured = false
                     },
                     new Models.Thread
                     {
-                        AuthorId = 4,
+                        UserId = 4,
                         Name = "Why doesn't redbull make more sugar free flavors?",
                         Comments = new List<Comment>
                         {
                             comments[11]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = false,
+                        IsPinned = false,
+                        IsFeatured = false
                     },
                     new Models.Thread
                     {
-                        AuthorId = 5,
+                        UserId = 5,
                         Name = "I can't stop going to the bathroom",
                         Comments = new List<Comment>
                         {
                             comments[12]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = false,
+                        IsPinned = false,
+                        IsFeatured = false
                     },
                     new Models.Thread
                     {
-                        AuthorId = 6,
+                        UserId = 6,
                         Name = "Thoughts on Yerba Mate?",
                         Comments = new List<Comment>
                         {
                             comments[13]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = false,
+                        IsPinned = false,
+                        IsFeatured = false
                     },
                     new Models.Thread
                     {
-                        AuthorId = 7,
+                        UserId = 7,
                         Name = "Bump thread",
                         Comments = new List<Comment>
                         {
                             comments[14]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = false,
+                        IsPinned = false,
+                        IsFeatured = true
                     },
                     new Models.Thread
                     {
-                        AuthorId = 8,
+                        UserId = 8,
                         Name = "Post your video of the day",
                         Comments = new List<Comment>
                         {
                             comments[15]
-                        }
+                        },
+                        IsLocked = false,
+                        IsAnnouncement = false,
+                        IsPinned = false,
+                        IsFeatured = true
                     }
                 };
 

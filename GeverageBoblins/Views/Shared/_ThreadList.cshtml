@@ -1,0 +1,179 @@
+﻿@model Thread
+<!--THREAD-->
+<li>
+    <div class="background-light border-item-bottom row">
+
+        <!--Status-->
+        <div class="col-1 icon-container hidden-mobile">
+            @{
+                if (Model.IsLocked)
+                {
+                    <i class="fa-solid fa-lock" data-bs-toggle="tooltip" title="Locked Thread"></i>
+                }
+                if (Model.IsAnnouncement)
+                {
+                    <i class="fa-solid fa-bullhorn" data-bs-toggle="tooltip" title="Announcement"></i>
+
+                }
+                if (Model.IsPinned)
+                {
+                    <i class="fa-solid fa-thumbtack icon-border icon-mini" data-bs-toggle="tooltip"
+                       title="Pinned Thread" style="color: #433b60;"></i>
+                }
+                if (Model.IsFeatured)
+                {
+                    <i class="fa-solid fa-star gradient-text spin" data-bs-toggle="tooltip"
+                       title="Featured Thread"></i>
+                }
+            }
+
+        </div>
+
+        <!--Title-->
+        <div class="col-9 col-md-7 forum-title-container">
+            <a href="Thread.html" class="thread-title-font std-link" title="Go to thread">
+                <span>
+                    @Model.Name
+                </span>
+            </a>
+
+            <p class="thread-subtitle-font">
+                By
+                @{
+                    if (Model.User.Rank == "admin")
+                    {
+                        <a href="#" class="adminTitle"
+                           title="Go to User Profile">
+                            <!--The following block of code determines the last commented thread's author-->
+                            @Model.User.Name
+                        </a>
+                    }
+                    else if (Model.User.Rank == "mod")
+                    {
+                        <a href="#" class="modTitle"
+                           title="Go to User Profile">
+                            <!--The following block of code determines the last commented thread's author-->
+                            @Model.User.Name
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="#" class="memberTitle"
+                           title="Go to User Profile">
+                            <!--The following block of code determines the last commented thread's author-->
+                            @Model.User.Name
+                        </a>
+                    }
+                }
+
+                <!--The following block of code determines the best way to display the publish date-->
+                @{
+                    TimeSpan ts = DateTime.Now.Subtract(Model.CreatedAt);
+                    var output = "";
+
+                    if (ts.TotalHours < 1)
+                        if (ts.TotalMinutes < 2)
+                            output = "1 minute ago";
+                        else output = $"{Math.Round(ts.TotalMinutes, 0)} minutes ago";
+                    else if (ts.TotalDays < 1)
+                        if (ts.TotalHours < 2)
+                            output = "1 hour ago";
+                        else output = $"{Math.Round(ts.TotalHours, 0)} hours ago";
+                    else if (ts.TotalDays < 2)
+                        output = "yesterday";
+                    else if (ts.TotalDays < 5)
+                        output = $"on {@Model.CreatedAt.DayOfWeek}";
+                    else output = $"on {@Model.CreatedAt.ToString("M")}";
+
+                    @output
+                }
+
+            </p>
+
+        </div>
+
+        <!--Replies-->
+        <div class="col-1 icon-container hidden-mobile">
+            <ul>
+                <li class="centered">
+                    <p>
+                        1
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        <!--Last Poster-->
+        <div class="col-3 last-poster-container">
+            <div class="row">
+                <!--Icon-->
+                <div class="col-6 col-md-3 last-poster-icon">
+
+                    <a href="" class="" title="Go to profile">
+                        <i class="fa-regular fa-circle-user fa-2xl"></i>
+                    </a>
+
+                </div>
+
+                <div class="col-md-9 centered-sm">
+
+                    <div>
+                        @{
+                            if (Model.User.Rank == "admin")
+                            {
+                                <a href="#" class="adminTitle"
+                                   title="Go to User Profile">
+                                    <!--The following block of code determines the last commented thread's author-->
+                                    @Model.User.Name
+                                </a>
+                            }
+                            else if (Model.User.Rank == "mod")
+                            {
+                                <a href="#" class="modTitle"
+                                   title="Go to User Profile">
+                                    <!--The following block of code determines the last commented thread's author-->
+                                    @Model.User.Name
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="#" class="memberTitle"
+                                   title="Go to User Profile">
+                                    <!--The following block of code determines the last commented thread's author-->
+                                    @Model.User.Name
+                                </a>
+                            }
+                        }
+
+                    </div>
+
+                    <div>
+                        <a href="" class="user-link hidden-mobile" title="Go to last post">
+                            @{
+                                TimeSpan ts2 = DateTime.Now.Subtract(Model.Comments.LastOrDefault().CreatedAt);
+                                var output2 = "";
+
+                                if (ts.TotalHours < 1)
+                                    if (ts.TotalMinutes < 2)
+                                        output2 = "1 minute ago";
+                                    else output2 = $"{Math.Round(ts.TotalMinutes, 0)} minutes ago";
+                                else if (ts.TotalDays < 1)
+                                    if (ts.TotalHours < 2)
+                                        output2 = "1 hour ago";
+                                    else output2 = $"{Math.Round(ts.TotalHours, 0)} hours ago";
+                                else if (ts.TotalDays < 2)
+                                    output2 = "yesterday";
+                                else if (ts.TotalDays < 5)
+                                    output2 = $"on {@Model.Comments.LastOrDefault().CreatedAt.DayOfWeek}";
+                                else output2 = $"on {@Model.Comments.LastOrDefault().CreatedAt.ToString("M")}";
+
+                                @output2
+                            }
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</li> 

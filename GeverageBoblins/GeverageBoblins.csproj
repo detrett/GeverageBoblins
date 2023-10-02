@@ -148,7 +148,6 @@
   <ItemGroup>
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\User\" />
-    <Folder Include="Views\Thread\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

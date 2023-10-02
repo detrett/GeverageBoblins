@@ -15,15 +15,15 @@ namespace GeverageBoblins.Controllers
         {
             _subforumRepository = subforumRepository;
         }
-        
-        // This method creates a container for a subforum
-        public async Task<IActionResult> Container()
+
+        // This method creates a container for a subforum based on its id
+        public async Task<IActionResult> Container(int id)
         {
             // Get Data
-            var subforums = await _subforumRepository.GetAll();
+            var subforum = await _subforumRepository.GetSubforumById(id);
 
             // Make ViewModel with Data and return it
-            var subforumListViewModel = new SubforumListViewModel(subforums, "Container");
+            var subforumListViewModel = new SubforumListViewModel(subforum, "Container");
             return View(subforumListViewModel);
         }
 

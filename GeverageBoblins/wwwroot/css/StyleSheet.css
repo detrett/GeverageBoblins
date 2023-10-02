@@ -48,12 +48,12 @@ a.modTitle:hover {
     color: #171717;
 }
 
-.userTitle {
+.memberTitle {
     font-weight: 400;
     color: #433B60;
 }
 
-a.userTitle:hover {
+a.memberTitle:hover {
     font-weight: 600;
     color: #171717;
 }

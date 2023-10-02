@@ -1,9 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeverageBoblins.Models
 {
+    [Table("Forum")]
     public class Forum
     {
+        [Key]
         public int ForumId { get; set; }
 
         [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{2,20}", 

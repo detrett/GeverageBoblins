@@ -33,7 +33,7 @@
                         {
                             subforum.BackgroundColor = "dark";
                         }
-                        @await Html.PartialAsync("_SubforumContainer", subforum);
+                        @await Html.PartialAsync("_SubforumList", subforum);
 
                         count++;
                     }
@@ -44,3 +44,5 @@
     </section>
 }
 <!--End of Forums Container-->
+
+<a href="" id="back-to-top-button" data-bs-toggle="tooltip" title="Back to top"></a>

@@ -1,89 +1,102 @@
 ﻿@model Subforum
-<!--Subforum Container-->
-<li>
 
-    <div class="background-@Model.BackgroundColor row std-height">
+<!--Subforum Title-->
+<div class="row">
+    <div class="col" id="title">
+        <h1 class="title-font">@Model.Name</h1>
+    </div>
+</div>
 
-        <!--Bubble icon-->
-        <div class="col-1 icon-container hidden-mobile">
-            <a href="Subforum.html" title="Go to Subforum">
-                <i class="fa-regular fa-message fa-2xl" style="color: #2d293c;"></i>
-            </a>
+<!--Start of Main Subforums Container-->
+<section class="">
+    <div class="subforum-container">
+
+        <!--Subforum Banner-->
+        <div class="border-round-top sub-banner row">
+
+            <!--PAGINATION-->
+            <nav aria-label="Page navigation" class="pagination-container col-10">
+                <ul class="pagination margin-bt-0">
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Last" data-bs-toggle="tooltip"
+                           title="Go to last page">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="col-2">
+                <a href="" class="btn card-body new-thread-btn guest-disabled disabled" role="button"
+                   aria-disabled="true" data-bs-toggle="tooltip" title="Make a new thread">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    New Thread
+                </a>
+            </div>
+
         </div>
-
-        <!--Forum title + description -->
-        <div class="col-9 col-md-4 forum-title-container-sm">
-            <a href="Subforum.html" class="forum-title-font std-link"
-               title="Go to @Model.Name">@Model.Name</a>
-
-            <p class="margin-bt-12">
-                @Model.Description
-            </p>
-
-        </div>
-
-        <div class="col-2 icon-container">
-
+        <!--End of Subforum Banner-->
+        <!--Subforum Content-->
+        <div>
+            <!--THIS PART WILL BE IMPLEMENTED BY THE FRAMEWORK USING THE DATABASE INSTEAD OF MANUALLY-->
             <ul>
-
-                <!--Last poster user picture-->
-                <li class="centered">
-                    <a href="#" title="Go to User Profile">
-                        <i class="fa-regular fa-circle-user fa-2xl" style="color: #2d293c;"></i>
-                    </a>
+                <!--LEGEND-->
+                <li>
+                    <div class="row" id="subforum-header">
+                        <div class="col-1 subforum-title-container hidden-mobile">
+                            <p>
+                                Status
+                            </p>
+                        </div>
+                        <div class="col-9 col-md-7 subforum-title-container">
+                            <p class="align-left">
+                                Title
+                            </p>
+                        </div>
+                        <div class="col-1 subforum-title-container hidden-mobile">
+                            <p>
+                                Replies
+                            </p>
+                        </div>
+                        <div class="col-3 subforum-title-container">
+                            <p>
+                                Last Post
+                            </p>
+                        </div>
+                    </div>
                 </li>
 
-                <!-- Only for mobile viewing : date of last post -->
-                <li class="only-mobile">
-                    <p class="date-font">Today</p>
-                </li>
-
-            </ul>
-
-        </div>
-
-        <div class="col-md-5 forum-title-container-sm hidden-mobile">
-
-            <!--Last post thread title-->
-            <a href="#" class="thread-title-font-lg" title="Go to Thread">
-                <!--The following block of code finds which thread in the subforum hast the latest comment, in order to use that thread's title-->
                 @{
-                    var trueLastComment = new Comment
+                    var count = 0;
+                    foreach (var thread in Model.Threads)
                     {
-                        ThreadId = 1,
-                        AuthorId = 1,
-                        CreatedAt = new DateTime()
-                    };
+                        @await Html.PartialAsync("_ThreadList", thread);
 
-                    foreach (var thread in Model.Threads)
-                    {
-                        var lastComment = thread.Comments.LastOrDefault();
-                        var value = DateTime.Compare(lastComment.CreatedAt, trueLastComment.CreatedAt);
-                        if (value > 0)
-                        {
-                            trueLastComment = lastComment;
-                        }
-                    }
-                    var threadId = trueLastComment.ThreadId;
-                    foreach (var thread in Model.Threads)
-                    {
-                        if (thread.ThreadId == threadId)
-                        {
-                            @thread.Name
-                        }
+                        count++;
                     }
                 }
-            </a>
 
-            <!--Last post username and date-->
-            <p class="std-subtitle-font">
-                By <a href="#" class="adminTitle"
-                      title="Go to User Profile">Fizzy</a>, 8 hours ago
-            </p>
-
-
+            </ul>
         </div>
+        <!--End of Subforum Content-->
     </div>
-</li>
+</section>
+<!--End of Subforums Container-->
 
-<!--End of Forums Container-->
+
+<!--Go back to thread list-->
+<div class="pager-container topic-listing-link">
+    <a asp-action="container" asp-controller="forum" class="">
+        <i class="fa-solid fa-chevron-left"></i> Go back to forum listing
+    </a>
+</div>
+
+<!--Back to top button-->
+<a href="" id="back-to-top-button" data-bs-toggle="tooltip" title="Back to top"></a>
+
+

@@ -5,12 +5,12 @@ namespace GeverageBoblins.ViewModels
     public class SubforumListViewModel
     {
 
-        public IEnumerable<Subforum> Subforums;
+        public Subforum Subforum;
         public string? CurrentViewName;
 
-        public SubforumListViewModel(IEnumerable<Subforum> subforums, string? currentViewName)
+        public SubforumListViewModel(Subforum subforum, string? currentViewName)
         {
-            Subforums = subforums;
+            Subforum = subforum;
             CurrentViewName = currentViewName;
         }
 
