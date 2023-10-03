@@ -31,7 +31,7 @@
 
         <!--Title-->
         <div class="col-9 col-md-7 forum-title-container">
-            <a href="Thread.html" class="thread-title-font std-link" title="Go to thread">
+            <a asp-action="container" asp-controller="thread" asp-route-id="@Model.ThreadId" class="thread-title-font std-link" title="Go to thread">
                 <span>
                     @Model.Name
                 </span>
@@ -40,7 +40,7 @@
             <p class="thread-subtitle-font">
                 By
                 @{
-                    if (Model.User.Rank == "admin")
+                    if (Model.User.Rank == "Admin")
                     {
                         <a href="#" class="adminTitle"
                            title="Go to User Profile">
@@ -48,7 +48,7 @@
                             @Model.User.Name
                         </a>
                     }
-                    else if (Model.User.Rank == "mod")
+                    else if (Model.User.Rank == "Mod")
                     {
                         <a href="#" class="modTitle"
                            title="Go to User Profile">
@@ -97,7 +97,7 @@
             <ul>
                 <li class="centered">
                     <p>
-                        1
+                        @Model.Comments.Count()
                     </p>
                 </li>
             </ul>
@@ -119,20 +119,20 @@
 
                     <div>
                         @{
-                            if (Model.User.Rank == "admin")
+                            if (Model.Comments.LastOrDefault().User.Rank == "Admin")
                             {
                                 <a href="#" class="adminTitle"
                                    title="Go to User Profile">
                                     <!--The following block of code determines the last commented thread's author-->
-                                    @Model.User.Name
+                                    @Model.Comments.LastOrDefault().User.Name
                                 </a>
                             }
-                            else if (Model.User.Rank == "mod")
+                            else if (Model.Comments.LastOrDefault().User.Rank == "Mod")
                             {
                                 <a href="#" class="modTitle"
                                    title="Go to User Profile">
                                     <!--The following block of code determines the last commented thread's author-->
-                                    @Model.User.Name
+                                    @Model.Comments.LastOrDefault().User.Name
                                 </a>
                             }
                             else
@@ -140,7 +140,7 @@
                                 <a href="#" class="memberTitle"
                                    title="Go to User Profile">
                                     <!--The following block of code determines the last commented thread's author-->
-                                    @Model.User.Name
+                                    @Model.Comments.LastOrDefault().User.Name
                                 </a>
                             }
                         }
@@ -148,7 +148,8 @@
                     </div>
 
                     <div>
-                        <a href="" class="user-link hidden-mobile" title="Go to last post">
+                        <a asp-action="container" asp-controller="thread" asp-route-id="@Model.ThreadId"
+                           class="user-link hidden-mobile" title="Go to thread">
                             @{
                                 TimeSpan ts2 = DateTime.Now.Subtract(Model.Comments.LastOrDefault().CreatedAt);
                                 var output2 = "";

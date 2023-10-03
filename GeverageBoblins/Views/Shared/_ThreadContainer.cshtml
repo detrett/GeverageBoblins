@@ -1,0 +1,62 @@
+﻿@model Thread
+    <!--Subforum Title-->
+<div class="row">
+    <div class="col" id="title">
+        <h1 class="title-font">@Model.ParentSubforum.Name</h1>
+    </div>
+</div>
+
+<!--Start of Thread Container-->
+<section class="">
+    <div class="thread-container background-dark card row">
+
+        <!--Thread title-->
+        <div>
+            <h2 class="thread-page-title">@Model.Name</h2>
+        </div>
+
+        @{
+            foreach (var comment in Model.Comments)
+            {
+                @await Html.PartialAsync("_CommentList", comment);
+            }
+        }
+
+        <!--Guest Teaser (GUEST ONLY)-->
+        <section class="background-light card comment-container guest-only">
+
+            <div class="row text-center margin-bt-40">
+                <div class="col-12 guest-teaser-upper-box">
+                    <h5 class="bolder">Create an account or sign in to leave a comment</h5>
+                    <p>Only members of the Beverage Goblins community can leave a comment</p>
+                </div>
+
+                <div class="guest-teaser-lower-box row">
+                    <div class="box-shadow-2 glow col-5 guest-teaser-inner-box border-round-bottom"
+                         id="signUpBox">
+                        <h6 class="card-header">Create an account</h6>
+                        <p class="card-body">Sign up for a new account now!</p>
+                        <a href="#" class="card-body std-rnbw-btn">Sign Up Now</a>
+                    </div>
+                    <div class="box-shadow-2 col-5 guest-teaser-inner-box border-round-bottom" id="signInBox">
+                        <h6 class="card-header">Sign in</h6>
+                        <p class="card-body">Already have an account? Sign in here!</p>
+                        <a href="#" class="card-body std-purple-btn">Sign In Here</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!--End of Guest Teaser (GUEST ONLY)-->
+    </div>
+</section>
+<!--End of Thread Container-->
+<!--Go back to thread list-->
+<div class="pager-container topic-listing-link">
+    <a asp-action="container" asp-controller="subforum" asp-route-id="@Model.ParentSubforum.SubforumId">
+        <i class="fa-solid fa-chevron-left"></i> Go back to topic listing
+    </a>
+</div>
+
+<!--Back to top button-->
+<a href="" id="back-to-top-button" data-bs-toggle="tooltip" title="Back to top"></a>

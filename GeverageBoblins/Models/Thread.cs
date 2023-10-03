@@ -13,6 +13,7 @@ namespace GeverageBoblins.Models
         public string Name { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public virtual List<Comment>? Comments { get; set; } // List of comments inside of a thread 
+        public virtual Subforum? ParentSubforum { get; set; }
 
         public Boolean IsLocked { get; set; }
         public Boolean IsAnnouncement { get; set; }

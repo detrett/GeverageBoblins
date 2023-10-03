@@ -16,13 +16,13 @@ namespace GeverageBoblins.Controllers
         }
 
         // This method creates a container for a thread
-        public async Task<IActionResult> Container()
+        public async Task<IActionResult> Container(int id)
         {
             // Get Data
-            var threads = await _threadRepository.GetAll();
+            var thread = await _threadRepository.GetThreadById(id);
 
             // Make ViewModel with Data and return it
-            var threadListViewModel = new ThreadListViewModel(threads, "Container");
+            var threadListViewModel = new ThreadListViewModel(thread, "Container");
             return View(threadListViewModel);
         }
 

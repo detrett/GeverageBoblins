@@ -20,56 +20,56 @@ namespace GeverageBoblins.DAL
                         Name = "Fizzy",
                         Email = "easyfizzy@bg.com",
                         Password = "bestadmin",
-                        Rank = "admin"
+                        Rank = "Admin"
                     },
                     new User
                     {
                         Name = "bubbletrouble",
                         Email = "mrbubbles@bg.com",
                         Password = "newuser",
-                        Rank = "member"
+                        Rank = "Member"
                     },
                     new User
                     {
                         Name = "Turbo",
                         Email = "master_turbo@bg.com",
                         Password = "JustTurbo",
-                        Rank = "member"
+                        Rank = "Member"
                     },
                     new User
                     {
                         Name = "m0nst3r4dd1ct",
                         Email = "monsterpunch@monster.com",
                         Password = "punch",
-                        Rank = "mod"
+                        Rank = "Mod"
                     },
                     new User
                     {
                         Name = "hydration_nation",
                         Email = "h2o@bg.com",
                         Password = "water",
-                        Rank = "member"
+                        Rank = "Member"
                     },
                     new User
                     {
                         Name = "aGeverageBoblin",
                         Email = "aGeverageBoblin@bg.com",
                         Password = "geverage",
-                        Rank = "member"
+                        Rank = "Member"
                     },
                     new User
                     {
                         Name = "The Hierophant",
                         Email = "numberv@bg.com",
                         Password = "hierophant",
-                        Rank = "mod"
+                        Rank = "Mod"
                     },
                     new User
                     {
                         Name = "Scratchy",
                         Email = "scratchy@bg.com",
                         Password = "scratchy",
-                        Rank = "member"
+                        Rank = "Member"
                     }
             };
 
@@ -79,99 +79,112 @@ namespace GeverageBoblins.DAL
                     new Comment
                     {
                         UserId = 1,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 1...",
                         CreatedAt = new DateTime(2023, 9, 29, 11, 20, 55)
                     },
                     new Comment
                     {
                         UserId = 2,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 2...",
                         CreatedAt = new DateTime(2023, 9, 28, 11, 20, 55)
                     },
                     new Comment
                     {
                         UserId = 3,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 3...",
                         CreatedAt = new DateTime(2023, 9, 27, 11, 20, 55)
                     },
                     new Comment
                     {
                         UserId = 4,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 4...",
                         CreatedAt = new DateTime(2023, 9, 26, 11, 20, 55)
                     },
                     new Comment
                     {
                         UserId = 5,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 5...",
                         CreatedAt = new DateTime(2023, 9, 25, 11, 20, 55)
                     },
                     new Comment
                     {   
                         UserId = 6,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 6...",
                         CreatedAt = new DateTime(2023, 9, 24, 11, 20, 55)
                     },
                     new Comment
                     {
                         UserId = 7,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 7...",
                         CreatedAt = new DateTime(2023, 9, 23, 11, 20, 55)
                     },
                     new Comment
                     {
                         UserId = 8,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 8...",
                         CreatedAt = new DateTime(2023, 9, 22, 11, 20, 55)
                     },
                     // 8 older comments
                     new Comment
                     {
                         UserId = 8,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 9...",
                         CreatedAt = new DateTime(2022, 9, 22, 11, 20, 55)
                     },
                     new Comment
                     {
                         UserId = 7,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 10...",
                         CreatedAt = new DateTime(2022, 9, 23, 11, 20, 55)
                     },
                     new Comment
                     {
                         UserId = 6,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 11...",
                         CreatedAt = new DateTime(2022, 9, 24, 11, 20, 55)
                     },
                     new Comment
                     {
                         UserId = 5,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 12...",
                         CreatedAt = new DateTime(2022, 9, 25, 11, 20, 55)
                     },
                     new Comment
                     {
                         UserId = 4,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 13...",
                         CreatedAt = new DateTime(2022, 9, 26, 11, 20, 55)
                     },
                     new Comment
                     {
                         UserId = 3,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 14...",
                         CreatedAt = new DateTime(2022, 9, 27, 11, 20, 55)
                     },
                     new Comment
                     {
                         UserId = 2,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 15...",
                         CreatedAt = new DateTime(2022, 9, 28, 11, 20, 55)
                     },
                     new Comment
                     {
                         UserId = 1,
-                        Body = "Lorem ipsum...",
+                        Body = "Lorem ipsum 16...",
                         CreatedAt = new DateTime(2022, 9, 29, 11, 20, 55)
+                    },
+                    // 2 Extra
+                    new Comment
+                    {
+                        UserId = 5,
+                        Body = "Lorem ipsum 17...",
+                        CreatedAt = new DateTime(2023, 9, 28, 11, 19, 55)
+                    },
+                    new Comment
+                    {
+                        UserId = 7,
+                        Body = "Lorem ipsum 18...",
+                        CreatedAt = new DateTime(2023, 9, 29, 11, 20, 52)
                     }
                 };
 
@@ -210,7 +223,9 @@ namespace GeverageBoblins.DAL
                         Name = "Alright here we go... Pepsi Vs Coke!!",
                         Comments = new List<Comment>
                         {
-                            comments[2]
+                            comments[2],
+                            comments[16],
+                            comments[17]
                         },
                         IsLocked = false,
                         IsAnnouncement = false,

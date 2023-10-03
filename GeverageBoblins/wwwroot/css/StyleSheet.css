@@ -683,7 +683,8 @@ a.memberTitle:hover {
 
 .post-container {
     margin: 15px 50px;
-    width: auto !important;
+    width: -webkit-fill-available;
+    width: -moz-available;
     box-shadow: var(--box--std-box-shadow);
 }
 

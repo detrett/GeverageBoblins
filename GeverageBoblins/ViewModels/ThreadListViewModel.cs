@@ -5,12 +5,12 @@ namespace GeverageBoblins.ViewModels
 {
     public class ThreadListViewModel
     {
-        public IEnumerable<Models.Thread> Threads;
+        public Models.Thread Thread;
         public string? CurrentViewName;
 
-        public ThreadListViewModel(IEnumerable<Models.Thread> threads, string? currentViewName)
+        public ThreadListViewModel(Models.Thread thread, string? currentViewName)
         {
-            Threads = threads;
+            Thread = thread;
             CurrentViewName = currentViewName;
         }
     }

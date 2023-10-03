@@ -26,6 +26,8 @@ builder.Services.AddDbContext<ForumDbContext>(options =>
 builder.Services.AddScoped<IForumRepository, ForumRepository>();
 // Adding the Subforum Repository
 builder.Services.AddScoped<ISubforumRepository, SubforumRepository>();
+// Adding the Thread Repository
+builder.Services.AddScoped<IThreadRepository, ThreadRepository>();
 
 // Build application
 var app = builder.Build();

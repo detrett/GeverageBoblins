@@ -1,0 +1,143 @@
+﻿@model Comment
+<!--Post start-->
+<article class="background-white card post-container" id="comment-@Model.CommentId">
+
+    <div class="row">
+        <!--Side content (Author, image, info)-->
+        <div class="aside-post hidden-mobile col-md-2">
+
+            <h3 class="aside-user-style">
+                <!--Choosing class for color based on rank-->
+                @{
+                    if (Model.User.Rank == "Admin")
+                    {
+                        <a href="#" class="adminTitle user-link"
+                           title="Go to User Profile"> 
+                            @Model.User.Name
+                        </a>
+                    }
+                    else if (Model.User.Rank == "Mod")
+                    {
+                        <a href="#" class="modTitle user-link"
+                           title="Go to User Profile">
+                            @Model.User.Name
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="#" class="memberTitle user-link"
+                           title="Go to User Profile">
+                            @Model.User.Name
+                        </a>
+                    }
+                }
+            </h3>
+
+            <ul>
+                <li>
+                    <a href="#" class="aside-user-photo-container" title="Go to profile">
+                        <i class="fa-regular fa-circle-user aside-user-photo"></i>
+                    </a>
+                </li>
+                <li class="margin-bt-20">
+                    <span class="aside-member-title">@Model.User.Rank</span>
+                </li>
+                <li class="aside-left-align">
+                    <span class="aside-subtitle">Posts: @Model.User.UserComments.Count()</span>
+
+                </li>
+                <li class="aside-left-align">
+                    <span class="aside-subtitle">Joined: <time>@Model.CreatedAt.ToString("d MMM yyyy")</time> </span>
+
+                </li>
+            </ul>
+        </div>
+        <!--End of side content-->
+        <!--Main Content-->
+        <div class="col-12 col-md-10 post-top">
+            <!--Top of Post (Title, date, buttons)-->
+            <div>
+                <div class="dropdown-center">
+                    <!--Ellipsis-->
+                    <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-ellipsis ellipsis"></i>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                               data-bs-target="#shareModal">
+                                <i class="fa-solid fa-share-nodes padding-right-icon"></i>
+                                Share
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-solid fa-pen padding-right-icon"></i>
+                                Edit
+                            </a>
+                            <!--Only the creator of the comment OR moderators/admins should see this button-->
+                        </li>
+                    </ul>
+                </div>
+                <!-- Only for mobile -->
+                <div class="only-mobile">
+
+                    <div class="post-top-user-photo-automargin">
+                        <a href="#" class="post-top-user-photo-container" title="Go to profile">
+                            <i class="fa-regular fa-circle-user post-top-user-photo"></i>
+                        </a>
+                    </div>
+
+                    <div>
+                            <h4 class="post-top-title">
+                                @{
+                                    if (Model.User.Rank == "admin")
+                                    {
+                                        <a href="#" class="adminTitle user-link"
+                                           title="Go to User Profile">
+                                            @Model.User.Name
+                                        </a>
+                                    }
+                                    else if (Model.User.Rank == "mod")
+                                    {
+                                        <a href="#" class="modTitle user-link"
+                                           title="Go to User Profile">
+                                            @Model.User.Name
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#" class="memberTitle user-link"
+                                           title="Go to User Profile">
+                                            @Model.User.Name
+                                        </a>
+                                    }
+                                }
+                            </h4>
+
+                        <a href="#comment-@Model.CommentId" class="post-top-subtitle" title="Jump to comment">
+                            Posted <time>@Model.CreatedAt.ToString("M")</time>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- For regular display -->
+                <a href="#comment-@Model.CommentId" title="Jump to comment">
+                    <h4 class="post-top-title hidden-mobile">@Model.Title</h4>
+                </a>
+                <a href="#comment-@Model.CommentId" class="post-top-subtitle hidden-mobile" title="Jump to comment">
+                    Posted <time>@Model.CreatedAt.ToString("M")</time>
+                </a>
+            </div>
+            <!--Body of Post-->
+            <div class="post-body">
+                <p>
+                    @Model.Body
+                </p>
+            </div>
+        </div>
+        <!--End of Main Content-->
+    </div>
+</article>
+<!--End of Post Content-->
