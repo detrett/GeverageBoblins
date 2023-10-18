@@ -48,6 +48,8 @@ builder.Services.AddScoped<ISubforumRepository, SubforumRepository>();
 // Adding the Thread Repository
 builder.Services.AddScoped<IThreadRepository, ThreadRepository>();
 
+builder.Services.AddRazorPages();
+builder.Services.AddSession();
 // Build application
 var app = builder.Build();
 
@@ -61,6 +63,8 @@ if (app.Environment.IsDevelopment())
 // Allows using the files under wwwroot
 app.UseStaticFiles();
 
+app.UseSession();
+
 app.UseAuthentication();
 
 app.UseAuthorization();
@@ -68,5 +72,6 @@ app.UseAuthorization();
 // Middleware: route controller => action (E.g, Forum/Container maps the action Container to the ForumController)
 app.MapDefaultControllerRoute();
 
+app.MapRazorPages();
 // Middleware: execute application
 app.Run();
