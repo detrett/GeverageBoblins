@@ -3,6 +3,7 @@ using GeverageBoblins.Models;
 using GeverageBoblins.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace GeverageBoblins.Controllers
 {
     public class UserController : Controller
@@ -38,14 +39,14 @@ namespace GeverageBoblins.Controllers
 
         // Inject data into the DB
         [HttpPost]
-        public async Task<IActionResult> Create(User user)
+        public async Task<IActionResult> Create(ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
             {
-                await _userRepository.Create(user);
+                await _userRepository.Create(applicationUser);
                 return RedirectToAction(nameof(Container));
             }
-            return View(user);
+            return View(applicationUser);
         }
 
         // READ
@@ -79,15 +80,15 @@ namespace GeverageBoblins.Controllers
 
         // Inject updated data into the DB
         [HttpPost]
-        public async Task<IActionResult> Update(User user)
+        public async Task<IActionResult> Update(ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
             {
-                await _userRepository.Update(user);
+                await _userRepository.Update(applicationUser);
 
                 return RedirectToAction(nameof(Container));
             }
-            return View(user);
+            return View(applicationUser);
         }
 
         // DELETE

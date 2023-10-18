@@ -4,10 +4,10 @@ namespace GeverageBoblins.DAL
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>?> GetAll();
-        Task<User?> GetUserById(int id);
-        Task Create(User user);
-        Task Update(User user);
+        Task<IEnumerable<ApplicationUser>?> GetAll();
+        Task<ApplicationUser?> GetUserById(int id);
+        Task Create(ApplicationUser applicationUser);
+        Task Update(ApplicationUser applicationUser);
         Task<bool> Delete(int id);
     }
 }

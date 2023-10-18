@@ -107,7 +107,7 @@
                         <a href="#" class="adminTitle"
                            title="Go to User Profile">
                             <!--The following block of code determines the last commented thread's author-->
-                            @trueLastComment.User.Name
+                            @trueLastComment.User.UserName
                         </a>
                     }
                     else if (trueLastComment.User.Rank == "Mod")
@@ -115,7 +115,7 @@
                         <a href="#" class="modTitle"
                            title="Go to User Profile">
                             <!--The following block of code determines the last commented thread's author-->
-                            @trueLastComment.User.Name
+                            @trueLastComment.User.UserName
                         </a>
                     }
                     else
@@ -123,7 +123,7 @@
                         <a href="#" class="memberTitle"
                            title="Go to User Profile">
                             <!--The following block of code determines the last commented thread's author-->
-                            @trueLastComment.User.Name
+                            @trueLastComment.User.UserName
                         </a>
                     }
                 }

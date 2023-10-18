@@ -1,77 +1,96 @@
 ﻿using GeverageBoblins.Models;
-using Microsoft.VisualBasic;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GeverageBoblins.DAL
 {
     public static class DBInit
     {
-        public static void Seed(IApplicationBuilder app)
+        public static async void Seed(IApplicationBuilder app)
         {
             using var serviceScope = app.ApplicationServices.CreateScope();
             ForumDbContext context = serviceScope.ServiceProvider.GetRequiredService<ForumDbContext>();
+            var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
-            var users = new List<User>
+            var users = new List<ApplicationUser>
             {
-                new User
+                new ApplicationUser
                     {
-                        Name = "Fizzy",
+                        UserName = "Fizzy",
                         Email = "easyfizzy@bg.com",
                         Password = "bestadmin",
                         Rank = "Admin"
                     },
-                    new User
+                    new ApplicationUser
                     {
-                        Name = "bubbletrouble",
+                        UserName = "bubbletrouble",
                         Email = "mrbubbles@bg.com",
                         Password = "newuser",
                         Rank = "Member"
                     },
-                    new User
+                    new ApplicationUser
                     {
-                        Name = "Turbo",
+                        UserName = "Turbo",
                         Email = "master_turbo@bg.com",
                         Password = "JustTurbo",
                         Rank = "Member"
                     },
-                    new User
+                    new ApplicationUser
                     {
-                        Name = "m0nst3r4dd1ct",
+                        UserName = "m0nst3r4dd1ct",
                         Email = "monsterpunch@monster.com",
                         Password = "punch",
                         Rank = "Mod"
                     },
-                    new User
+                    new ApplicationUser
                     {
-                        Name = "hydration_nation",
+                        UserName = "hydration_nation",
                         Email = "h2o@bg.com",
                         Password = "water",
                         Rank = "Member"
                     },
-                    new User
+                    new ApplicationUser
                     {
-                        Name = "aGeverageBoblin",
+                        UserName = "aGeverageBoblin",
                         Email = "aGeverageBoblin@bg.com",
                         Password = "geverage",
                         Rank = "Member"
                     },
-                    new User
+                    new ApplicationUser
                     {
-                        Name = "The Hierophant",
+                        UserName = "The Hierophant",
                         Email = "numberv@bg.com",
                         Password = "hierophant",
                         Rank = "Mod"
                     },
-                    new User
+                    new ApplicationUser
                     {
-                        Name = "Scratchy",
+                        UserName = "Scratchy",
                         Email = "scratchy@bg.com",
                         Password = "scratchy",
                         Rank = "Member"
                     }
             };
+            
+            if (!context.Users.Any())
+            {
+                foreach (var user in users)
+                {
+                    var result = await userManager.CreateAsync(user, user.Password);
+                    if (!result.Succeeded)
+                    {
+                        throw new InvalidOperationException($"Error creating user {user.UserName}: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                    }
+                }
+            }
 
             var comments = new List<Comment>
                 {

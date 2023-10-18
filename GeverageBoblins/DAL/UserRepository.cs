@@ -11,9 +11,9 @@ namespace GeverageBoblins.DAL
         {
             _db = db;
         }
-        public async Task Create(User user)
+        public async Task Create(ApplicationUser applicationUser)
         {
-            _db.Users.Add(user);
+            _db.Users.Add(applicationUser);
             await _db.SaveChangesAsync();
         }
 
@@ -30,19 +30,19 @@ namespace GeverageBoblins.DAL
             return true;
         }
 
-        public async Task<IEnumerable<User>?> GetAll()
+        public async Task<IEnumerable<ApplicationUser>?> GetAll()
         {
             return await _db.Users.ToListAsync();
         }
 
-        public async Task<User?> GetUserById(int id)
+        public async Task<ApplicationUser?> GetUserById(int id)
         {
             return await _db.Users.FindAsync(id);
         }
 
-        public async Task Update(User user)
+        public async Task Update(ApplicationUser applicationUser)
         {
-            _db.Users.Update(user);
+            _db.Users.Update(applicationUser);
             await _db.SaveChangesAsync();
         }
     }

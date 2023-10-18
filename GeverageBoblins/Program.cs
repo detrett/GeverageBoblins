@@ -1,8 +1,14 @@
 using GeverageBoblins.DAL;
+using GeverageBoblins.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+using Serilog.Events;
 
 // Create builder
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("ForumDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ItemDbContextConnection' not found.");
 
 // Inject MVC model into builder
 builder.Services.AddControllersWithViews();
@@ -21,6 +27,19 @@ builder.Services.AddDbContext<ForumDbContext>(options =>
     options.UseSqlite(
         builder.Configuration["ConnectionStrings:ForumDbContextConnection"]);
 });
+
+// Add Identity services
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+    {
+        options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+        options.Password.RequiredLength = 4;
+        options.Password.RequireDigit = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        // ... other configurations if needed
+    })
+    .AddEntityFrameworkStores<ForumDbContext>();
+
 
 // Adding the Forum Repository
 builder.Services.AddScoped<IForumRepository, ForumRepository>();
@@ -41,6 +60,10 @@ if (app.Environment.IsDevelopment())
 
 // Allows using the files under wwwroot
 app.UseStaticFiles();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 // Middleware: route controller => action (E.g, Forum/Container maps the action Container to the ForumController)
 app.MapDefaultControllerRoute();
