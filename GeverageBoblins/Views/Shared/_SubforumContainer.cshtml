@@ -1,5 +1,4 @@
 ﻿@model Subforum
-
 <!--Subforum Title-->
 <div class="row">
     <div class="col" id="title">
@@ -31,13 +30,31 @@
                 </ul>
             </nav>
 
-            <div class="col-2">
-                <a href="" class="btn card-body new-thread-btn guest-disabled disabled" role="button"
-                   aria-disabled="true" data-bs-toggle="tooltip" title="Make a new thread">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    New Thread
-                </a>
-            </div>
+            @{
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="col-2">
+                        <a href="" class="btn card-body new-thread-btn guest-disabled disabled" role="button"
+                           aria-disabled="false" data-bs-toggle="tooltip" title="Make a new thread">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            New Thread
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-2">
+                        <a href="" class="btn card-body new-thread-btn guest-disabled disabled" role="button"
+                           aria-disabled="true" data-bs-toggle="tooltip" title="Make a new thread">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            New Thread
+                        </a>
+                    </div>
+                }
+
+            }
+
+
 
         </div>
         <!--End of Subforum Banner-->
@@ -87,8 +104,6 @@
     </div>
 </section>
 <!--End of Subforums Container-->
-
-
 <!--Go back to thread list-->
 <div class="pager-container topic-listing-link">
     <a asp-action="container" asp-controller="forum" class="">

@@ -363,6 +363,49 @@ a.memberTitle:hover {
     }
 }
 
+.border-pink {
+    border: 1px solid #fc375c;
+}
+
+.login-card {
+    margin-top: 100px;
+    font-family: Inter;
+}
+
+.register-card {
+    margin-top: 100px;
+    font-family: Inter;
+}
+
+.std-color {
+    color: #505050;
+}
+
+.login-header {
+    border-bottom: none;
+    position: relative;
+    justify-content: center;
+}
+
+.login-logo {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: -70px;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    z-index: 9;
+    background: #60c7c1;
+    padding: 15px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+
+    &>img {
+            width: 100%;
+        }
+}
+
 .std-pink-btn {
     background-color: #fc375c;
     border-radius: 5px;
@@ -384,8 +427,95 @@ a.memberTitle:hover {
     transform: translateY(1px);
     transition: transform 0.1s ease;
 }
+&:active {
+    position: relative;
+    top: 1px;
+}
+}
+
+.custom-checkbox{
+    margin-left: 7.5%;
+}
+
+.login-pink-btn {
+    background-color: #fc375c;
+    border-radius: 5px;
+    border: 1px solid #c12367;
+    box-shadow: var(--box--std-box-shadow);
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 18px;
+    padding: 5px 5px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #2d293c;
+    height: 45px;
+    width: 85%;
+    &:hover
+
+{
+    background-color: #ba2b45;
+    transform: translateY(1px);
+    transition: transform 0.1s ease;
+}
+&:active {
+    position: relative;
+    top: 1px;
+}
+}
+
+.m-7-5{
+    margin-left: 7.5%;
+}
+
+.pt-2 {
+    padding-top: 4px !important;
+}
+
+.login-purple-btn {
+    background-color: #433b60;
+    border-radius: 5px;
+    border: 1px solid #2d293c;
+    box-shadow: var(--box--std-box-shadow);
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 18px;
+    padding: 5px 5px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #2d293c;
+    height: 45px;
+    width: 85%;
+    &:hover
+
+{
+    background-color: #2d293c;
+    transform: translateY(1px);
+    transition: transform 0.1s ease;
+}
+
+&:active {
+    position: relative;
+    top: 1px;
+}
 
 }
+
+#customCheck {
+    accent-color: #2d293c;
+}
+
+.custom-form-control{
+    width: 85% !important;
+    margin: auto;
+}
+
+.custom-form-label {
+    margin-left: 7.5%;
+}
+
 
 .new-thread-btn {
     text-align: center;
@@ -844,6 +974,16 @@ input:focus {
     font-weight: 600;
 }
 
+.alt-link {
+    color: #505050;
+    font-weight: 500;
+
+    &:hover
+{
+    color: #1a1a1a;
+}
+}
+
 .std-link {
     color: #505050;
     font-weight: 700;
@@ -1100,6 +1240,8 @@ ul {
         opacity: 1;
         visibility: visible;
     }
+
+
 
 #member-switch {
     background-color: rgba(0, 0, 0, 0);
