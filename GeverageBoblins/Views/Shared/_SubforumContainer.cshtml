@@ -34,11 +34,11 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div class="col-2">
-                        <a href="" class="btn card-body new-thread-btn guest-disabled disabled" role="button"
-                           aria-disabled="false" data-bs-toggle="tooltip" title="Make a new thread">
+                        <button type="button" class="btn card-body new-thread-btn guest-disabled" data-bs-toggle="modal"
+                           data-bs-target="#threadModal" data-bs-id="1" data-bs-keyboard="false" data-bs-backdrop="static">
                             <i class="fa-solid fa-pen-to-square"></i>
                             New Thread
-                        </a>
+                        </button>
                     </div>
                 }
                 else
@@ -113,5 +113,24 @@
 
 <!--Back to top button-->
 <a href="" id="back-to-top-button" data-bs-toggle="tooltip" title="Back to top"></a>
+
+<!-- New Thread Modal -->
+<div class="modal fade" id="threadModal" tabindex="-1" aria-labelledby="threadModalLabel" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 modal-font" id="shareModalLabel">Create a new thread</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 class="modal-subtitle">Title:</h5>
+                <input type="text" class="share-input" id="comment-id">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Warning Modal-->
+
 
 

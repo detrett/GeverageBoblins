@@ -107,4 +107,27 @@ triggerTabList.forEach(triggerEl => {
     })
 })
 
+/* SHARE MODAL */
+var exampleModal = document.getElementById('shareModal')
+exampleModal.addEventListener('show.bs.modal', function (event) {
+    console.log("Triggered")
+    // Button that triggered the modal
+    var button = event.relatedTarget
+    // Extract info from data-bs-* attributes
+    var recipient = button.getAttribute('data-bs-id')
+    console.log(recipient)
+    // If necessary, you could initiate an AJAX request here
+    // and then do the updating in a callback.
+    //
+    // Update the modal's content.
+    var modalBodyInput = exampleModal.querySelector('.modal-body input')
+    modalBodyInput.value = "https://localhost:7054/thread/container/" + recipient
+})
+
+/* THREAD MODAL */
+
+var threadModal = new bootstrap.Modal(document.getElementById('threadModal'), {
+    keyboard: false,
+    backdrop: static
+})
 

@@ -12,7 +12,7 @@
                     if (Model.User.Rank == "Admin")
                     {
                         <a href="#" class="adminTitle user-link"
-                           title="Go to User Profile"> 
+                           title="Go to User Profile">
                             @Model.User.UserName
                         </a>
                     }
@@ -62,11 +62,15 @@
                     <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-ellipsis ellipsis"></i>
                     </a>
+                    
+                    @{ 
+                        var url = Model.ThreadId + "#comment-" + Model.CommentId;
+                    }
 
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#" class="dropdown-item" data-bs-toggle="modal"
-                               data-bs-target="#shareModal">
+                               data-bs-target="#shareModal" data-bs-id="@url">
                                 <i class="fa-solid fa-share-nodes padding-right-icon"></i>
                                 Share
                             </a>
@@ -90,31 +94,31 @@
                     </div>
 
                     <div>
-                            <h4 class="post-top-title">
-                                @{
-                                    if (Model.User.Rank == "admin")
-                                    {
-                                        <a href="#" class="adminTitle user-link"
-                                           title="Go to User Profile">
-                                            @Model.User.UserName
-                                        </a>
-                                    }
-                                    else if (Model.User.Rank == "mod")
-                                    {
-                                        <a href="#" class="modTitle user-link"
-                                           title="Go to User Profile">
-                                            @Model.User.UserName
-                                        </a>
-                                    }
-                                    else
-                                    {
-                                        <a href="#" class="memberTitle user-link"
-                                           title="Go to User Profile">
-                                            @Model.User.UserName
-                                        </a>
-                                    }
+                        <h4 class="post-top-title">
+                            @{
+                                if (Model.User.Rank == "admin")
+                                {
+                                    <a href="#" class="adminTitle user-link"
+                                       title="Go to User Profile">
+                                        @Model.User.UserName
+                                    </a>
                                 }
-                            </h4>
+                                else if (Model.User.Rank == "mod")
+                                {
+                                    <a href="#" class="modTitle user-link"
+                                       title="Go to User Profile">
+                                        @Model.User.UserName
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="#" class="memberTitle user-link"
+                                       title="Go to User Profile">
+                                        @Model.User.UserName
+                                    </a>
+                                }
+                            }
+                        </h4>
 
                         <a href="#comment-@Model.CommentId" class="post-top-subtitle" title="Jump to comment">
                             Posted <time>@Model.CreatedAt.ToString("M")</time>
@@ -141,3 +145,19 @@
     </div>
 </article>
 <!--End of Post Content-->
+
+<!-- Sharing Modal -->
+<div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 modal-font" id="shareModalLabel">Share this post!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 class="modal-subtitle">Link to this comment:</h5>
+                <input type="text" class="share-input" id="comment-id">
+            </div>
+        </div>
+    </div>
+</div>
