@@ -34,8 +34,8 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div class="col-2">
-                        <button type="button" class="btn card-body new-thread-btn guest-disabled" data-bs-toggle="modal"
-                           data-bs-target="#threadModal" data-bs-id="1" data-bs-keyboard="false" data-bs-backdrop="static">
+                        <button type="button" class="btn card-body new-thread-btn guest-disabled" data-bs-keyboard="false" data-bs-backdrop="static" data-bs-toggle="modal"
+                                data-bs-target="#threadModal">
                             <i class="fa-solid fa-pen-to-square"></i>
                             New Thread
                         </button>
@@ -114,23 +114,43 @@
 <!--Back to top button-->
 <a href="" id="back-to-top-button" data-bs-toggle="tooltip" title="Back to top"></a>
 
+@{
+    var newThread = new Thread { Name = "", UserId = 5, IsAnnouncement = false, IsFeatured = false, IsLocked = false, IsPinned = false };
+    var newComment = new Comment { Title = "", UserId = 5, Body = "", ThreadId = newThread.ThreadId };
+}
+
 <!-- New Thread Modal -->
-<div class="modal fade" id="threadModal" tabindex="-1" aria-labelledby="threadModalLabel" aria-hidden="true" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="threadModal" tabindex="-1" aria-labelledby="threadModalLabel" aria-hidden="true" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 modal-font" id="shareModalLabel">Create a new thread</h1>
+                <h1 class="modal-title fs-5 modal-font" id="threadModalLabel">Create a new thread</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h5 class="modal-subtitle">Title:</h5>
-                <input type="text" class="share-input" id="comment-id">
+                <div asp-validation-summary="ModelOnly" class="text-danger m-2-5"></div>
+
+                <h5 class="modal-subtitle m-2-5">Thread title:</h5>
+                <div class="form-floating mb-2">
+                    <input asp-for="@newThread.Name" class="form-control thread-form-control" aria-required="true" />
+                    <span asp-validation-for="@newThread.Name" class="text-danger m-2-5"></span>
+                </div>
+
+                <h5 class="modal-subtitle m-2-5">Thread body:</h5>
+                <div class="form-floating mb-2">
+                    <textarea asp-for="@newComment.Body" class="form-control thread-form-control" rows="15"></textarea>
+                    <span asp-validation-for="@newComment.Body" class="text-danger m-2-5"></span>
+                </div>
+
+                <div class="d-flex">
+                    <button id="thread-submit" type="submit" class="mb-3 login-purple-btn m-2-5">Submit</button>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
 
-<!--Warning Modal-->
-
-
-
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

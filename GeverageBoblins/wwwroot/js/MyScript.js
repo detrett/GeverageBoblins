@@ -2,6 +2,46 @@
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
+/* THREAD MODAL */
+/*$(document).ready(function () {
+    console.log("ready!");
+
+    var threadModal = document.getElementById('threadModal')
+    threadModal.addEventListener("hide.bs.modal", function (e) {
+        console.log("Modal closed")
+
+        if (confirm("Are you sure, you want to close?")) return true;
+
+        else return false;
+    });
+});*/
+
+/* COMMENT BOX PREVIEW */
+window.onload = function () {
+    function commentPreview() {
+        var previewContent = document.getElementById('comment').value;
+        if (previewContent.trim().length === 0) {
+            return false;
+        } else {
+            document.getElementById('preview-content').innerHTML = previewContent;
+            return false;
+        }
+    }
+    document.getElementById('preview-tab').onclick = commentPreview;
+}
+
+
+/* COMMENT BOX TABS (BOOTSTRAP) */
+const triggerTabList = document.querySelectorAll('#commentTab button')
+triggerTabList.forEach(triggerEl => {
+    const tabTrigger = new bootstrap.Tab(triggerEl)
+
+    triggerEl.addEventListener('click', event => {
+        event.preventDefault()
+        tabTrigger.show()
+    })
+})
+
 /* BACK TO TOP BUTTON */
 var btn = $('#back-to-top-button');
 
@@ -110,7 +150,7 @@ triggerTabList.forEach(triggerEl => {
 /* SHARE MODAL */
 var exampleModal = document.getElementById('shareModal')
 exampleModal.addEventListener('show.bs.modal', function (event) {
-    console.log("Triggered")
+
     // Button that triggered the modal
     var button = event.relatedTarget
     // Extract info from data-bs-* attributes
@@ -124,10 +164,5 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
     modalBodyInput.value = "https://localhost:7054/thread/container/" + recipient
 })
 
-/* THREAD MODAL */
 
-var threadModal = new bootstrap.Modal(document.getElementById('threadModal'), {
-    keyboard: false,
-    backdrop: static
-})
 

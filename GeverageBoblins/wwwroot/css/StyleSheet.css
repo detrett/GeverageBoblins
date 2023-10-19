@@ -28,6 +28,10 @@
 
 /**************************************************************************************************/
 /** Classes **/
+textarea {
+    height: auto !important;
+}
+
 .adminTitle {
     font-weight: 700;
     color: #285de5;
@@ -464,6 +468,9 @@ a.memberTitle:hover {
     top: 1px;
 }
 }
+.m-2-5 {
+    margin-left: 2.5%;
+}
 
 .m-7-5{
     margin-left: 7.5%;
@@ -509,6 +516,10 @@ a.memberTitle:hover {
 
 .custom-form-control{
     width: 85% !important;
+    margin: auto;
+}
+.thread-form-control{
+    width: 95% !important;
     margin: auto;
 }
 
@@ -1121,6 +1132,10 @@ ul {
 
 /**************************************************************************************************/
 /** Ids **/
+
+#thread-submit {
+    width: 25%;
+}
 
 #back-to-top-button {
     bottom: var(--spx-8);

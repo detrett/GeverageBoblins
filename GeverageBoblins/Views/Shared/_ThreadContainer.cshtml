@@ -21,33 +21,169 @@
                 @await Html.PartialAsync("_CommentList", comment);
             }
         }
-
-        <!--Guest Teaser (GUEST ONLY)-->
-        <section class="background-light card comment-container guest-only">
-
-            <div class="row text-center margin-bt-40">
-                <div class="col-12 guest-teaser-upper-box">
-                    <h5 class="bolder">Create an account or sign in to leave a comment</h5>
-                    <p>Only members of the Beverage Goblins community can leave a comment</p>
-                </div>
-
-                <div class="guest-teaser-lower-box row">
-                    <div class="box-shadow-2 glow col-5 guest-teaser-inner-box border-round-bottom"
-                         id="signUpBox">
-                        <h6 class="card-header">Create an account</h6>
-                        <p class="card-body">Sign up for a new account now!</p>
-                        <a href="#" class="card-body std-rnbw-btn">Sign Up Now</a>
+        @{
+            if (User.Identity.IsAuthenticated)
+            {
+                <!--Message Box (MEMBER ONLY)-->
+                <div class="card comment-container member-only">
+                    <div class="row">
+                        <!--TABS-->
+                        <ul class="nav nav-tabs comment-tab-list" id="commentTab" role="tablist">
+                            <!--WRITE-->
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active comment-tab" id="write-tab" data-bs-toggle="tab"
+                                        data-bs-target="#write-tab-pane" type="button" role="tab"
+                                        aria-controls="write-tab-pane" aria-selected="true">
+                                    Write
+                                </button>
+                            </li>
+                            <!--PREVIEW-->
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link comment-tab" id="preview-tab" data-bs-toggle="tab"
+                                        data-bs-target="#preview-tab-pane" type="button" role="tab"
+                                        aria-controls="preview-tab-pane" aria-selected="true">
+                                    Preview
+                                </button>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="box-shadow-2 col-5 guest-teaser-inner-box border-round-bottom" id="signInBox">
-                        <h6 class="card-header">Sign in</h6>
-                        <p class="card-body">Already have an account? Sign in here!</p>
-                        <a href="#" class="card-body std-purple-btn">Sign In Here</a>
+                    <!--TAB CONTENT-->
+                    <div class="tab-content" id="commentTabContent">
+                        <!--WRITE-->
+                        <div class="tab-pane fade active show comment-box" id="write-tab-pane" role="tabpanel"
+                             aria-labelledby="write-tab" tabindex="0">
+                            <textarea class="form-control" name="" id="comment" cols="30" rows="7"
+                                      placeholder="Write a comment"></textarea>
+                            <div class="tab-pane-bttm">
+                                <button type="submit" class="std-purple-btn">Reply</button>
+                            </div>
+                        </div>
+                        <!--PREVIEW-->
+
+
+
+                        <div class="tab-pane fade preview-box" role="tabpanel" id="preview-tab-pane"
+                             aria-labelledby="preview-tab" tabindex="0">
+
+                            <article class="background-white card post-container" id="comment-preview">
+
+                                <div class="row">
+                                    <!--Side content (Author, image, info)-->
+                                    <div class="aside-post hidden-mobile col-md-2">
+                                        <a href="#" title="Go to profile" class="user-link">
+                                            <h3 class="aside-user-style">Pengu</h3>
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="#" class="aside-user-photo-container" title="Go to profile">
+                                                    <i class="fa-regular fa-circle-user aside-user-photo"></i>
+                                                </a>
+                                            </li>
+                                            <li class="margin-bt-20">
+                                                <span class="aside-member-title">Member</span>
+                                            </li>
+                                            <li class="aside-left-align">
+                                                <span class="aside-subtitle">Posts: 11</span>
+
+                                            </li>
+                                            <li class="aside-left-align">
+                                                <span class="aside-subtitle">Joined: 25th Sep, 2023</span>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!--End of side content-->
+                                    <!--Main Content-->
+                                    <div class="col-12 col-md-10 post-top">
+                                        <!--Top of Post (Title, date, buttons)-->
+                                        <div>
+                                            <div class="dropdown-center">
+                                                <!--Ellipsis-->
+                                                <a href="#" role="button" data-bs-toggle="dropdown"
+                                                   aria-expanded="false">
+                                                    <i class="fa-solid fa-ellipsis ellipsis"></i>
+                                                </a>
+
+                                            </div>
+                                            <!-- Only for mobile -->
+                                            <div class="only-mobile">
+
+                                                <div class="post-top-user-photo-automargin">
+                                                    <a href="#" class="post-top-user-photo-container"
+                                                       title="Go to profile">
+                                                        <i class="fa-regular fa-circle-user post-top-user-photo"></i>
+                                                    </a>
+                                                </div>
+
+                                                <div>
+                                                    <a href="#" title="Go to profile">
+                                                        <h4 class="post-top-title">Pengu</h4>
+                                                    </a>
+                                                    <a href="#" class="post-top-subtitle"
+                                                       title="Jump to comment">
+                                                        Posted <time datetime="2023-09-04T12:55:00">September 4</time>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <!-- For regular display -->
+                                            <a href="#comment-3" title="Jump to comment">
+                                                <h4 class="post-top-title hidden-mobile">Re: Pepsi Vs Coke</h4>
+                                            </a>
+                                            <a href="#comment-3" class="post-top-subtitle hidden-mobile"
+                                               title="Jump to comment">
+                                                Posted <time datetime="2023-09-04T12:05:00">September 4</time>
+                                            </a>
+                                        </div>
+                                        <!--Body of Post-->
+                                        <div class="post-body">
+                                            <p id="preview-content">
+                                                Nothing to preview.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!--End of Main Content-->
+                                </div>
+                            </article>
+
+                        </div>
                     </div>
                 </div>
+                <!--End of Message Box (MEMBER ONLY)-->
+            }
+            else
+            {
+                <!--Guest Teaser (GUEST ONLY)-->
+                <section class="background-light card comment-container guest-only">
 
-            </div>
-        </section>
-        <!--End of Guest Teaser (GUEST ONLY)-->
+                    <div class="row text-center margin-bt-40">
+                        <div class="col-12 guest-teaser-upper-box">
+                            <h5 class="bolder">Create an account or sign in to leave a comment</h5>
+                            <p>Only members of the Beverage Goblins community can leave a comment</p>
+                        </div>
+
+                        <div class="guest-teaser-lower-box row">
+                            <div class="box-shadow-2 glow col-5 guest-teaser-inner-box border-round-bottom"
+                                 id="signUpBox">
+                                <h6 class="card-header">Create an account</h6>
+                                <p class="card-body">Sign up for a new account now!</p>
+
+                                <a asp-area="Identity" asp-page="/Account/Register" class="card-body std-rnbw-btn">Sign Up Now</a>
+                            </div>
+                            <div class="box-shadow-2 col-5 guest-teaser-inner-box border-round-bottom" id="signInBox">
+                                <h6 class="card-header">Sign in</h6>
+                                <p class="card-body">Already have an account? Sign in here!</p>
+
+                                <a asp-area="Identity" asp-page="/Account/Login" class="card-body std-purple-btn">Sign In Here</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+                <!--End of Guest Teaser (GUEST ONLY)-->
+            }
+        }
+
     </div>
 </section>
 <!--End of Thread Container-->
