@@ -103,7 +103,7 @@
 
                             <!--Settings-->
                             <div class="p-1">
-                                <a href="#" title="Edit your profile" class="lighter-link">
+                                <a title="Edit your profile" class="lighter-link" asp-area="Identity" asp-page="/Account/Manage/Index">
                                     <i class="fa-solid fa-gear"></i>
                                     Settings
                                 </a>
@@ -228,7 +228,9 @@
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
     <script src="https://kit.fontawesome.com/7918846ba0.js" crossorigin="anonymous"></script>
     <script src="~/js/MyScript.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/lib/qrcode.js"></script>
+<script type="text/javascript" src="~/js/qr.js"></script>
 
 </body>
 </html>
