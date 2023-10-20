@@ -5,12 +5,12 @@ namespace GeverageBoblins.ViewModels
     public class SubforumListViewModel
     {
 
-        public Subforum Subforum;
+        public SubforumThreadComment SubforumThreadComment;
         public string? CurrentViewName;
 
-        public SubforumListViewModel(Subforum subforum, string? currentViewName)
+        public SubforumListViewModel(SubforumThreadComment stc, string? currentViewName)
         {
-            Subforum = subforum;
+            SubforumThreadComment = stc;
             CurrentViewName = currentViewName;
         }
 

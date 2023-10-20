@@ -19,6 +19,12 @@ namespace GeverageBoblins.DAL
             await _db.SaveChangesAsync();
         }
 
+        public async Task CreateComment(Comment comment)
+        {
+            _db.Comments.Add(comment);
+            await _db.SaveChangesAsync();
+        }
+
         public async Task<bool> Delete(int id)
         {
             var item = await _db.Threads.FindAsync(id);

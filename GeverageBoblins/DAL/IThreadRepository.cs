@@ -10,5 +10,6 @@ namespace GeverageBoblins.DAL
         Task Create(Models.Thread thread);
         Task Update(Models.Thread thread);
         Task<bool> Delete(int id);
+        Task CreateComment(Comment comment);
     }
 }

@@ -22,8 +22,16 @@ namespace GeverageBoblins.Controllers
             // Get Data
             var subforum = await _subforumRepository.GetSubforumById(id);
 
+            // New STC
+            var stc = new SubforumThreadComment
+            {
+                Subforum = subforum,
+                newThread = new Models.Thread(),
+                newComment = new Comment()
+            };
+
             // Make ViewModel with Data and return it
-            var subforumListViewModel = new SubforumListViewModel(subforum, "Container");
+            var subforumListViewModel = new SubforumListViewModel(stc, "Container");
             return View(subforumListViewModel);
         }
 

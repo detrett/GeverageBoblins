@@ -38,14 +38,24 @@ namespace GeverageBoblins.Controllers
 
         // Inject data into the DB
         [HttpPost]
-        public async Task<IActionResult> Create(Models.Thread thread)
+        public async Task<IActionResult> Create(SubforumThreadComment stc)
         {
             if (ModelState.IsValid)
             {
-                await _threadRepository.Create(thread);
+                Console.WriteLine("Model State valid");
+                // Add comment to thread
+                stc.newThread.Comments.Add(stc.newComment);
+                stc.newThread.ParentSubforum = stc.Subforum;
+                // Add thread to DB
+                await _threadRepository.Create(stc.newThread);
+                // Link comment to thread
+                stc.newComment.ThreadId = stc.newThread.ThreadId;
+                // Save comment to DB
+                await _threadRepository.CreateComment(stc.newComment);
+
                 return RedirectToAction(nameof(Container));
             }
-            return View(thread);
+            return View(stc.newThread);
         }
 
         // READ
