@@ -80,10 +80,10 @@
                                 <!--If user is the comment's owner or user is moderator/admin-->
                                 if (true)
                                 {
-                                    <a href="" class="dropdown-item">
+                                    <button class="dropdown-item" onclick="edit()">
                                         <i class="fa-solid fa-pen padding-right-icon"></i>
                                         Edit
-                                    </a>
+                                    </button>
                                     <a href="" class="dropdown-item" data-bs-toggle="modal"
                                        data-bs-target="#deleteModal-@Model.CommentId" data-bs-id="@Model.CommentId">
                                         <i class="fa-solid fa-eraser padding-right-icon"></i>
@@ -166,7 +166,7 @@
             </div>
             <div class="modal-body">
                 <h5 class="modal-subtitle">Link to this comment:</h5>
-                <input type="text" class="share-input" id="comment-id">
+                <input type="text" class="share-input" id="comment-id" value="https://localhost:7054/Thread/Container/@Model.ThreadId#comment-@Model.CommentId">
             </div>
         </div>
     </div>

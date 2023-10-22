@@ -21,7 +21,6 @@ namespace GeverageBoblins.Models
         // Consider making Title and Body non-nullable if they are essential
         public string? Title { get; set; }
         public string? Body { get; set; }
-        public bool? IsDeleted { get; set; } = false;
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }

@@ -1,34 +1,30 @@
-﻿/* TOOLTIPS */
+﻿console.log("Start of MyScript.js")
+
+/* TOOLTIPS */
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-/* THREAD MODAL */
-/*$(document).ready(function () {
-    console.log("ready!");
-
-    var threadModal = document.getElementById('threadModal')
-    threadModal.addEventListener("hide.bs.modal", function (e) {
-        console.log("Modal closed")
-
-        if (confirm("Are you sure, you want to close?")) return true;
-
-        else return false;
-    });
-});*/
-
-/* COMMENT BOX PREVIEW */
-window.onload = function () {
-    function commentPreview() {
-        var previewContent = document.getElementById('comment').value;
-        if (previewContent.trim().length === 0) {
-            return false;
-        } else {
-            document.getElementById('preview-content').innerHTML = previewContent;
-            return false;
-        }
-    }
-    document.getElementById('preview-tab').onclick = commentPreview;
+/* EDIT FUNCTION */
+var edit = function() {
+    console.log("Clicked")
 }
+
+$(document).ready(edit);
+
+
+/* THREAD MODAL */
+//$(document).ready(function () {
+//    console.log("ready!");
+
+//    var threadModal = document.getElementById('threadModal')
+//    threadModal.addEventListener("hide.bs.modal", function (e) {
+//        console.log("Modal closed")
+
+//        if (confirm("Are you sure, you want to close?")) return true;
+
+//        else return false;
+//    });
+//});
 
 
 /* COMMENT BOX TABS (BOOTSTRAP) */
@@ -122,7 +118,17 @@ guestSwitch.on('click', function () {
 });
 
 /* COMMENT BOX PREVIEW */
-window.onload = function () {
+window.addEventListener('load', function () {
+    console.log("Window loaded");
+
+    //if (window.jQuery) {
+    //    // jQuery is loaded  
+    //    alert("jQuery is working!");
+    //} else {
+    //    // jQuery is not loaded
+    //    alert("jQuery is not working");
+    //}
+
     function commentPreview() {
         var previewContent = document.getElementById('comment').value;
         if (previewContent.trim().length === 0) {
@@ -133,19 +139,19 @@ window.onload = function () {
         }
     }
     document.getElementById('preview-tab').onclick = commentPreview;
-}
+})
 
 
 /* COMMENT BOX TABS (BOOTSTRAP) */
-const triggerTabList = document.querySelectorAll('#commentTab button')
-triggerTabList.forEach(triggerEl => {
-    const tabTrigger = new bootstrap.Tab(triggerEl)
+//const triggerTabList = document.querySelectorAll('#commentTab button')
+//triggerTabList.forEach(triggerEl => {
+//    const tabTrigger = new bootstrap.Tab(triggerEl)
 
-    triggerEl.addEventListener('click', event => {
-        event.preventDefault()
-        tabTrigger.show()
-    })
-})
+//    triggerEl.addEventListener('click', event => {
+//        event.preventDefault()
+//        tabTrigger.show()
+//    })
+//})
 
 /* SHARE MODAL */
 var exampleModal = document.getElementById('shareModal')
@@ -164,5 +170,5 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
     modalBodyInput.value = "https://localhost:7054/thread/container/" + recipient
 })
 
-
+console.log("End of MyScript.js")
 
