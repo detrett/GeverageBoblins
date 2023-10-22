@@ -1,6 +1,7 @@
 using GeverageBoblins.DAL;
 using GeverageBoblins.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -47,6 +48,8 @@ builder.Services.AddScoped<IForumRepository, ForumRepository>();
 builder.Services.AddScoped<ISubforumRepository, SubforumRepository>();
 // Adding the Thread Repository
 builder.Services.AddScoped<IThreadRepository, ThreadRepository>();
+
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
 builder.Services.AddRazorPages();
 builder.Services.AddSession();

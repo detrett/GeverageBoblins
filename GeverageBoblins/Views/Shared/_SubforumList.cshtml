@@ -1,4 +1,5 @@
 ﻿@model Subforum
+@using Microsoft.AspNetCore.Mvc;
 
 <!--The following block of code finds which thread in the subforum has the latest comment, in order to use that thread's title-->
 @{
@@ -83,7 +84,9 @@
         <div class="col-md-5 forum-title-container-sm hidden-mobile">
 
             <!--Last post thread title-->
-            <a asp-action="container" asp-controller="thread" asp-route-id="@trueLastComment.ThreadId" class="thread-title-font-lg" title="Go to Thread">
+            <a href="@Url.Action("Container", "Thread", new { id = trueLastComment.ThreadId, trueLastComment.CommentId })"
+               class="thread-title-font-lg" title="Go to Thread">
+            @*<a asp-action="container" asp-controller="thread" asp-route-id="@trueLastComment.ThreadId" class="thread-title-font-lg" title="Go to Thread">*@
                 <!--The following block of code finds which thread in the subforum has the latest comment, in order to use that thread's title-->
                 @{               
                     var threadId = trueLastComment.ThreadId;
@@ -133,7 +136,7 @@
                     var output2 = "";
 
                     if (ts2.TotalHours < 1)
-                        output2 = $"{ts2.TotalMinutes} minutes ago";
+                        output2 = $"{ (int) ts2.TotalMinutes } minutes ago";
                     else if (ts2.TotalDays < 1)
                         output2 = $"{ts2.TotalHours} hours ago";
                     else if (ts.TotalDays < 2)
@@ -141,6 +144,8 @@
                     else if (ts2.TotalDays < 5)
                         output2 = $"on {trueLastComment.CreatedAt.DayOfWeek}";
                     else output2 = $"on {trueLastComment.CreatedAt.ToString("M")}";
+
+                    
 
                     @output2
                 }

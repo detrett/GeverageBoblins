@@ -42,9 +42,16 @@ namespace GeverageBoblins.Controllers
         {
             if (ModelState.IsValid)
             {
+                Console.WriteLine("Comment Model State valid");
+
                 await _commentRepository.Create(comment);
-                return RedirectToAction(nameof(Container));
+
+                //return RedirectToAction("Container", "Thread", new { id = comment.ThreadId});
+                return Redirect($"{Url.Action("Container", "Thread", new { id = comment.ThreadId })}#comment-" + comment.CommentId);
+
+
             }
+                Console.WriteLine("Comment Model State NOT valid");
             return View(comment);
         }
 

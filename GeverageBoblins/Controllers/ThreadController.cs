@@ -16,8 +16,14 @@ namespace GeverageBoblins.Controllers
         }
 
         // This method creates a container for a thread
-        public async Task<IActionResult> Container(int id)
+        public async Task<IActionResult> Container(int id, int commentId)
         {
+            // Redirects to the last comment if its ID was given
+            if(commentId != 0)
+            {
+                return Redirect($"{Url.Action("Container", "Thread", new { id = id })}#comment-" + commentId);
+            }
+
             // Get Data
             var thread = await _threadRepository.GetThreadById(id);
 
@@ -44,8 +50,9 @@ namespace GeverageBoblins.Controllers
             {
                 Console.WriteLine("Model State valid");
                 // Add comment to thread
-                stc.newThread.Comments.Add(stc.newComment);
+                stc.newThread.Comments = new List<Comment> { stc.newComment };
                 stc.newThread.ParentSubforum = stc.Subforum;
+                stc.newThread.UserId = 5;
                 // Add thread to DB
                 await _threadRepository.Create(stc.newThread);
                 // Link comment to thread
@@ -55,6 +62,8 @@ namespace GeverageBoblins.Controllers
 
                 return RedirectToAction(nameof(Container));
             }
+            Console.WriteLine("Model State NOT valid");
+
             return View(stc.newThread);
         }
 
