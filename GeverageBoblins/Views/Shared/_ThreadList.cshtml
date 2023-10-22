@@ -6,21 +6,21 @@
         <!--Status-->
         <div class="col-1 icon-container hidden-mobile">
             @{
-                if (Model.IsLocked)
+                if (Model.IsLocked ?? true)
                 {
                     <i class="fa-solid fa-lock" data-bs-toggle="tooltip" title="Locked Thread"></i>
                 }
-                if (Model.IsAnnouncement)
+                if (Model.IsAnnouncement ?? true)
                 {
                     <i class="fa-solid fa-bullhorn" data-bs-toggle="tooltip" title="Announcement"></i>
 
                 }
-                if (Model.IsPinned)
+                if (Model.IsPinned ?? true)
                 {
                     <i class="fa-solid fa-thumbtack icon-border icon-mini" data-bs-toggle="tooltip"
                        title="Pinned Thread" style="color: #433b60;"></i>
                 }
-                if (Model.IsFeatured)
+                if (Model.IsFeatured ?? true)
                 {
                     <i class="fa-solid fa-star gradient-text spin" data-bs-toggle="tooltip"
                        title="Featured Thread"></i>

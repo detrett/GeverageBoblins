@@ -2,6 +2,7 @@
 using GeverageBoblins.Models;
 using GeverageBoblins.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Thread = GeverageBoblins.Models.Thread;
 
 namespace GeverageBoblins.Controllers
 {
@@ -44,27 +45,21 @@ namespace GeverageBoblins.Controllers
 
         // Inject data into the DB
         [HttpPost]
-        public async Task<IActionResult> Create(SubforumThreadComment stc)
+        public async Task<IActionResult> Create(Thread thread)
         {
             if (ModelState.IsValid)
             {
                 Console.WriteLine("Model State valid");
-                // Add comment to thread
-                stc.newThread.Comments = new List<Comment> { stc.newComment };
-                stc.newThread.ParentSubforum = stc.Subforum;
-                stc.newThread.UserId = 5;
+               
                 // Add thread to DB
-                await _threadRepository.Create(stc.newThread);
-                // Link comment to thread
-                stc.newComment.ThreadId = stc.newThread.ThreadId;
-                // Save comment to DB
-                await _threadRepository.CreateComment(stc.newComment);
+                await _threadRepository.Create(thread);
+                
 
                 return RedirectToAction(nameof(Container));
             }
             Console.WriteLine("Model State NOT valid");
 
-            return View(stc.newThread);
+            return View(thread);
         }
 
         // READ

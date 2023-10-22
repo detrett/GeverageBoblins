@@ -1134,16 +1134,40 @@ ul {
         margin: 5px;
     }
 
+/** Icons **/
+
+/** https://markheath.net/post/font-awesome-circle-background **/
+.circle-icon {
+    background: #ffc0c0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: middle;
+    padding: 25px;
+}
+
+.fa-triangle-exclamation {
+    color: #F83A5B;
+}
+
 /**************************************************************************************************/
 /** Ids **/
+
+.modal-header {
+    flex-direction: column;
+}
 
 #thread-submit {
     width: 25%;
 }
 
-.fa-forward-step:hover{
+.fa-forward-step:hover {
     animation: backandforth 0.5s normal forwards ease-in-out;
     animation-iteration-count: infinite;
+    -moz-animation: backandforth 0.5s normal forwards ease-in-out;
+    -moz-animation-iteration-count: infinite;
 }
 
 @keyframes backandforth{
@@ -1155,6 +1179,20 @@ ul {
     }
     70% {
         transform: translateX(0px);
+    }
+}
+
+@-moz-keyframes backandforth {
+    30% {
+        -moz-transform: translateX(2px);
+    }
+
+    50% {
+        -moz-transform: translateX(4px);
+    }
+
+    70% {
+        -moz-transform: translateX(0px);
     }
 }
 

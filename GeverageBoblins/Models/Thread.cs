@@ -15,11 +15,12 @@ namespace GeverageBoblins.Models
         public string Name { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public virtual List<Comment>? Comments { get; set; } // List of comments inside of a thread 
+        public int SubforumId { get; set; }
         public virtual Subforum? ParentSubforum { get; set; }
 
-        public bool IsLocked { get; set; }
-        public bool IsAnnouncement { get; set; }
-        public bool IsPinned { get; set; }
-        public bool IsFeatured { get; set; }
+        public bool? IsLocked { get; set; } = false;
+        public bool? IsAnnouncement { get; set; } = false;
+        public bool? IsPinned { get; set; } = false;
+        public bool? IsFeatured { get; set; } = false;
     }
 }

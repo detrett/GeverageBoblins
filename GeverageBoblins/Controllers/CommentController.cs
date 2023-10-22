@@ -18,6 +18,8 @@ namespace GeverageBoblins.Controllers
         // This method creates a container for a subforum
         public async Task<IActionResult> Container()
         {
+            Console.WriteLine("In CommentController: Container");
+
             // Get Data
             var comments = await _commentRepository.GetAll();
 
@@ -40,6 +42,8 @@ namespace GeverageBoblins.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Comment comment)
         {
+            Console.WriteLine("In CommentController: Create");
+
             if (ModelState.IsValid)
             {
                 Console.WriteLine("Comment Model State valid");
@@ -59,6 +63,8 @@ namespace GeverageBoblins.Controllers
         // Obtain data from an item based on its id
         public async Task<IActionResult> Details(int id)
         {
+            Console.WriteLine("In CommentController: Details");
+
             // Get Data
             var item = await _commentRepository.GetCommentById(id);
 
@@ -75,6 +81,8 @@ namespace GeverageBoblins.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
+            Console.WriteLine("In CommentController: Update");
+
             var item = await _commentRepository.GetCommentById(id);
 
             if (item == null)
@@ -88,6 +96,8 @@ namespace GeverageBoblins.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(Comment comment)
         {
+            Console.WriteLine("In CommentController: Update");
+
             if (ModelState.IsValid)
             {
                 await _commentRepository.Update(comment);
@@ -102,6 +112,8 @@ namespace GeverageBoblins.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            Console.WriteLine("In CommentController: Delete");
+
             var item = await _commentRepository.GetCommentById(id);
             if (item == null)
             {
@@ -114,8 +126,17 @@ namespace GeverageBoblins.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _commentRepository.Delete(id);
-            return RedirectToAction(nameof(Container));
+            Console.WriteLine("In COMMENT CONTROLLER: DeleteConfirmed, comment id = " + id);
+
+            var comment = await _commentRepository.GetCommentById(id);
+            var threadId = comment.ThreadId;
+
+            bool returnOk = await _commentRepository.Delete(id);
+            if (!returnOk)
+            {
+                return BadRequest("Comment deletion failed");
+            }
+            return RedirectToAction("Container", "Thread", new { id = threadId });
         }
 
         public IActionResult Index()

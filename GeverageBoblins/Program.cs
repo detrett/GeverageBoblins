@@ -32,7 +32,7 @@ builder.Services.AddDbContext<ForumDbContext>(options =>
 // Add Identity services
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     {
-        options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+        options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ ";
         options.Password.RequiredLength = 4;
         options.Password.RequireDigit = false;
         options.Password.RequireNonAlphanumeric = false;

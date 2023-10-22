@@ -213,6 +213,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 1,
+                        SubforumId = 1,
                         Name = "Drink of the Year 2023 Winner Awards!",
                         Comments = new List<Comment>
                         {
@@ -226,6 +227,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 2,
+                        SubforumId = 2,
                         Name = "Hi everyone :)",
                         Comments = new List<Comment>
                         {
@@ -239,6 +241,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 3,
+                        SubforumId = 3,
                         Name = "Alright here we go... Pepsi Vs Coke!!",
                         Comments = new List<Comment>
                         {
@@ -254,6 +257,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 4,
+                        SubforumId = 4,
                         Name = "Definitive Monster flavours tier list",
                         Comments = new List<Comment>
                         {
@@ -267,7 +271,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 5,
-                        Name = "WaterTok - Is flavoured water still considered water? ",
+                        SubforumId = 5, Name = "WaterTok - Is flavoured water still considered water? ",
                         Comments = new List<Comment>
                         {
                             comments[4]
@@ -280,7 +284,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 6,
-                        Name = "Just tried Kombucha for the first time",
+                        SubforumId = 6, Name = "Just tried Kombucha for the first time",
                         Comments = new List<Comment>
                         {
                             comments[5]
@@ -293,7 +297,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 7,
-                        Name = "Control + V Thread",
+                        SubforumId = 7, Name = "Control + V Thread",
                         Comments = new List<Comment>
                         {
                             comments[6]
@@ -306,7 +310,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 8,
-                        Name = "Post your song of the day",
+                        SubforumId = 8, Name = "Post your song of the day",
                         Comments = new List<Comment>
                         {
                             comments[7]
@@ -319,6 +323,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 1,
+                        SubforumId = 1,
                         Name = "Updated list of moderators!",
                         Comments = new List<Comment>
                         {
@@ -332,7 +337,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 2,
-                        Name = "Hello!",
+                        SubforumId = 2, Name = "Hello!",
                         Comments = new List<Comment>
                         {
                             comments[9]
@@ -345,6 +350,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 3,
+                        SubforumId = 3,
                         Name = "What even is Bitter Kas?",
                         Comments = new List<Comment>
                         {
@@ -358,7 +364,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 4,
-                        Name = "Why doesn't redbull make more sugar free flavors?",
+                        SubforumId = 4, Name = "Why doesn't redbull make more sugar free flavors?",
                         Comments = new List<Comment>
                         {
                             comments[11]
@@ -371,7 +377,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 5,
-                        Name = "I can't stop going to the bathroom",
+                        SubforumId = 5, Name = "I can't stop going to the bathroom",
                         Comments = new List<Comment>
                         {
                             comments[12]
@@ -384,7 +390,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 6,
-                        Name = "Thoughts on Yerba Mate?",
+                        SubforumId = 6, Name = "Thoughts on Yerba Mate?",
                         Comments = new List<Comment>
                         {
                             comments[13]
@@ -397,7 +403,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 7,
-                        Name = "Bump thread",
+                        SubforumId = 7, Name = "Bump thread",
                         Comments = new List<Comment>
                         {
                             comments[14]
@@ -410,7 +416,7 @@ namespace GeverageBoblins.DAL
                     new Models.Thread
                     {
                         UserId = 8,
-                        Name = "Post your video of the day",
+                        SubforumId = 8, Name = "Post your video of the day",
                         Comments = new List<Comment>
                         {
                             comments[15]
@@ -536,6 +542,9 @@ namespace GeverageBoblins.DAL
                     },
                 };
 
+
+            Console.WriteLine("In DBInit: Adding Users");
+
             if (!context.Users.Any())
             {
                 var items = users;
@@ -544,13 +553,7 @@ namespace GeverageBoblins.DAL
                 context.SaveChanges();
             }
 
-            if (!context.Threads.Any())
-            {
-                var items = threads;
-
-                context.AddRange(items);
-                context.SaveChanges();
-            }
+            Console.WriteLine("In DBInit: Adding Subforums");
 
             if (!context.Subforums.Any())
             {
@@ -560,6 +563,18 @@ namespace GeverageBoblins.DAL
                 context.SaveChanges();
             }
 
+            Console.WriteLine("In DBInit: Adding Threads");
+
+            if (!context.Threads.Any())
+            {
+                var items = threads;
+
+                context.AddRange(items);
+                context.SaveChanges();
+            }
+
+            Console.WriteLine("In DBInit: Adding Forums");
+
             if (!context.Forums.Any())
             {
                 var items = forums;
@@ -567,6 +582,8 @@ namespace GeverageBoblins.DAL
                 context.AddRange(items);
                 context.SaveChanges();
             }
+
+            Console.WriteLine("In DBInit: Adding Comments");
 
             if (!context.Comments.Any())
             {

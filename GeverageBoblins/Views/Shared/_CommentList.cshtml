@@ -70,9 +70,9 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#" class="dropdown-item" data-bs-toggle="modal"
-                               data-bs-target="#shareModal" data-bs-id="@url">
+                               data-bs-target="#shareModal-@Model.CommentId" data-bs-id="@url">
                                 <i class="fa-solid fa-share-nodes padding-right-icon"></i>
-                                Share comment
+                                Share
                             </a>
                         </li>
                         <li>
@@ -84,7 +84,8 @@
                                         <i class="fa-solid fa-pen padding-right-icon"></i>
                                         Edit
                                     </a>
-                                    <a href="" class="dropdown-item">
+                                    <a href="" class="dropdown-item" data-bs-toggle="modal"
+                                       data-bs-target="#deleteModal-@Model.CommentId" data-bs-id="@Model.CommentId">
                                         <i class="fa-solid fa-eraser padding-right-icon"></i>
                                         Delete
                                     </a>
@@ -156,8 +157,8 @@
 </article>
 <!--End of Post Content-->
 <!-- Sharing Modal -->
-<div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="shareModal-@Model.CommentId" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 modal-font" id="shareModalLabel">Share this post!</h1>
@@ -166,6 +167,40 @@
             <div class="modal-body">
                 <h5 class="modal-subtitle">Link to this comment:</h5>
                 <input type="text" class="share-input" id="comment-id">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Deleting Modal -->
+<div class="modal fade" id="deleteModal-@Model.CommentId" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header fd-column">
+                <div>
+                    <span class="circle-icon">
+                        <i class="fa-solid fa-triangle-exclamation fa-2xl"></i>
+                    </span>
+
+                </div>
+                <div>
+                    <h1 class="modal-title fs-5 modal-font" id="deleteModalLabel">Are you sure?</h1>
+
+                </div>
+            </div>
+            <div class="modal-body text-center">
+                <h2 class="modal-subtitle mt-2">This action cannot be undone.</h2>
+                <h3 class="modal-subtitle mb-5">The content of your comment (Id #@Model.CommentId) will be lost forever.</h3>
+
+
+                <div>
+                    <form asp-controller="Comment" asp-action="DeleteConfirmed" asp-route-id="@Model.CommentId" method="post">
+                        <button type="submit" class="mb-3 std-pink-btn w-75">Delete</button>
+                    </form>
+                </div>
+                <div>
+                    <button type="button" class="mb-4 std-purple-btn w-75" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
