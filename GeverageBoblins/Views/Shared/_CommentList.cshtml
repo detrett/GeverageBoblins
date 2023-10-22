@@ -80,7 +80,7 @@
                                 <!--If user is the comment's owner or user is moderator/admin-->
                                 if (true)
                                 {
-                                    <button class="dropdown-item" onclick="edit()">
+                                    <button class="dropdown-item" id="editBtn-@Model.CommentId" onclick="edit(@Model.CommentId)" >
                                         <i class="fa-solid fa-pen padding-right-icon"></i>
                                         Edit
                                     </button>
@@ -147,7 +147,7 @@
             </div>
             <!--Body of Post-->
             <div class="post-body">
-                <p>
+                <p id="comment-@Model.CommentId-body" contenteditable="false">
                     @Model.Body
                 </p>
             </div>

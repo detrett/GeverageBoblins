@@ -5,8 +5,22 @@ const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
 /* EDIT FUNCTION */
-var edit = function() {
-    console.log("Clicked")
+var edit = function(btn_id) {
+    console.log("Clicked on button " + btn_id)
+    console.log(`comment-${btn_id}-body`)
+
+    var commentBody = document.getElementById(`comment-${btn_id}-body`)
+    var originalContent = commentBody.innerHTML;
+
+    commentBody.contentEditable = true;
+    commentBody.focus();
+
+    commentBody.addEventListener('blur', function(event) {
+        console.log("Lost focus")
+        commentBody.contentEditable = false;
+        commentBody.innerHTML = originalContent;
+    })
+    
 }
 
 $(document).ready(edit);

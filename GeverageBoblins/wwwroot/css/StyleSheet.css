@@ -404,10 +404,12 @@ a.memberTitle:hover {
     background: #60c7c1;
     padding: 15px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    &>img
 
-    &>img {
-            width: 100%;
-        }
+{
+    width: 100%;
+}
+
 }
 
 .std-pink-btn {
@@ -431,13 +433,15 @@ a.memberTitle:hover {
     transform: translateY(1px);
     transition: transform 0.1s ease;
 }
+
 &:active {
     position: relative;
     top: 1px;
 }
+
 }
 
-.custom-checkbox{
+.custom-checkbox {
     margin-left: 7.5%;
 }
 
@@ -463,16 +467,19 @@ a.memberTitle:hover {
     transform: translateY(1px);
     transition: transform 0.1s ease;
 }
+
 &:active {
     position: relative;
     top: 1px;
 }
+
 }
+
 .m-2-5 {
     margin-left: 2.5%;
 }
 
-.m-7-5{
+.m-7-5 {
     margin-left: 7.5%;
 }
 
@@ -514,11 +521,12 @@ a.memberTitle:hover {
     accent-color: #2d293c;
 }
 
-.custom-form-control{
+.custom-form-control {
     width: 85% !important;
     margin: auto;
 }
-.thread-form-control{
+
+.thread-form-control {
     width: 95% !important;
     margin: auto;
 }
@@ -992,11 +1000,12 @@ input:focus {
 .alt-link {
     color: #505050;
     font-weight: 500;
-
     &:hover
+
 {
     color: #1a1a1a;
 }
+
 }
 
 .std-link {
@@ -1152,6 +1161,16 @@ ul {
     color: #F83A5B;
 }
 
+.post-body > p {
+    transition: all .5s ease-out 
+
+}
+.post-body > p:focus {
+    transition: all .5s ease-in-out;
+    background-color: white;
+    padding: 10px 0px 10px 15px;
+}
+
 /**************************************************************************************************/
 /** Ids **/
 
@@ -1170,13 +1189,15 @@ ul {
     -moz-animation-iteration-count: infinite;
 }
 
-@keyframes backandforth{
+@keyframes backandforth {
     30% {
         transform: translateX(2px);
     }
+
     50% {
         transform: translateX(4px);
     }
+
     70% {
         transform: translateX(0px);
     }
