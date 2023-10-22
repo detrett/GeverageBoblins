@@ -743,6 +743,10 @@ a.memberTitle:hover {
     font-size: 1em;
 }
 
+.pr-3 {
+    padding-right: 12px !important;
+}
+
 .nav-link,
 .nav-link:hover {
     color: white;
@@ -1135,6 +1139,23 @@ ul {
 
 #thread-submit {
     width: 25%;
+}
+
+.fa-forward-step:hover{
+    animation: backandforth 0.5s normal forwards ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes backandforth{
+    30% {
+        transform: translateX(2px);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+    70% {
+        transform: translateX(0px);
+    }
 }
 
 #back-to-top-button {

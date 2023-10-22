@@ -31,12 +31,20 @@
 
         <!--Title-->
         <div class="col-9 col-md-7 forum-title-container">
-            <a asp-action="container" asp-controller="thread" asp-route-id="@Model.ThreadId" class="thread-title-font std-link" title="Go to thread">
-                <span>
-                    @Model.Name
-                </span>
-            </a>
 
+            <div>
+
+                    <a asp-action="container" asp-controller="thread" asp-route-id="@Model.ThreadId" class="thread-title-font std-link" title="Go to thread">
+                        <span class="">@Model.Name &nbsp;</span>
+                    </a>
+
+
+                    <a href="@Url.Action("Container", "Thread", new { id = Model.ThreadId, Model.Comments.LastOrDefault().CommentId })"
+                       class="user-link hidden-mobile" title="Go to last comment">
+                        <i class="fa-solid fa-forward-step"></i>
+                    </a>
+
+            </div>
             <p class="thread-subtitle-font">
                 By
                 @{
@@ -148,8 +156,10 @@
                     </div>
 
                     <div>
-                        <a asp-action="container" asp-controller="thread" asp-route-id="@Model.ThreadId"
-                           class="user-link hidden-mobile" title="Go to thread">
+                        <a href="@Url.Action("Container", "Thread", new { id = Model.ThreadId, Model.Comments.LastOrDefault().CommentId })"
+                           class="user-link hidden-mobile" title="Go to last comment">
+                            @*<a asp-action="container" asp-controller="thread" asp-route-id="@Model.ThreadId"
+                                class="user-link hidden-mobile" title="Go to thread">*@
                             @{
                                 TimeSpan ts2 = DateTime.Now.Subtract(Model.Comments.LastOrDefault().CreatedAt);
                                 var output2 = "";

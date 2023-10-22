@@ -62,8 +62,8 @@
                     <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-ellipsis ellipsis"></i>
                     </a>
-                    
-                    @{ 
+
+                    @{
                         var url = Model.ThreadId + "#comment-" + Model.CommentId;
                     }
 
@@ -72,15 +72,25 @@
                             <a href="#" class="dropdown-item" data-bs-toggle="modal"
                                data-bs-target="#shareModal" data-bs-id="@url">
                                 <i class="fa-solid fa-share-nodes padding-right-icon"></i>
-                                Share
+                                Share comment
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item">
-                                <i class="fa-solid fa-pen padding-right-icon"></i>
-                                Edit
-                            </a>
-                            <!--Only the creator of the comment OR moderators/admins should see this button-->
+                            @{
+                                <!--If user is the comment's owner or user is moderator/admin-->
+                                if (true)
+                                {
+                                    <a href="" class="dropdown-item">
+                                        <i class="fa-solid fa-pen padding-right-icon"></i>
+                                        Edit
+                                    </a>
+                                    <a href="" class="dropdown-item">
+                                        <i class="fa-solid fa-eraser padding-right-icon"></i>
+                                        Delete
+                                    </a>
+                                }
+                            }
+
                         </li>
                     </ul>
                 </div>
@@ -145,7 +155,6 @@
     </div>
 </article>
 <!--End of Post Content-->
-
 <!-- Sharing Modal -->
 <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
     <div class="modal-dialog">
