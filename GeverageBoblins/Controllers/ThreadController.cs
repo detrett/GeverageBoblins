@@ -2,6 +2,7 @@
 using GeverageBoblins.Models;
 using GeverageBoblins.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.ComponentModel.Design;
 using Thread = GeverageBoblins.Models.Thread;
 
@@ -109,9 +110,11 @@ namespace GeverageBoblins.Controllers
         {
             if (ModelState.IsValid)
             {
+                Console.WriteLine("Model State valid");
+
                 await _threadRepository.Update(thread);
 
-                return RedirectToAction(nameof(Container));
+                return Redirect($"{Url.Action("Container", "Thread", new { id = thread.ThreadId })}");
             }
             return View(thread);
         }

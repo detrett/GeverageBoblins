@@ -517,6 +517,36 @@ a.memberTitle:hover {
 
 }
 
+.login-pink-btn {
+    background-color: #fc375c;
+    border-radius: 5px;
+    border: 1px solid #c12367;
+    box-shadow: var(--box--std-box-shadow);
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 18px;
+    padding: 5px 5px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #2d293c;
+    height: 45px;
+    width: 85%;
+    &:hover
+
+{
+    background-color: #2d293c;
+    transform: translateY(1px);
+    transition: transform 0.1s ease;
+}
+
+&:active {
+    position: relative;
+    top: 1px;
+}
+
+}
+
 #customCheck {
     accent-color: #2d293c;
 }
@@ -1277,6 +1307,9 @@ ul {
 
 /**************************************************************************************************/
 /** Ids **/
+#threadEdit {
+    margin-right: 10px;
+}
 
 #editThreadBtn {
     margin-top: 40px;

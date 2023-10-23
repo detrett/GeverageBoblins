@@ -55,7 +55,13 @@ namespace GeverageBoblins.DAL
 
         public async Task Update(Models.Thread thread)
         {
+            var firstComment = thread.Comments.First();
+            firstComment.Body = thread.Description;
+            firstComment.Title = thread.Name;
+
+            _db.Comments.Update(firstComment);
             _db.Threads.Update(thread);
+
             await _db.SaveChangesAsync();
         }
     }

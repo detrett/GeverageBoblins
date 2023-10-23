@@ -1,0 +1,51 @@
+﻿@model Thread
+
+<form asp-controller="Thread" asp-action="Update" method="post">
+    <div class="modal-body">
+        <div asp-validation-summary="All" class="text-danger m-2-5"></div>
+
+        <h5 class="modal-subtitle m-2-5">Thread title:</h5>
+        <div class="form-floating mb-2">
+            <input asp-for="Name" class="form-control thread-form-control" aria-required="true" placeholder="@Model.Name" />
+            <span asp-validation-for="Name" class="text-danger m-2-5"></span>
+        </div>
+
+        <h5 class="modal-subtitle m-2-5">Thread body:</h5>
+        <div class="form-floating mb-2">
+            <textarea asp-for="Description" class="form-control thread-form-control" rows="15" placeholder="@Model.Description"></textarea>
+            <span asp-validation-for="Description" class="text-danger m-2-5"></span>
+        </div>
+        @{
+            Console.WriteLine("In _EditThreadModal: Model.Comments.Count(): " + @Model.Comments.Count());
+        }
+        <input type="hidden" asp-for="UserId" value="@Model.UserId" />
+        <input type="hidden" asp-for="SubforumId" value="@Model.SubforumId" />
+
+        @for (int i = 0; i < Model.Comments.Count; i++)
+        {
+            <input type="hidden" asp-for="Comments[i].CommentId" value="@Model.Comments[i].CommentId" />
+            <input type="hidden" asp-for="Comments[i].Title" value="@Model.Comments[i].Title" />
+            <input type="hidden" asp-for="Comments[i].Body" value="@Model.Comments[i].Body" />
+            <input type="hidden" asp-for="Comments[i].ThreadId" value="@Model.ThreadId" />
+            <input type="hidden" asp-for="Comments[i].UserId" value="@Model.Comments[i].UserId" />
+
+            if(i == 0)
+                {
+                    <input type="hidden" asp-for="Comments[0].Body" value="@Model.Description" />
+                }
+            
+        }
+
+
+
+        <div class="d-flex">
+            <button id="thread-edit" type="submit" class="mb-3 login-purple-btn m-2-5">
+                Save changes
+            </button>
+            <button type="button" class="mb-3 login-pink-btn m-2-5" data-bs-dismiss="modal">Discard changes</button>
+        </div>
+
+
+
+    </div>
+</form>

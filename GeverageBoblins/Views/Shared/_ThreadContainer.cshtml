@@ -14,26 +14,26 @@
 
         <!--Thread title-->
         <div class="d-inline-flex">
-                <h2 class="thread-page-title">@Model.Name</h2>
+            <h2 class="thread-page-title">@Model.Name</h2>
 
             @{
                 // CHANGEME
                 if (@Model.UserId == 5)
                 {
-                        <button type="button" class="btn card-body std-purple-btn" data-bs-keyboard="false" data-bs-backdrop="static" data-bs-toggle="modal"
-                                data-bs-target="#editThread" id="editThreadBtn">
-                            <i class="fa-solid fa-file-pen"></i>
-                            Edit Topic
-                        </button>
+                    <button type="button" class="btn card-body std-purple-btn" data-bs-keyboard="false" data-bs-backdrop="static" data-bs-toggle="modal"
+                            data-bs-target="#editThread" id="editThreadBtn">
+                        <i class="fa-solid fa-file-pen"></i>
+                        Edit Topic
+                    </button>
                 }
                 // CHANGEME
                 if (@Model.UserId == 5)
                 {
-                        <button type="button" class="btn card-body std-pink-btn" data-bs-keyboard="false" data-bs-backdrop="static" data-bs-toggle="modal"
-                                data-bs-target="#deleteThread" id="deleteThreadBtn">
-                            <i class="fa-solid fa-trash"></i>
-                            Delete
-                        </button>
+                    <button type="button" class="btn card-body std-pink-btn" data-bs-keyboard="false" data-bs-backdrop="static" data-bs-toggle="modal"
+                            data-bs-target="#deleteThread" id="deleteThreadBtn">
+                        <i class="fa-solid fa-trash"></i>
+                        Delete
+                    </button>
                 }
             }
         </div>
@@ -62,8 +62,8 @@
                 <!--guest teaser (guest only)-->
                 <section class="background-light card comment-container guest-only">
 
-                    @await Html.PartialAsync("_GuestTeaser"); 
-                    
+                    @await Html.PartialAsync("_GuestTeaser");
+
                 </section>
                 <!--end of guest teaser (guest only)-->
             }
@@ -79,7 +79,22 @@
     </a>
 </div>
 
+<!-- Edit Thread Modal -->
+<div class="modal fade" id="editThread" tabindex="-1" aria-labelledby="editThreadLabel" aria-hidden="true" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 modal-font" id="editThreadLabel">Edit topic</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @{ 
+                var editThread = Model;
+            }
+            @await Html.PartialAsync("_EditThreadModal", @editThread);
 
+        </div>
+    </div>
+</div>
 
 <!--Back to top button-->
 <a href="" id="back-to-top-button" data-bs-toggle="tooltip" title="Back to top"></a>
