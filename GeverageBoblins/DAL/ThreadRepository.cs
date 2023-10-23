@@ -33,6 +33,12 @@ namespace GeverageBoblins.DAL
                 return false;
             }
 
+            foreach(var comment in item.Comments.ToList())
+            {
+                _db.Comments.Remove(comment);
+                await _db.SaveChangesAsync();
+            }
+
             _db.Threads.Remove(item);
             await _db.SaveChangesAsync();
             return true;

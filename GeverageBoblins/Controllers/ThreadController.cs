@@ -4,6 +4,7 @@ using GeverageBoblins.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.Design;
+using System.Threading;
 using Thread = GeverageBoblins.Models.Thread;
 
 namespace GeverageBoblins.Controllers
@@ -136,8 +137,18 @@ namespace GeverageBoblins.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _threadRepository.Delete(id);
-            return RedirectToAction(nameof(Container));
+            Console.WriteLine("In THREAD CONTROLLER: DeleteConfirmed, thread id = " + id);
+
+            var thread = await _threadRepository.GetThreadById(id);
+            var subforumId = thread.SubforumId;
+
+            bool returnOk = await _threadRepository.Delete(id);
+            if (!returnOk)
+            {
+                return BadRequest("Topic deletion failed");
+            }
+
+            return RedirectToAction("Container", "Subforum", new { id = subforumId });
         }
 
         public IActionResult Index()

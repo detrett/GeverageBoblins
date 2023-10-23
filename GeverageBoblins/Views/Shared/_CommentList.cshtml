@@ -77,7 +77,8 @@
                         </li>
                         <li>
                             @{
-                                <!--If user is the comment's owner or user is moderator/admin CHANGEME-->
+                                <!--CHANGEME
+                                    If user is the comment's owner or user is moderator/admin -->
                                 if (Model.UserId == 5 || Model.User.Rank == "Mod" || Model.User.Rank == "Admin")
                                 {
                                     <button class="dropdown-item" id="editBtn-@Model.CommentId" onclick="edit(@Model.CommentId)">
