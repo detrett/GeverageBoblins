@@ -1113,6 +1113,7 @@ input:focus {
     font-size: 1.5rem;
     margin-top: 40px;
     margin-left: 50px;
+    width: fit-content;
 }
 
 .thread-title-font {
@@ -1279,9 +1280,23 @@ ul {
 
 #editThreadBtn {
     margin-top: 40px;
+    width: fit-content;
+    max-width: 150px;
+    margin-left: auto;
+    margin-right: 10px;
+    &:hover{
+               color: white;
+           }
 }
 #deleteThreadBtn {
     margin-top: 40px;
+    width: fit-content;
+    max-width: 150px;
+    margin-right: 3%;
+    &:hover
+            {
+                color: white;
+            }
 }
 
 .modal-header {

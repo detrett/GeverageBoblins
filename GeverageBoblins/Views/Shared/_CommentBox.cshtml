@@ -111,9 +111,14 @@
                                     <a href="#" title="Go to profile">
                                         <h4 class="post-top-title">Pengu</h4>
                                     </a>
+                                    @{ 
+                                        DateTime currentDay = DateTime.Now;
+                                        string formattedDate = currentDay.ToString("dd MMMM");
+                                        Console.WriteLine(formattedDate);
+                                    }
                                     <a href="#" class="post-top-subtitle"
                                        title="Jump to comment">
-                                        Posted <time datetime="2023-09-04T12:55:00">September 4</time>
+                                        Posted <time datetime="@currentDay.ToString()">@formattedDate</time>
                                     </a>
                                 </div>
                             </div>
@@ -124,7 +129,7 @@
                             </a>
                             <a href="#comment-3" class="post-top-subtitle hidden-mobile"
                                title="Jump to comment">
-                                Posted <time datetime="2023-09-04T12:05:00">September 4</time>
+                                Posted <time datetime="@currentDay.ToString()">@formattedDate</time>
                             </a>
                         </div>
                         <!--Body of Post-->

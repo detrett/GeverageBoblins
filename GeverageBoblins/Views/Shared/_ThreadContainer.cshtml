@@ -13,33 +13,27 @@
     <div class="thread-container background-dark card row">
 
         <!--Thread title-->
-        <div class="row">
-            <div class="col-3">
+        <div class="d-inline-flex">
                 <h2 class="thread-page-title">@Model.Name</h2>
-            </div>
 
             @{
                 // CHANGEME
                 if (@Model.UserId == 5)
                 {
-                    <div class="col-1 mr-50">
                         <button type="button" class="btn card-body std-purple-btn" data-bs-keyboard="false" data-bs-backdrop="static" data-bs-toggle="modal"
                                 data-bs-target="#editThread" id="editThreadBtn">
                             <i class="fa-solid fa-file-pen"></i>
                             Edit Topic
                         </button>
-                    </div>
                 }
                 // CHANGEME
                 if (@Model.UserId == 5)
                 {
-                    <div class="col-1">
-                        <button type="button" class="btn card-body std-pink-btn w-100" data-bs-keyboard="false" data-bs-backdrop="static" data-bs-toggle="modal"
+                        <button type="button" class="btn card-body std-pink-btn" data-bs-keyboard="false" data-bs-backdrop="static" data-bs-toggle="modal"
                                 data-bs-target="#deleteThread" id="deleteThreadBtn">
                             <i class="fa-solid fa-trash"></i>
                             Delete
                         </button>
-                    </div>
                 }
             }
         </div>

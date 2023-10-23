@@ -48,6 +48,11 @@ namespace GeverageBoblins.DAL
             return await _db.Threads.FindAsync(id);
         }
 
+        public async Task<Subforum?> GetSubforumById(int id)
+        {
+            return await _db.Subforums.FindAsync(id);
+        }
+
         public async Task Update(Models.Thread thread)
         {
             _db.Threads.Update(thread);

@@ -41,17 +41,17 @@
                         </button>
                     </div>
                 }
-                
+
                 @*else
-                {
-                    <div class="col-2">
-                        <a href="" class="btn card-body new-thread-btn guest-disabled disabled" role="button"
-                           aria-disabled="true" data-bs-toggle="tooltip" title="Make a new thread">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                            New Thread
-                        </a>
-                    </div>
-                }*@
+                    {
+                        <div class="col-2">
+                            <a href="" class="btn card-body new-thread-btn guest-disabled disabled" role="button"
+                               aria-disabled="true" data-bs-toggle="tooltip" title="Make a new thread">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                New Thread
+                            </a>
+                        </div>
+                    }*@
 
             }
 
@@ -90,8 +90,13 @@
                 </li>
 
                 @{
+                    // Order the threads by last comment date
+                    var orderedThreads = Model.Threads.OrderByDescending(aTopic =>
+                        aTopic.Comments.Any() ? aTopic.Comments.Max(comment => comment.CreatedAt) : DateTime.MinValue).ToList();
+
                     var count = 0;
-                    foreach (var thread in Model.Threads)
+                    // Load the threads
+                    foreach (var thread in orderedThreads)
                     {
                         @await Html.PartialAsync("_ThreadList", thread);
 
@@ -123,7 +128,7 @@
                 <h1 class="modal-title fs-5 modal-font" id="threadModalLabel">Create a new thread</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            @{ 
+            @{
                 var newThread = new GeverageBoblins.Models.Thread();
                 newThread.SubforumId = Model.SubforumId;
                 newThread.UserId = 5;
@@ -132,7 +137,7 @@
                 newThread.IsFeatured = false;
                 newThread.IsPinned = false;
             }
-            @await Html.PartialAsync("_NewThreadModal", newThread); 
+            @await Html.PartialAsync("_NewThreadModal", newThread);
 
         </div>
     </div>

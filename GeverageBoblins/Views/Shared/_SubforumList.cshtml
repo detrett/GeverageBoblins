@@ -61,8 +61,9 @@
                         @{
                             TimeSpan ts = DateTime.Now.Subtract(trueLastComment.CreatedAt);
                             var output = "";
-
-                            if (ts.TotalHours < 1)
+                            if (ts.TotalMinutes < 2)
+                                output = "1 minute ago";
+                            else if (ts.TotalHours < 1)
                                 output = $"{ts.TotalMinutes} minutes ago";
                             else if (ts.TotalDays < 1)
                                 output = $"{ts.TotalHours} hours ago";

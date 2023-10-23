@@ -11,5 +11,6 @@ namespace GeverageBoblins.DAL
         Task Update(Models.Thread thread);
         Task<bool> Delete(int id);
         Task CreateComment(Comment comment);
+        Task<Subforum?> GetSubforumById(int subforumId);
     }
 }

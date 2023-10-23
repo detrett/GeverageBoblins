@@ -2,6 +2,7 @@
 using GeverageBoblins.Models;
 using GeverageBoblins.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.Design;
 using Thread = GeverageBoblins.Models.Thread;
 
 namespace GeverageBoblins.Controllers
@@ -63,9 +64,10 @@ namespace GeverageBoblins.Controllers
                 firstComment.CreatedAt = thread.CreatedAt;
                      
                 await _threadRepository.CreateComment(firstComment);
-                
 
-                return RedirectToAction(nameof(Container));
+                thread.ParentSubforum = await _threadRepository.GetSubforumById(thread.SubforumId);
+
+                return Redirect($"{Url.Action("Container", "Thread", new { id = thread.ThreadId })}#comment-" + firstComment.CommentId);
             }
             Console.WriteLine("Model State NOT valid");
 
