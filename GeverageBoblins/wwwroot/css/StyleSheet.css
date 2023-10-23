@@ -920,17 +920,17 @@ a.memberTitle:hover {
             background-color: #2d293cFF;
         }
 
-.post-body {
+.post-body > p {
     margin-top: 30px;
-    margin-bottom: 35px;
 }
 
-.post-container {
-    margin: 15px 50px;
-    width: -webkit-fill-available;
-    width: -moz-available;
-    box-shadow: var(--box--std-box-shadow);
-}
+
+    .post-container {
+        margin: 15px 50px;
+        width: -webkit-fill-available;
+        width: -moz-available;
+        box-shadow: var(--box--std-box-shadow);
+    }
 
 .post-top {
     padding: 24px;
@@ -1208,7 +1208,7 @@ i {
     color: #2d293c;
 }
 
-    i.fa-pen-to-square, i.fa-chevron-left {
+    i.fa-pen-to-square, i.fa-chevron-left, i.fa-file-pen, i.fa-trash {
         color: #fff;
     }
 
@@ -1269,10 +1269,20 @@ ul {
 .mr-3 {
     margin-right: 12px;
 }
+.mr-50 {
+    margin-right: 50px;
+}
 
 
 /**************************************************************************************************/
 /** Ids **/
+
+#editThreadBtn {
+    margin-top: 40px;
+}
+#deleteThreadBtn {
+    margin-top: 40px;
+}
 
 .modal-header {
     flex-direction: column;

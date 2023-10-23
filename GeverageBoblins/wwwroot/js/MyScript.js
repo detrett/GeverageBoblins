@@ -51,6 +51,9 @@ var edit = function(btn_id) {
     })  
     // Cancel button
     cancelBtn.addEventListener('click', function cancel() {
+
+        input.value = originalContent;
+
         commentBody.innerHTML = originalContent;
         commentBody.contentEditable = false;
 

@@ -219,6 +219,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[0]
                         },
+                        Description = comments[0].Body,
                         IsLocked = true,
                         IsAnnouncement = true,
                         IsPinned = true,
@@ -233,6 +234,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[1]
                         },
+                        Description = comments[1].Body,
                         IsLocked = false,
                         IsAnnouncement = false,
                         IsPinned = false,
@@ -249,6 +251,7 @@ namespace GeverageBoblins.DAL
                             comments[16],
                             comments[17]
                         },
+                        Description = comments[2].Body,
                         IsLocked = false,
                         IsAnnouncement = false,
                         IsPinned = false,
@@ -263,6 +266,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[3]
                         },
+                        Description = comments[3].Body,
                         IsLocked = false,
                         IsAnnouncement = false,
                         IsPinned = true,
@@ -276,6 +280,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[4]
                         },
+                        Description = comments[4].Body,
                         IsLocked = false,
                         IsAnnouncement = false,
                         IsPinned = false,
@@ -289,6 +294,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[5]
                         },
+                        Description = comments[5].Body,
                         IsLocked = false,
                         IsAnnouncement = false,
                         IsPinned = false,
@@ -302,6 +308,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[6]
                         },
+                        Description = comments[6].Body,
                         IsLocked = false,
                         IsAnnouncement = false,
                         IsPinned = false,
@@ -315,6 +322,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[7]
                         },
+                        Description = comments[7].Body,
                         IsLocked = false,
                         IsAnnouncement = false,
                         IsPinned = false,
@@ -329,6 +337,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[8]
                         },
+                        Description = comments[8].Body,
                         IsLocked = false,
                         IsAnnouncement = true,
                         IsPinned = false,
@@ -342,6 +351,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[9]
                         },
+                        Description = comments[9].Body,
                         IsLocked = false,
                         IsAnnouncement = false,
                         IsPinned = false,
@@ -356,6 +366,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[10]
                         },
+                        Description = comments[10].Body,
                         IsLocked = true,
                         IsAnnouncement = false,
                         IsPinned = false,
@@ -369,6 +380,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[11]
                         },
+                        Description = comments[11].Body,
                         IsLocked = false,
                         IsAnnouncement = false,
                         IsPinned = false,
@@ -382,6 +394,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[12]
                         },
+                        Description = comments[12].Body,
                         IsLocked = false,
                         IsAnnouncement = false,
                         IsPinned = false,
@@ -395,6 +408,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[13]
                         },
+                        Description = comments[13].Body,
                         IsLocked = false,
                         IsAnnouncement = false,
                         IsPinned = false,
@@ -408,6 +422,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[14]
                         },
+                        Description = comments[14].Body,
                         IsLocked = false,
                         IsAnnouncement = false,
                         IsPinned = false,
@@ -421,6 +436,7 @@ namespace GeverageBoblins.DAL
                         {
                             comments[15]
                         },
+                        Description = comments[15].Body,
                         IsLocked = false,
                         IsAnnouncement = false,
                         IsPinned = false,

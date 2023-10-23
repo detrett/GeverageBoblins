@@ -50,9 +50,19 @@ namespace GeverageBoblins.Controllers
             if (ModelState.IsValid)
             {
                 Console.WriteLine("Model State valid");
-               
+                thread.Comments = new List<Comment>();
+
                 // Add thread to DB
                 await _threadRepository.Create(thread);
+
+                var firstComment = new Comment();
+                firstComment.Title = thread.Name;
+                firstComment.UserId = thread.UserId;
+                firstComment.Body = thread.Description;
+                firstComment.ThreadId = thread.ThreadId;
+                firstComment.CreatedAt = thread.CreatedAt;
+                     
+                await _threadRepository.CreateComment(firstComment);
                 
 
                 return RedirectToAction(nameof(Container));

@@ -77,10 +77,10 @@
                         </li>
                         <li>
                             @{
-                                <!--If user is the comment's owner or user is moderator/admin-->
-                                if (true)
+                                <!--If user is the comment's owner or user is moderator/admin CHANGEME-->
+                                if (Model.UserId == 5 || Model.User.Rank == "Mod" || Model.User.Rank == "Admin")
                                 {
-                                    <button class="dropdown-item" id="editBtn-@Model.CommentId" onclick="edit(@Model.CommentId)" >
+                                    <button class="dropdown-item" id="editBtn-@Model.CommentId" onclick="edit(@Model.CommentId)">
                                         <i class="fa-solid fa-pen padding-right-icon"></i>
                                         Edit
                                     </button>
@@ -145,8 +145,9 @@
                     Posted <time>@Model.CreatedAt.ToString("M")</time>
                 </a>
             </div>
+
             <!--Body of Post-->
-            <form asp-controller="Comment" asp-action="Update" method="post">
+            <form asp-controller="Comment" asp-action="Update" method="post" class="mb-3">
                 <div class="post-body">
                     <p id="comment-@Model.CommentId-body" contenteditable="false" class="prevent-blur">
                         @Model.Body
@@ -154,7 +155,7 @@
                     <input id="comment-@Model.CommentId-input" type="hidden" asp-for="Body" value="" />
                     <span asp-validation-for="@Model.Body" class="text-danger m-2-5"></span>
                 </div>
-                <div>
+                
                     <input type="hidden" asp-for="CommentId" value="@Model.CommentId" />
                     <input type="hidden" asp-for="ThreadId" value="@Model.ThreadId" />
                     <input type="hidden" asp-for="UserId" value="@Model.UserId" />
@@ -163,14 +164,18 @@
                     <button type="submit" class="std-pink-btn mr-3 hidden" id="save-comment-@Model.CommentId">
                         Save changes
                     </button>
-                    <button class="std-purple-btn hidden" id="cancel-save-@Model.CommentId">
-                        Cancel
-                    </button>
-                </div>
+                
             </form>
+
+            <button class="std-purple-btn hidden" id="cancel-save-@Model.CommentId">
+                Cancel
+            </button>
+
         </div>
-        <!--End of Main Content-->
+        
     </div>
+    <!--End of Main Content-->
+    
 </article>
 <!--End of Post Content-->
 <!-- Sharing Modal -->
