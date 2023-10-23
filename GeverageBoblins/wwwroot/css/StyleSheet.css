@@ -651,10 +651,101 @@ a.memberTitle:hover {
     margin-bottom: 0;
 }
 
+.smooth-fade {
+    animation: fade 0.2s;
+    -moz-animation: fade 0.2s;
+}
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes reversefade {
+    0% {
+        opacity: 1;
+    }
+
+    25% {
+        opacity: 0.75;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes reversefade {
+    0% {
+        opacity: 1;
+    }
+
+    25% {
+        opacity: 0.75;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
 .hide {
     opacity: 0;
     visibility: hidden;
     display: none !important;
+    animation: reversefade 0.2s;
+    -moz-animation: reversefade 0.2s;
+}
+
+.hidden {
+    display: none;
+    -webkit-transition: display .25s ease;
+    -moz-transition: display .25s ease;
+    -o-transition: display .25s ease;
+}
+
+.active {
+    transition: display .25s ease;
+    -webkit-transition: display .25s ease;
+    -moz-transition: display .25s ease;
+    -o-transition: display .25s ease;
 }
 
 .icon-border {
@@ -1162,14 +1253,23 @@ ul {
 }
 
 .post-body > p {
-    transition: all .5s ease-out 
+    transition: all .5s ease-out
+}
 
+    .post-body > p:focus {
+        transition: all .5s ease-in-out;
+        background-color: white;
+        padding: 10px 0px 10px 15px;
+    }
+    .post-body > p:focus-visible {
+        outline: 1px solid #2d293c;
+        border-radius: 5px;
+    }
+
+.mr-3 {
+    margin-right: 12px;
 }
-.post-body > p:focus {
-    transition: all .5s ease-in-out;
-    background-color: white;
-    padding: 10px 0px 10px 15px;
-}
+
 
 /**************************************************************************************************/
 /** Ids **/

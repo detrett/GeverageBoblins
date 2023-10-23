@@ -138,7 +138,7 @@
                     if (ts2.TotalHours < 1)
                         output2 = $"{ (int) ts2.TotalMinutes } minutes ago";
                     else if (ts2.TotalDays < 1)
-                        output2 = $"{ts2.TotalHours} hours ago";
+                        output2 = $"{(int) ts2.TotalHours} hours ago";
                     else if (ts.TotalDays < 2)
                         output2 = "yesterday";
                     else if (ts2.TotalDays < 5)

@@ -1,25 +1,86 @@
-﻿console.log("Start of MyScript.js")
+﻿/* LOG */
+console.log('Start of MyScript.js')
+
+/* URL REDIRECT */
+/* Redirect url when the path name is empty */
+if (window.location.href == "https://localhost:7054/") {
+    window.location.href = 'https://localhost:7054/Forum/Container';
+}
 
 /* TOOLTIPS */
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
 
 /* EDIT FUNCTION */
 var edit = function(btn_id) {
-    console.log("Clicked on button " + btn_id)
-    console.log(`comment-${btn_id}-body`)
+    console.log(`Clicked on editBtn-${btn_id}`);
 
-    var commentBody = document.getElementById(`comment-${btn_id}-body`)
+    // Getting the elements we are going to need
+    var editBtn = document.getElementById(`editBtn-${btn_id}`);
+    $(editBtn).addClass('disabled');
+
+    var commentBody = document.getElementById(`comment-${btn_id}-body`);
     var originalContent = commentBody.innerHTML;
+
+    var saveBtn = document.getElementById(`save-comment-${btn_id}`);
+    var cancelBtn = document.getElementById(`cancel-save-${btn_id}`);
+
+    var input = document.getElementById(`comment-${btn_id}-input`);
+
+    // Slow fade
+    $(saveBtn).fadeToggle('slow');
+    $(cancelBtn).fadeToggle('slow');
+
+    // Prevent from losing focus when clicking outside any relevant elements
+    document.addEventListener('mousedown', function preventBlur(event) {
+        var hasFocus = (document.activeElement === commentBody);
+
+        if (event.target != saveBtn
+            && event.target != cancelBtn
+            && event.target != commentBody
+            && hasFocus) {
+            event.preventDefault();
+        }
+        if (!hasFocus) {
+            console.log("False");
+            setTimeout(function () {
+                commentBody.focus();
+            }, 0);
+        }
+    })  
+    // Cancel button
+    cancelBtn.addEventListener('click', function cancel() {
+        commentBody.innerHTML = originalContent;
+        commentBody.contentEditable = false;
+
+        $(saveBtn).fadeToggle('slow');
+        $(cancelBtn).fadeToggle('slow');
+        $(editBtn).removeClass('disabled');
+
+        this.removeEventListener('click', cancel);
+        document.removeEventListener('mousedown', preventBlur);
+    })
+
+    // Save button
+    saveBtn.addEventListener('click', function save() {
+
+        input.value = commentBody.innerHTML;
+
+        commentBody.contentEditable = false;
+        document.getElementById()
+
+        $(saveBtn).fadeToggle('slow');
+        $(cancelBtn).fadeToggle('slow');
+        $(editBtn).removeClass('disabled');
+
+        this.removeEventListener('click', save);
+        document.removeEventListener('mousedown', preventBlur);
+    })
 
     commentBody.contentEditable = true;
     commentBody.focus();
-
-    commentBody.addEventListener('blur', function(event) {
-        console.log("Lost focus")
-        commentBody.contentEditable = false;
-        commentBody.innerHTML = originalContent;
-    })
+    
     
 }
 
@@ -52,6 +113,7 @@ triggerTabList.forEach(triggerEl => {
     })
 })
 
+
 /* BACK TO TOP BUTTON */
 var btn = $('#back-to-top-button');
 
@@ -62,11 +124,11 @@ $(window).scroll(function () {
         btn.removeClass('show');
     }
 });
-
 btn.on('click', function (e) {
     e.preventDefault();
     $('html, body').animate({ scrollTop: 0 }, '300');
 });
+
 
 /* GUEST/MEMBER SWITCH */
 var memberSwitch = $('#guest-switch');
@@ -166,6 +228,7 @@ window.addEventListener('load', function () {
 //        tabTrigger.show()
 //    })
 //})
+
 
 /* SHARE MODAL */
 var exampleModal = document.getElementById('shareModal')

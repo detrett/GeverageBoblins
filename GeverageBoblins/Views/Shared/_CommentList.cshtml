@@ -146,11 +146,28 @@
                 </a>
             </div>
             <!--Body of Post-->
-            <div class="post-body">
-                <p id="comment-@Model.CommentId-body" contenteditable="false">
-                    @Model.Body
-                </p>
-            </div>
+            <form asp-controller="Comment" asp-action="Update" method="post">
+                <div class="post-body">
+                    <p id="comment-@Model.CommentId-body" contenteditable="false" class="prevent-blur">
+                        @Model.Body
+                    </p>
+                    <input id="comment-@Model.CommentId-input" type="hidden" asp-for="Body" value="" />
+                    <span asp-validation-for="@Model.Body" class="text-danger m-2-5"></span>
+                </div>
+                <div>
+                    <input type="hidden" asp-for="CommentId" value="@Model.CommentId" />
+                    <input type="hidden" asp-for="ThreadId" value="@Model.ThreadId" />
+                    <input type="hidden" asp-for="UserId" value="@Model.UserId" />
+                    <input type="hidden" asp-for="Title" value="@Model.Title" />
+
+                    <button type="submit" class="std-pink-btn mr-3 hidden" id="save-comment-@Model.CommentId">
+                        Save changes
+                    </button>
+                    <button class="std-purple-btn hidden" id="cancel-save-@Model.CommentId">
+                        Cancel
+                    </button>
+                </div>
+            </form>
         </div>
         <!--End of Main Content-->
     </div>

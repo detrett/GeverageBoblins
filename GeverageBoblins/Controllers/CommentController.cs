@@ -101,8 +101,8 @@ namespace GeverageBoblins.Controllers
             if (ModelState.IsValid)
             {
                 await _commentRepository.Update(comment);
-
-                return RedirectToAction(nameof(Container));
+ 
+                return Redirect($"{Url.Action("Container", "Thread", new { id = comment.ThreadId })}#comment-" + comment.CommentId);
             }
             return View(comment);
         }
