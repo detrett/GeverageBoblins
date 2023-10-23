@@ -13,19 +13,22 @@
     foreach (var thread in Model.Threads)
     {
         var lastComment = thread.Comments.LastOrDefault();
-        var value = DateTime.Compare(lastComment.CreatedAt, trueLastComment.CreatedAt);
-        if (value > 0)
+
+        // Added a null check for lastComment
+        if (lastComment != null)
         {
-            trueLastComment = lastComment;
+            var value = DateTime.Compare(lastComment.CreatedAt, trueLastComment.CreatedAt);
+            if (value > 0)
+            {
+                trueLastComment = lastComment;
+            }
         }
     }
 }
 
 <!--Subforum List-->
 <li>
-
     <div class="background-@Model.BackgroundColor row std-height">
-
         <!--Bubble icon-->
         <div class="col-1 icon-container hidden-mobile">
             <a asp-action="container" asp-controller="subforum" asp-route-id="@Model.SubforumId" title="Go to Subforum">
@@ -41,20 +44,16 @@
             <p class="margin-bt-12">
                 @Model.Description
             </p>
-
         </div>
 
         <div class="col-2 icon-container">
-
             <ul>
-
                 <!--Last poster user picture-->
                 <li class="centered">
                     <a href="#" title="Go to User Profile">
                         <i class="fa-regular fa-circle-user fa-2xl" style="color: #2d293c;"></i>
                     </a>
                 </li>
-
                 <!-- Only for mobile viewing : date of last post -->
                 <li class="only-mobile">
                     <p class="date-font">
@@ -70,32 +69,26 @@
                                 output = "yesterday";
                             else if (ts.TotalDays < 5)
                                 output = $"on {trueLastComment.CreatedAt.DayOfWeek}";
-                            else output = $"on {trueLastComment.CreatedAt.ToString("M")}";
+                            else
+                                output = $"on {trueLastComment.CreatedAt.ToString("M")}";
 
                             @output
                         }
                     </p>
                 </li>
-
             </ul>
-
         </div>
 
         <div class="col-md-5 forum-title-container-sm hidden-mobile">
-
             <!--Last post thread title-->
             <a href="@Url.Action("Container", "Thread", new { id = trueLastComment.ThreadId, trueLastComment.CommentId })"
                class="thread-title-font-lg" title="Go to Thread">
-            @*<a asp-action="container" asp-controller="thread" asp-route-id="@trueLastComment.ThreadId" class="thread-title-font-lg" title="Go to Thread">*@
-                <!--The following block of code finds which thread in the subforum has the latest comment, in order to use that thread's title-->
-                @{               
-                    var threadId = trueLastComment.ThreadId;
-                    foreach (var thread in Model.Threads)
+                @{
+                    // Find the thread with the matching ID
+                    var matchingThread = Model.Threads.FirstOrDefault(thread => thread.ThreadId == trueLastComment.ThreadId);
+                    if (matchingThread != null)
                     {
-                        if (thread.ThreadId == threadId)
-                        {
-                            @thread.Name
-                        }
+                        @matchingThread.Name
                     }
                 }
             </a>
@@ -104,56 +97,47 @@
             <p class="std-subtitle-font">
                 By
                 @{
-                    if (trueLastComment.User.Rank == "Admin")
+                    var user = trueLastComment.User;
+                    if (user != null)
                     {
-                        <a href="#" class="adminTitle"
-                           title="Go to User Profile">
-                            <!--The following block of code determines the last commented thread's author-->
-                            @trueLastComment.User.UserName
-                        </a>
+                        if (user.Rank == "Admin")
+                        {
+                            <a href="#" class="adminTitle" title="Go to User Profile">
+                                @user.UserName
+                            </a>
+                        }
+                        else if (user.Rank == "Mod")
+                        {
+                            <a href="#" class="modTitle" title="Go to User Profile">
+                                @user.UserName
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="#" class="memberTitle" title="Go to User Profile">
+                                @user.UserName
+                            </a>
+                        }
                     }
-                    else if (trueLastComment.User.Rank == "Mod")
-                    {
-                        <a href="#" class="modTitle"
-                           title="Go to User Profile">
-                            <!--The following block of code determines the last commented thread's author-->
-                            @trueLastComment.User.UserName
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="#" class="memberTitle"
-                           title="Go to User Profile">
-                            <!--The following block of code determines the last commented thread's author-->
-                            @trueLastComment.User.UserName
-                        </a>
-                    }
-                }
-
-                <!--The following block of code determines the best way to display the date since the last comment-->
-                @{
+                    <!--The following block of code determines the best way to display the date since the last comment-->
                     TimeSpan ts2 = DateTime.Now.Subtract(trueLastComment.CreatedAt);
                     var output2 = "";
 
                     if (ts2.TotalHours < 1)
-                        output2 = $"{ (int) ts2.TotalMinutes } minutes ago";
+                        output2 = $"{(int)ts2.TotalMinutes} minutes ago";
                     else if (ts2.TotalDays < 1)
-                        output2 = $"{(int) ts2.TotalHours} hours ago";
-                    else if (ts.TotalDays < 2)
+                        output2 = $"{(int)ts2.TotalHours} hours ago";
+                    else if (ts2.TotalDays < 2)
                         output2 = "yesterday";
                     else if (ts2.TotalDays < 5)
                         output2 = $"on {trueLastComment.CreatedAt.DayOfWeek}";
-                    else output2 = $"on {trueLastComment.CreatedAt.ToString("M")}";
-
-                    
+                    else
+                        output2 = $"on {trueLastComment.CreatedAt.ToString("M")}";
 
                     @output2
                 }
             </p>
-
-
         </div>
     </div>
 </li>
-
 <!--End of Forums Container-->
