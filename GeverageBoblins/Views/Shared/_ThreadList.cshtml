@@ -13,7 +13,6 @@
                 if (Model.IsAnnouncement ?? true)
                 {
                     <i class="fa-solid fa-bullhorn" data-bs-toggle="tooltip" title="Announcement"></i>
-
                 }
                 if (Model.IsPinned ?? true)
                 {
@@ -26,78 +25,82 @@
                        title="Featured Thread"></i>
                 }
             }
-
         </div>
 
         <!--Title-->
         <div class="col-9 col-md-7 forum-title-container">
-
             <div>
-
                 <a asp-action="container" asp-controller="thread" asp-route-id="@Model.ThreadId" class="thread-title-font std-link" title="Go to thread">
                     <span class="">@Model.Name &nbsp;</span>
                 </a>
-
-
-                <a href="@Url.Action("Container", "Thread", new { id = Model.ThreadId, Model.Comments.LastOrDefault().CommentId })"
-                   class="user-link hidden-mobile" title="Go to last comment">
-                    <i class="fa-solid fa-forward-step"></i>
-                </a>
-
+                @if (Model.Comments != null && Model.Comments.Any())
+                {
+                    <a href="@Url.Action("Container", "Thread", new { id = Model.ThreadId, commentId = Model.Comments.LastOrDefault().CommentId })"
+                       class="user-link hidden-mobile" title="Go to last comment">
+                        <i class="fa-solid fa-forward-step"></i>
+                    </a>
+                }
             </div>
             <p class="thread-subtitle-font">
                 By
                 @{
-                    if (Model.User.Rank == "Admin")
+                    if (Model.User != null)
                     {
-                        <a href="#" class="adminTitle"
-                           title="Go to User Profile">
-                            <!--The following block of code determines the last commented thread's author-->
-                            @Model.User.UserName
-                        </a>
+                        if (Model.User.Rank == "Admin")
+                        {
+                            <a href="#" class="adminTitle" title="Go to User Profile">@Model.User.UserName</a>
+                        }
+                        else if (Model.User.Rank == "Mod")
+                        {
+                            <a href="#" class="modTitle" title="Go to User Profile">@Model.User.UserName</a>
+                        }
+                        else
+                        {
+                            <a href="#" class="memberTitle" title="Go to User Profile">@Model.User.UserName</a>
+                        }
                     }
-                    else if (Model.User.Rank == "Mod")
-                    {
-                        <a href="#" class="modTitle"
-                           title="Go to User Profile">
-                            <!--The following block of code determines the last commented thread's author-->
-                            @Model.User.UserName
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="#" class="memberTitle"
-                           title="Go to User Profile">
-                            <!--The following block of code determines the last commented thread's author-->
-                            @Model.User.UserName
-                        </a>
-                    }
-                }
 
-                <!--The following block of code determines the best way to display the publish date-->
-                @{
                     TimeSpan ts = DateTime.Now.Subtract(Model.CreatedAt);
                     var output = "";
 
                     if (ts.TotalHours < 1)
+                    {
                         if (ts.TotalMinutes < 2)
+                        {
                             output = "1 minute ago";
-                        else output = $"{Math.Round(ts.TotalMinutes, 0)} minutes ago";
+                        }
+                        else
+                        {
+                            output = $"{Math.Round(ts.TotalMinutes, 0)} minutes ago";
+                        }
+                    }
                     else if (ts.TotalDays < 1)
+                    {
                         if (ts.TotalHours < 2)
+                        {
                             output = "1 hour ago";
-                        else output = $"{Math.Round(ts.TotalHours, 0)} hours ago";
+                        }
+                        else
+                        {
+                            output = $"{Math.Round(ts.TotalHours, 0)} hours ago";
+                        }
+                    }
                     else if (ts.TotalDays < 2)
+                    {
                         output = "yesterday";
+                    }
                     else if (ts.TotalDays < 5)
-                        output = $"on {@Model.CreatedAt.DayOfWeek}";
-                    else output = $"on {@Model.CreatedAt.ToString("M")}";
+                    {
+                        output = $"on {Model.CreatedAt.DayOfWeek}";
+                    }
+                    else
+                    {
+                        output = $"on {Model.CreatedAt.ToString("M")}";
+                    }
 
                     @output
                 }
-
             </p>
-
         </div>
 
         <!--Replies-->
@@ -116,72 +119,78 @@
             <div class="row">
                 <!--Icon-->
                 <div class="col-6 col-md-3 last-poster-icon">
-
                     <a href="" class="" title="Go to profile">
                         <i class="fa-regular fa-circle-user fa-2xl"></i>
                     </a>
-
                 </div>
-
                 <div class="col-md-9 centered-sm">
-
                     <div>
-                        @{
+                        @if (Model.Comments != null && Model.Comments.Any() && Model.Comments.LastOrDefault().User != null)
+                        {
                             if (Model.Comments.LastOrDefault().User.Rank == "Admin")
                             {
-                                <a href="#" class="adminTitle"
-                                   title="Go to User Profile">
-                                    <!--The following block of code determines the last commented thread's author-->
-                                    @Model.Comments.LastOrDefault().User.UserName
-                                </a>
+                                <a href="#" class="adminTitle" title="Go to User Profile">@Model.Comments.LastOrDefault().User.UserName</a>
                             }
                             else if (Model.Comments.LastOrDefault().User.Rank == "Mod")
                             {
-                                <a href="#" class="modTitle"
-                                   title="Go to User Profile">
-                                    <!--The following block of code determines the last commented thread's author-->
-                                    @Model.Comments.LastOrDefault().User.UserName
-                                </a>
+                                <a href="#" class="modTitle" title="Go to User Profile">@Model.Comments.LastOrDefault().User.UserName</a>
                             }
                             else
                             {
-                                <a href="#" class="memberTitle"
-                                   title="Go to User Profile">
-                                    <!--The following block of code determines the last commented thread's author-->
-                                    @Model.Comments.LastOrDefault().User.UserName
-                                </a>
+                                <a href="#" class="memberTitle" title="Go to User Profile">@Model.Comments.LastOrDefault().User.UserName</a>
                             }
                         }
-
                     </div>
-
                     <div>
-                        <a href="@Url.Action("Container", "Thread", new { id = Model.ThreadId, Model.Comments.LastOrDefault().CommentId })"
-                           class="user-link hidden-mobile" title="Go to last comment">
-                            @{
-                                TimeSpan ts2 = DateTime.Now.Subtract(Model.Comments.LastOrDefault().CreatedAt);
+                        @if (Model.Comments != null && Model.Comments.Any())
+                        {
+                            var lastComment = Model.Comments.LastOrDefault();
+                            if (lastComment != null)
+                            {
+                                TimeSpan ts2 = DateTime.Now.Subtract(lastComment.CreatedAt);
                                 var output2 = "";
 
                                 if (ts2.TotalHours < 1)
+                                {
                                     if (ts2.TotalMinutes < 2)
+                                    {
                                         output2 = "1 minute ago";
-                                    else output2 = $"{Math.Round(ts2.TotalMinutes, 0)} minutes ago";
+                                    }
+                                    else
+                                    {
+                                        output2 = $"{Math.Round(ts2.TotalMinutes, 0)} minutes ago";
+                                    }
+                                }
                                 else if (ts2.TotalDays < 1)
+                                {
                                     if (ts2.TotalHours < 2)
+                                    {
                                         output2 = "1 hour ago";
-                                    else output2 = $"{Math.Round(ts2.TotalHours, 0)} hours ago";
+                                    }
+                                    else
+                                    {
+                                        output2 = $"{Math.Round(ts2.TotalHours, 0)} hours ago";
+                                    }
+                                }
                                 else if (ts2.TotalDays < 2)
+                                {
                                     output2 = "yesterday";
+                                }
                                 else if (ts2.TotalDays < 5)
-                                    output2 = $"on {@Model.Comments.LastOrDefault().CreatedAt.DayOfWeek}";
-                                else output2 = $"on {@Model.Comments.LastOrDefault().CreatedAt.ToString("M")}";
-                            }
-                            @output2
-                        </a>
-                    </div>
+                                {
+                                    output2 = $"on {lastComment.CreatedAt.DayOfWeek}";
+                                }
+                                else
+                                {
+                                    output2 = $"on {lastComment.CreatedAt.ToString("M")}";
+                                }
 
+                                @output2
+                            }
+                        }
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</li> 
+</li>
