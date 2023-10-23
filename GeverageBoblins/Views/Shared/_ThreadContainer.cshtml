@@ -45,7 +45,8 @@
             }
         }
         @{
-            if (!User.Identity.IsAuthenticated)
+            System.Diagnostics.Debug.Assert(User.Identity != null, "User.Identity != null");
+            if (User.Identity.IsAuthenticated)
             {
 
                 var newComment = new Comment();
