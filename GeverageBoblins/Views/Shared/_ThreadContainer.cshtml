@@ -8,6 +8,13 @@
     </div>
 </div>
 
+<!--Go back to thread list-->
+<div class="pager-container topic-listing-link mt-4">
+    <a asp-action="container" asp-controller="subforum" asp-route-id="@Model.ParentSubforum.SubforumId">
+        <i class="fa-solid fa-chevron-left"></i> Go back to topic listing
+    </a>
+</div>
+
 <!--Start of Thread Container-->
 <section class="">
     <div class="thread-container background-dark card row">
@@ -88,7 +95,7 @@
                 <h1 class="modal-title fs-5 modal-font" id="editThreadLabel">Edit topic</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            @{ 
+            @{
                 var editThread = Model;
             }
             @await Html.PartialAsync("_EditThreadModal", @editThread);

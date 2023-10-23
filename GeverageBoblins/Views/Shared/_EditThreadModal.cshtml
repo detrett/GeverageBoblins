@@ -16,10 +16,11 @@
             <span asp-validation-for="Description" class="text-danger m-2-5"></span>
         </div>
         @{
-            Console.WriteLine("In _EditThreadModal: Model.Comments.Count(): " + @Model.Comments.Count());
+            Console.WriteLine("Thread Id: " + Model.ThreadId);
         }
         <input type="hidden" asp-for="UserId" value="@Model.UserId" />
         <input type="hidden" asp-for="SubforumId" value="@Model.SubforumId" />
+        <input type="hidden" asp-for="ThreadId" value="@Model.ThreadId" />
 
         @for (int i = 0; i < Model.Comments.Count; i++)
         {
@@ -36,16 +37,12 @@
             
         }
 
-
-
         <div class="d-flex">
             <button id="thread-edit" type="submit" class="mb-3 login-purple-btn m-2-5">
                 Save changes
             </button>
             <button type="button" class="mb-3 login-pink-btn m-2-5" data-bs-dismiss="modal">Discard changes</button>
         </div>
-
-
 
     </div>
 </form>
