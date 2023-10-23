@@ -110,7 +110,7 @@ namespace GeverageBoblins.Controllers
         {
             if (ModelState.IsValid)
             {
-                Console.WriteLine("Model State valid");
+                Console.WriteLine("Model State valid. Thread id: " + thread.ThreadId);
 
                 await _threadRepository.Update(thread);
 

@@ -909,7 +909,7 @@ a.memberTitle:hover {
 }
 
 .pager-container {
-    margin-left: 50px;
+    margin-left: 0px;
     padding: 0px;
     width: fit-content;
 }
