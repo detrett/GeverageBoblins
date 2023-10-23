@@ -143,6 +143,7 @@
     <None Include="wwwroot\lib\bootstrap\scss\_utilities.scss" />
     <None Include="wwwroot\lib\bootstrap\scss\_variables-dark.scss" />
     <None Include="wwwroot\lib\bootstrap\scss\_variables.scss" />
+    <None Remove="ForumDatabase.db-shm" />
   </ItemGroup>
 
   <ItemGroup>
