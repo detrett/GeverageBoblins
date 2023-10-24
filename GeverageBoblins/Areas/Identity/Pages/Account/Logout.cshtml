@@ -4,13 +4,39 @@
     ViewData["Title"] = "Log out";
 }
 
-<header>
+<style>
+   
+
+    .header-container {
+        text-align: center;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    .logout-text {
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    .logout-button {
+        background-color: #ecebd9;
+        color: black;
+    }
+</style>
+
+<!-- Page-specific content goes here -->
+<div class="header-container">
     <h1>@ViewData["Title"]</h1>
+</div>
+<div class="logout-text">
+    <p>Are you sure you want to log out?</p>
+</div>
+<div>
     @{
         if (User.Identity?.IsAuthenticated ?? false)
         {
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                <button type="submit" class="nav-link btn btn-link text-dark">Click here to Logout</button>
+                <button type="submit" class="btn btn-outline-dark logout-button">Click here to Logout</button>
             </form>
         }
         else
@@ -18,4 +44,8 @@
             <p>You have successfully logged out of the application.</p>
         }
     }
-</header>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
