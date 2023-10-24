@@ -31,14 +31,14 @@
                         // Add as many buttons as total pages are
                         for (var i = 1; i <= totalPages; i++)
                         {
-                            <li class="page-item @(i == currentPage ? "active" : "" )">
+                            <li class="mr-1 page-item @(i == currentPage ? "active" : "" )">
                                 <a class="page-link" href="#tab-@i">@i</a>
                             </li>
                             lastPageIndex = i;
 
                         }
-                        <li class="page-item shadow-none">
-                            <a class="page-link shadow-none" role="button" href="#tab-@lastPageIndex" aria-label="Last" data-bs-toggle="tooltip"
+                        <li class="page-item">
+                            <a class="page-link" role="button" href="#tab-@lastPageIndex" aria-label="Last" data-bs-toggle="tooltip"
                                title="Go to last page">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
