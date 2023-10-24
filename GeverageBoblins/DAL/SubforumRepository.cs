@@ -41,6 +41,7 @@ namespace GeverageBoblins.DAL
             return await _db.Subforums.FindAsync(id);
         }
 
+
         public async Task Update(Subforum subforum)
         {
             _db.Subforums.Update(subforum);

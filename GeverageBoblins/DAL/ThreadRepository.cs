@@ -49,6 +49,15 @@ namespace GeverageBoblins.DAL
             return await _db.Threads.ToListAsync();
         }
 
+        public async Task<IEnumerable<Models.Thread>?> GetTopicsBySubforum(int subforumId, int pageNumber, int pageSize)
+        {
+            return await _db.Threads.Where(t => t.SubforumId ==  subforumId)
+                .OrderByDescending(t => t.CreatedAt)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
         public async Task<Models.Thread?> GetThreadById(int id)
         {
             return await _db.Threads.FindAsync(id);

@@ -16,22 +16,39 @@
             <!--PAGINATION-->
             <nav aria-label="Page navigation" class="pagination-container col-10">
                 <ul class="pagination margin-bt-0">
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Last" data-bs-toggle="tooltip"
-                           title="Go to last page">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
+                    @{
+                        var currentPage = 1;
+                        var pageSize = 10;
+
+                        double totalPages = 1;
+                        // Find out how many pages we will need (10 topics per page)
+                        if (Model.Threads.Count() > 0)
+                        {
+                            totalPages = Math.Ceiling((double)Model.Threads.Count() / 10);
+                            Console.WriteLine(totalPages);
+                        }
+                        var lastPageIndex = 1;
+                        // Add as many buttons as total pages are
+                        for (var i = 1; i <= totalPages; i++)
+                        {
+                            <li class="page-item @(i == currentPage ? "active" : "" )">
+                                <a class="page-link" href="#tab-@i">@i</a>
+                            </li>
+                            lastPageIndex = i;
+
+                        }
+                        <li class="page-item shadow-none">
+                            <a class="page-link shadow-none" role="button" href="#tab-@lastPageIndex" aria-label="Last" data-bs-toggle="tooltip"
+                               title="Go to last page">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    }
                 </ul>
             </nav>
 
             @{
-                @*@if (User.Identity.IsAuthenticated)*@
+                if (User.Identity.IsAuthenticated)
                 {
                     <div class="col-2">
                         <button type="button" class="btn card-body new-thread-btn guest-disabled" data-bs-keyboard="false" data-bs-backdrop="static" data-bs-toggle="modal"
@@ -41,23 +58,19 @@
                         </button>
                     </div>
                 }
-
-                @*else
-                    {
-                        <div class="col-2">
-                            <a href="" class="btn card-body new-thread-btn guest-disabled disabled" role="button"
-                               aria-disabled="true" data-bs-toggle="tooltip" title="Make a new thread">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                                New Thread
-                            </a>
-                        </div>
-                    }*@
-
+                else
+                {
+                    <div class="col-2">
+                        <a href="" class="btn card-body new-thread-btn guest-disabled disabled" role="button"
+                           aria-disabled="true" data-bs-toggle="tooltip" title="Make a new thread">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            New Thread
+                        </a>
+                    </div>
+                }
             }
-
-
-
         </div>
+
         <!--End of Subforum Banner-->
         <!--Subforum Content-->
         <div>
@@ -94,16 +107,28 @@
                     var orderedThreads = Model.Threads.OrderByDescending(aTopic =>
                         aTopic.Comments.Any() ? aTopic.Comments.Max(comment => comment.CreatedAt) : DateTime.MinValue).ToList();
 
-                    var count = 0;
-                    // Load the threads
-                    foreach (var thread in orderedThreads)
-                    {
-                        @await Html.PartialAsync("_ThreadList", thread);
-
-                        count++;
-                    }
+                    var count = 1;
+                    // Load the threads, 10 threads per page
+                    <div class="tab-content">
+                        @for (var i = 1; i <= totalPages; i++)
+                        {
+                            <div class="tab-pane @(i == 1 ? "active" : "")" id="tab-@i">
+                                @for (var j = count; j <= currentPage * pageSize; j++)
+                                {
+                                    if (j <= orderedThreads.Count())
+                                    {
+                                        @await Html.PartialAsync("_ThreadList", orderedThreads[j - 1]);
+                                        count++;
+                                    }
+                                    else break;
+                                }
+                                @{
+                                    currentPage += 1;
+                                }
+                            </div>
+                        }
+                    </div>
                 }
-
             </ul>
         </div>
         <!--End of Subforum Content-->

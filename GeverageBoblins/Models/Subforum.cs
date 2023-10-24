@@ -24,6 +24,8 @@ namespace GeverageBoblins.Models
         public int ForumId { get; set; }
         public virtual Forum? ParentForum { get; set; }
 
+        public int CurrentPage { get; set; }
+
         public virtual List<Models.Thread>? Threads { get; set; } // List of threads inside of a subforum
     }
 }

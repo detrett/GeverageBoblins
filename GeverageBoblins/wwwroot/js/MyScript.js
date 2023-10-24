@@ -217,7 +217,10 @@ window.addEventListener('load', function () {
             return false;
         }
     }
-    document.getElementById('preview-tab').onclick = commentPreview;
+    if (document.getElementById('preview-tab') != null) {
+        document.getElementById('preview-tab').onclick = commentPreview;
+
+    }
 })
 
 
@@ -235,33 +238,58 @@ window.addEventListener('load', function () {
 
 /* SHARE MODAL */
 var shareModal = document.getElementById('shareModal')
-shareModal.addEventListener('show.bs.modal', function (event) {
+if (shareModal != null) {
+    shareModal.addEventListener('show.bs.modal', function (event) {
 
-    // Button that triggered the modal
-    var button = event.relatedTarget
-    // Extract info from data-bs-* attributes
-    var recipient = button.getAttribute('data-bs-id')
-    console.log(recipient)
-    // If necessary, you could initiate an AJAX request here
-    // and then do the updating in a callback.
-    //
-    // Update the modal's content.
-    var modalBodyInput = shareModal.querySelector('.modal-body input')
-    modalBodyInput.value = "https://localhost:7054/thread/container/" + recipient
-})
-
-/* COLLAPSE BOOTSTRAP */
-var collapser = function(forum_id) {
-    console.log("Member switch pressed. You are now a guest");
-    var collapseBtn = document.getElementById(`collapseBtn-${forum_id}`);
-    var collapseElement = document.getElementById(`collapseContent-${forum_id}`);
-
-    collapseBtn.addEventListener('click', function () {
-        console.log("Collapse triggered");
-        $(collapseElement).collapse('toggle');
-    });
+        // Button that triggered the modal
+        var button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+        var recipient = button.getAttribute('data-bs-id')
+        console.log(recipient)
+        // If necessary, you could initiate an AJAX request here
+        // and then do the updating in a callback.
+        //
+        // Update the modal's content.
+        var modalBodyInput = shareModal.querySelector('.modal-body input')
+        modalBodyInput.value = "https://localhost:7054/thread/container/" + recipient
+    })
 }
-$(document).ready(collapser);
+
+/* PAGINATION */
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("Pagination function loaded")
+    // Get all the pagination links
+    var tabs = document.querySelectorAll('.page-link');
+
+    tabs.forEach(function (tab) {
+        console.log("Tab function loaded")
+        tab.addEventListener('click', function (event) {
+            event.preventDefault();
+            console.log("Tab event listener triggered")
+
+            //Remove active class for all other pages
+            var listItems = document.querySelectorAll('.page-item');
+            listItems.forEach(function (li) {
+                li.classList.remove('active');
+            });
+            //Add active class to the current page
+            tab.parentElement.classList.add('active');
+
+            // Deactivate all tab panes
+            var tabPanes = document.querySelectorAll('.tab-pane');
+            tabPanes.forEach(function (pane) {
+                console.log("Removing active class for each tab pane")
+                pane.classList.remove('active');
+            });
+
+            // Activate the clicked tab's pane
+            var targetPaneId = tab.getAttribute('href');
+            var targetPane = document.querySelector(targetPaneId);
+            console.log("Adding active class for selected tab pane: ")
+            targetPane.classList.add('active');
+        });
+    });
+});
 
 console.log("End of MyScript.js")
 
