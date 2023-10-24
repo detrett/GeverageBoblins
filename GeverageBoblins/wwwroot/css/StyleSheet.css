@@ -169,8 +169,16 @@ a.memberTitle:hover {
 }
 
 .bg-gradient {
-    background: rgb(67, 59, 96) !important;
-    background: linear-gradient(90deg, #433B60 50%, #FFFEEB 100%) !important;
+    background-color: #D5D19C40;
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-image: none;
+    background-size: auto;
+    background-origin: padding-box;
+    background-clip: border-box;
+    /*background: linear-gradient(90deg, #433B60 50%, #FFFEEB 100%) !important;*/
     border-top-right-radius: 0.5rem;
     border-top-left-radius: 0.5rem;
 }
@@ -291,6 +299,10 @@ a.memberTitle:hover {
 
 .fa-message {
     text-shadow: -1px -1px 0 #00ffff80, 2px -2px 0 #F83A5B80, -2px 2px 0 #00ffff80, 1px 1px 0 #F83A5B80;
+}
+
+.fa-minus, .fa-plus, .list-title-font {
+    text-shadow: -1px -1px 0 #fc375c36, 1px -1px 0 #433b6036, -1.5px 1.5px 0 #433b60, 1px 1px 0 #433b6061;
 }
 
 .fa-user {
@@ -1217,6 +1229,10 @@ a {
     a[aria-expanded=false] .fa-minus {
         display: none;
     }
+
+i.fa-minus, i.fa-plus {
+    color: white;
+}
 
 body {
     background-color: #2d293c;

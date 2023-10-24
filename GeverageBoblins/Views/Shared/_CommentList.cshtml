@@ -6,26 +6,26 @@
         <!--Side content (Author, image, info)-->
         <div class="aside-post hidden-mobile col-md-2">
 
-            <h3 class="aside-user-style">
+            <h3 class="aside-user-style mb-4">
                 <!--Choosing class for color based on rank-->
                 @{
                     if (Model.User.Rank == "Admin")
                     {
-                        <a href="#" class="adminTitle user-link"
+                        <a href="#" class="adminTitle"
                            title="Go to User Profile">
                             @Model.User.UserName
                         </a>
                     }
                     else if (Model.User.Rank == "Mod")
                     {
-                        <a href="#" class="modTitle user-link"
+                        <a href="#" class="modTitle"
                            title="Go to User Profile">
                             @Model.User.UserName
                         </a>
                     }
                     else
                     {
-                        <a href="#" class="memberTitle user-link"
+                        <a href="#" class="memberTitle"
                            title="Go to User Profile">
                             @Model.User.UserName
                         </a>

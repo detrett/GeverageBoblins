@@ -7,7 +7,7 @@ if (window.location.href == "https://localhost:7054/") {
     window.location.href = 'https://localhost:7054/Forum/Container';
 }
 
-/* TOOLTIPS */
+/* TOOLTIPS BOOTSTRAP */
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
@@ -234,8 +234,8 @@ window.addEventListener('load', function () {
 
 
 /* SHARE MODAL */
-var exampleModal = document.getElementById('shareModal')
-exampleModal.addEventListener('show.bs.modal', function (event) {
+var shareModal = document.getElementById('shareModal')
+shareModal.addEventListener('show.bs.modal', function (event) {
 
     // Button that triggered the modal
     var button = event.relatedTarget
@@ -246,9 +246,22 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
     // and then do the updating in a callback.
     //
     // Update the modal's content.
-    var modalBodyInput = exampleModal.querySelector('.modal-body input')
+    var modalBodyInput = shareModal.querySelector('.modal-body input')
     modalBodyInput.value = "https://localhost:7054/thread/container/" + recipient
 })
+
+/* COLLAPSE BOOTSTRAP */
+var collapser = function(forum_id) {
+    console.log("Member switch pressed. You are now a guest");
+    var collapseBtn = document.getElementById(`collapseBtn-${forum_id}`);
+    var collapseElement = document.getElementById(`collapseContent-${forum_id}`);
+
+    collapseBtn.addEventListener('click', function () {
+        console.log("Collapse triggered");
+        $(collapseElement).collapse('toggle');
+    });
+}
+$(document).ready(collapser);
 
 console.log("End of MyScript.js")
 

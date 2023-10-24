@@ -127,7 +127,9 @@
                     var output2 = "";
 
                     if (ts2.TotalHours < 1)
-                        output2 = $"{(int)ts2.TotalMinutes} minutes ago";
+                        if (ts2.TotalMinutes < 2)
+                            output2 = "1 minute ago";
+                        else output2 = $"{(int)ts2.TotalMinutes} minutes ago";
                     else if (ts2.TotalDays < 1)
                         if (ts2.TotalHours >= 2)
                             output2 = $"{(int) ts2.TotalHours} hours ago";

@@ -3,6 +3,9 @@
 
 @foreach (var forum in Model)
 {
+
+    var id = forum.ForumId;
+
     <section class="forum-container">
 
         <!--Forum Header-->
@@ -10,22 +13,21 @@
 
             <h2 class="col-6 list-title-font">@forum.Name</h2>
 
-            <a class="col-6" href="#collapseContent-@forum.ForumId" data-bs-toggle="collapse" data-target="collapseContent-@forum.ForumId" role="button" aria-expanded="true"
-               aria-controls="collapseContent-@forum.ForumId">
-                <i class="fa-solid fa-minus icon-right" style="color: #2d293c;"></i>
-                <i class="fa-solid fa-plus icon-right" style="color: #2d293c;"></i>
+            <a class="col-6" data-bs-toggle="collapse" data-bs-target="#collapseContent-@id" id="collapseBtn-@id" role="button" aria-expanded="true">
+                <i class="fa-solid fa-minus icon-right"></i>
+                <i class="fa-solid fa-plus icon-right"></i>
             </a>
 
         </div>
 
-        <div class="show" id="collapseContent-@forum.ForumId">
+        <div class="collapse show" id="collapseContent-@id">
 
             <ul>
                 @{
                     var count = 0;
                     foreach (var subforum in forum.Subforums)
                     {
-                        if (count%2 > 0)
+                        if (count % 2 > 0)
                         {
                             subforum.BackgroundColor = "light";
                         }
