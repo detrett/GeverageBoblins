@@ -1,6 +1,13 @@
 ﻿@page
 @model IndexModel
+@inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> _userManager
+@using System.Security.Claims
+
 @{
+    // Getting the current user
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var currentUser = await _userManager.FindByIdAsync(userId);
+
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
@@ -25,27 +32,39 @@
 <!-- END OF HEAD -->
 
 
-    <h3 class="text-center std-color mt-5">@ViewData["Title"]</h3>
+<h3 class="text-center std-color mt-5">@ViewData["Title"]</h3>
 
-    <partial name="_StatusMessage" for="StatusMessage" />
+<partial name="_StatusMessage" for="StatusMessage" />
 
-    <div class="row justify-content-center mb-4">
-        <div class="col-md-6 mb-4">
-            <form id="profile-form" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-floating mt-4">
-                    <input asp-for="Username" class="form-control mb-1" disabled/>
-                    <label asp-for="Username" class="form-label"></label>
-                </div>
-                <div class="form-floating mt-3">
-                    <input asp-for="Input.PhoneNumber" class="form-control mb-2"/>
-                    <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                </div>
-                <button id="update-profile-button m" type="submit" class="w-100 std-pink-btn mt-3">Save</button>
-            </form>
-        </div>
+<div class="row justify-content-center mb-4">
+    <div class="col-md-6 mb-4">
+        <form method="post" enctype="multipart/form-data" asp-page-handler="UploadImage">
+            <div class="aside-user-photo-container m-auto">
+                <img src="#" class="img-avatar" alt="Image Preview" id="imagePreview" />
+            </div>
+            <div class="mt-4 text-center">
+                <input type="file" asp-for="UserPhoto" accept="image/*" name="userImage" id="imgInput" />
+            </div>
+            <div class="mt-3 text-center">
+                <input type="submit" value="Upload" />
+            </div>
+        </form>
+
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating mt-4">
+                <input asp-for="Username" class="form-control mb-1" disabled />
+                <label asp-for="Username" class="form-label"></label>
+            </div>
+            <div class="form-floating mt-3">
+                <input asp-for="Input.PhoneNumber" class="form-control mb-2" />
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <button id="update-profile-button m" type="submit" class="w-100 std-pink-btn mt-3">Save</button>
+        </form>
     </div>
+</div>
 
 
 @section Scripts {

@@ -1,7 +1,12 @@
 ﻿@model Comment
 
-@{ 
-    var currentUser = await Component.InvokeAsync("CurrentUser");
+@inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> _userManager
+@using System.Security.Claims
+
+@{
+    // Getting the current user
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var currentUser = await _userManager.FindByIdAsync(userId);
 }
 <!--Post start-->
 <article class="background-white card post-container" id="comment-@Model.CommentId">
@@ -40,10 +45,21 @@
             <ul>
                 <li>
                     <a href="#" class="aside-user-photo-container" title="Go to profile">
-                        <img src="~/images/ppic.png" alt="Profile Picture" class="img-avatar">
-                        @*<i class="fa-regular fa-circle-user aside-user-photo"></i>*@
+                        @{
+                            if (Model.User.UserPhoto != null)
+                            {
+                                var base64Image = Convert.ToBase64String(Model.User.UserPhoto);
+                                var source = String.Format("data:image/png;base64,{0}", base64Image);
+                                <img src="@source" alt="Profile Picture" class="img-avatar">
+                            }
+                            else
+                            {
+                                <i class="fa-regular fa-circle-user aside-user-photo"></i>
+                            }
+                        }
                     </a>
                 </li>
+
                 <li class="margin-bt-20">
                     <span class="aside-member-title">@Model.User.Rank</span>
                 </li>
@@ -84,7 +100,7 @@
                             @{
                                 <!--CHANGEME
                                     If user is the comment's owner or user is moderator/admin -->
-                                if (Model.UserId == 5 || Model.User.Rank == "Mod" || Model.User.Rank == "Admin")
+                                if (Model.UserId == currentUser.Id || currentUser.Rank == "Mod" || currentUser.Rank == "Admin")
                                 {
                                     <button class="dropdown-item" id="editBtn-@Model.CommentId" onclick="edit(@Model.CommentId)">
                                         <i class="fa-solid fa-pen padding-right-icon"></i>
@@ -106,8 +122,18 @@
 
                     <div class="post-top-user-photo-automargin">
                         <a href="#" class="post-top-user-photo-container" title="Go to profile">
-                            <img src="~/images/ppic.png" alt="Profile Picture" class="img-avatar">
-                            @*<i class="fa-regular fa-circle-user post-top-user-photo"></i>*@
+                            @{
+                                if (Model.User.UserPhoto != null)
+                                {
+                                    var base64Image = Convert.ToBase64String(Model.User.UserPhoto);
+                                    var source = String.Format("data:image/png;base64,{0}", base64Image);
+                                    <img src="@source" alt="Profile Picture" class="img-avatar">
+                                }
+                                else
+                                {
+                                    <i class="fa-regular fa-circle-user aside-user-photo"></i>
+                                }
+                            }
                         </a>
                     </div>
 
@@ -162,29 +188,28 @@
                     <input id="comment-@Model.CommentId-input" type="hidden" asp-for="Body" value="" />
                     <span asp-validation-for="@Model.Body" class="text-danger m-2-5"></span>
                 </div>
-                
-                    <input type="hidden" asp-for="CommentId" value="@Model.CommentId" />
-                    <input type="hidden" asp-for="ThreadId" value="@Model.ThreadId" />
-                    <input type="hidden" asp-for="UserId" value="@Model.UserId" />
-                    <input type="hidden" asp-for="Title" value="@Model.Title" />
 
-                    <button type="submit" class="std-pink-btn mr-3 hidden" id="save-comment-@Model.CommentId">
-                        Save changes
-                    </button>
+                <input type="hidden" asp-for="CommentId" value="@Model.CommentId" />
+                <input type="hidden" asp-for="ThreadId" value="@Model.ThreadId" />
+                <input type="hidden" asp-for="UserId" value="@Model.UserId" />
+                <input type="hidden" asp-for="Title" value="@Model.Title" />
 
-                    <button type="button" class="std-purple-btn hidden" id="cancel-save-@Model.CommentId">
-                        Cancel
-                    </button>
+                <button type="submit" class="std-pink-btn mr-3 hidden" id="save-comment-@Model.CommentId">
+                    Save changes
+                </button>
+
+                <button type="button" class="std-purple-btn hidden" id="cancel-save-@Model.CommentId">
+                    Cancel
+                </button>
             </form>
 
         </div>
-        
+
     </div>
     <!--End of Main Content-->
-    
+
 </article>
 <!--End of Post Content-->
-
 <!-- Sharing Modal -->
 <div class="modal fade" id="shareModal-@Model.CommentId" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

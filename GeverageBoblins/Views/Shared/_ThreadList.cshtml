@@ -121,7 +121,23 @@
                 <!--Icon-->
                 <div class="col-6 col-md-3 last-poster-icon">
                     <a href="" class="" title="Go to profile">
-                        <i class="fa-regular fa-circle-user fa-2xl"></i>
+                        @{
+                            if (Model.Comments.LastOrDefault().User.UserPhoto != null)
+                            {
+                                var base64Image = Convert.ToBase64String(Model.Comments.LastOrDefault().User.UserPhoto);
+                                var source = String.Format("data:image/png;base64,{0}", base64Image);
+                                <div class="useravatar-container">
+                                    <img src="@source" alt="Profile Picture" class="img-avatar">
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="usericon-container">
+                                     <i class="fa-regular fa-circle-user fa-2xl"></i>
+                                </div>
+                            }
+                        }
+
                     </a>
                 </div>
                 <div class="col-md-9 centered-sm">

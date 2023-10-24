@@ -291,5 +291,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// To preview image before submitting
+document.addEventListener("DOMContentLoaded", function () {
+    const imgInput = document.getElementById("imgInput");
+    const imagePreview = document.getElementById("imagePreview");
+
+    imgInput.addEventListener("change", function () {
+        const file = imgInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+});
+
 console.log("End of MyScript.js")
 

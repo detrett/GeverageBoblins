@@ -38,12 +38,6 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger m-7-5"></div>
 
                 <div class="form-floating mb-2">
-                    <div class="col-md-10">
-                        <input  asp-for="Input.UserPhoto" type="file" name="UserPhoto" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" aria-required="false"/>
-                    </div>
-                </div>
-
-                <div class="form-floating mb-2">
                     <input asp-for="Input.UserName" class="form-control custom-form-control" autocomplete="username" aria-required="true" />
                     <label asp-for="Input.UserName" class="form-label custom-form-label">
                         <i class="fa-regular fa-user"></i>

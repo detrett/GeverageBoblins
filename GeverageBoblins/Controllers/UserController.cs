@@ -1,7 +1,12 @@
 ﻿using GeverageBoblins.DAL;
 using GeverageBoblins.Models;
 using GeverageBoblins.ViewModels;
+using Humanizer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Metrics;
+using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
 
 
 namespace GeverageBoblins.Controllers
@@ -112,9 +117,10 @@ namespace GeverageBoblins.Controllers
             return RedirectToAction(nameof(Container));
         }
 
+
         public IActionResult Index()
-        {
-            return View();
-        }
+    {
+        return View();
+    }
     }
 }

@@ -94,7 +94,7 @@
                                 Replies
                             </p>
                         </div>
-                        <div class="col-3 subforum-title-container">
+                        <div class="col-3 subforum-title-container" id="lastPost">
                             <p>
                                 Last Post
                             </p>
@@ -156,7 +156,6 @@
             @{
                 var newThread = new GeverageBoblins.Models.Thread();
                 newThread.SubforumId = Model.SubforumId;
-                newThread.UserId = 5;
                 newThread.IsAnnouncement = false;
                 newThread.IsLocked = false;
                 newThread.IsFeatured = false;

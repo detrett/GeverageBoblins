@@ -473,11 +473,22 @@ a.memberTitle:hover {
     font-family: 'Inter', sans-serif;
 }
 
-.usericon-container{
-    
+.useravatar-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 500px;
+    text-decoration: none;
 }
+.useravatar-container .img-avatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid #2d293cb8;
+}
+
 .usericon-container i {
-        font-size: 48px;
+    font-size: 48px;
+    color: #2d293cc2;
 }
 
 .img-avatar {
@@ -866,7 +877,7 @@ a.memberTitle:hover {
 }
 
 .last-poster-container {
-    align-items: center;
+    align-items: normal;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1226,6 +1237,10 @@ input:focus {
     margin-bottom: 12px;
 }
 
+.std-subtitle-font{
+    margin-bottom: 0px;
+}
+
 .topic-listing-link {
     transition: transform 0.1s ease;
 }
@@ -1390,6 +1405,18 @@ ul {
 /** Ids **/
 #threadEdit {
     margin-right: 10px;
+}
+
+#imgInput {
+    width: 180px;
+}
+
+#imagePreview{
+
+}
+
+#lastPost {
+    margin-left: -3%;
 }
 
 #editThreadBtn {

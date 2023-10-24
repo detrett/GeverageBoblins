@@ -1,7 +1,11 @@
 ﻿@model Comment
+@inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> _userManager
+@using System.Security.Claims
+
 @{
-    Console.WriteLine("LOCATION: Partial View in _CommentBox");
-    Console.WriteLine("Model: " + Model.Thread.Name);
+    // Getting the current user
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var currentUser = await _userManager.FindByIdAsync(userId);
     ViewData["Title"] = "Comment Box";
 }
 <!--Message Box (MEMBER ONLY)-->
@@ -42,7 +46,7 @@
                 <span asp-validation-for="@Model.Body" class="text-danger m-2-5"></span>
 
                 <input type="hidden" asp-for="@Model.Title" value="@Model.Title" />
-                <input type="hidden" asp-for="@Model.UserId" value="@Model.UserId" />
+                <input type="hidden" asp-for="@Model.UserId" value="@currentUser.Id" />
                 <input type="hidden" asp-for="@Model.Thread" value="@Model.Thread" />
                 <input type="hidden" asp-for="@Model.ThreadId" value="@Model.ThreadId" />
 
@@ -62,24 +66,36 @@
                 <div class="row">
                     <!--Side content (Author, image, info)-->
                     <div class="aside-post hidden-mobile col-md-2">
-                        <a href="#" title="Go to profile" class="user-link">
-                            <h3 class="aside-user-style">Pengu</h3>
-                        </a>
+
+                        <h3 class="aside-user-style">@currentUser.UserName</h3>
+
                         <ul>
                             <li>
                                 <a href="#" class="aside-user-photo-container" title="Go to profile">
-                                    <i class="fa-regular fa-circle-user aside-user-photo"></i>
+                                    @{
+                                        if (currentUser.UserPhoto != null)
+                                        {
+                                            var base64Image = Convert.ToBase64String(currentUser.UserPhoto);
+                                            var source = String.Format("data:image/png;base64,{0}", base64Image);
+                                            <img src="@source" alt="Profile Picture" class="img-avatar">
+                                        }
+                                        else
+                                        {
+                                            <i class="fa-regular fa-circle-user aside-user-photo"></i>
+                                        }
+                                    }
                                 </a>
                             </li>
+
                             <li class="margin-bt-20">
-                                <span class="aside-member-title">Member</span>
+                                <span class="aside-member-title">@currentUser.Rank</span>
                             </li>
                             <li class="aside-left-align">
-                                <span class="aside-subtitle">Posts: 11</span>
+                                <span class="aside-subtitle">Posts: @(currentUser.UserComments.Count()+1)</span>
 
                             </li>
                             <li class="aside-left-align">
-                                <span class="aside-subtitle">Joined: 25th Sep, 2023</span>
+                                <span class="aside-subtitle">Joined: <time>@currentUser.CreatedAt.ToString("d MMM yyyy")</time></span>
 
                             </li>
                         </ul>
@@ -92,7 +108,7 @@
                             <div class="dropdown-center">
                                 <!--Ellipsis-->
                                 <a href="#" role="button" data-bs-toggle="dropdown"
-                                   aria-expanded="false">
+                                   aria-expanded="false" aria-disabled="true">
                                     <i class="fa-solid fa-ellipsis ellipsis"></i>
                                 </a>
 
@@ -103,15 +119,25 @@
                                 <div class="post-top-user-photo-automargin">
                                     <a href="#" class="post-top-user-photo-container"
                                        title="Go to profile">
-                                        <i class="fa-regular fa-circle-user post-top-user-photo"></i>
+                                        @{
+                                            if (currentUser.UserPhoto != null)
+                                            {
+                                                var base64Image = Convert.ToBase64String(currentUser.UserPhoto);
+                                                var source = String.Format("data:image/png;base64,{0}", base64Image);
+                                                <img src="@source" alt="Profile Picture" class="img-avatar">
+                                            }
+                                            else
+                                            {
+                                                <i class="fa-regular fa-circle-user aside-user-photo"></i>
+                                            }
+                                        }
                                     </a>
                                 </div>
 
                                 <div>
-                                    <a href="#" title="Go to profile">
-                                        <h4 class="post-top-title">Pengu</h4>
-                                    </a>
-                                    @{ 
+                                    <h4 class="post-top-title">@currentUser.UserName</h4>
+
+                                    @{
                                         DateTime currentDay = DateTime.Now;
                                         string formattedDate = currentDay.ToString("dd MMMM");
                                         Console.WriteLine(formattedDate);
@@ -124,10 +150,10 @@
                             </div>
 
                             <!-- For regular display -->
-                            <a href="#comment-3" title="Jump to comment">
-                                <h4 class="post-top-title hidden-mobile">Re: Pepsi Vs Coke</h4>
+                            <a href="#" title="Jump to comment">
+                                <h4 class="post-top-title hidden-mobile">@Model.Thread.Name</h4>
                             </a>
-                            <a href="#comment-3" class="post-top-subtitle hidden-mobile"
+                            <a href="#" class="post-top-subtitle hidden-mobile"
                                title="Jump to comment">
                                 Posted <time datetime="@currentDay.ToString()">@formattedDate</time>
                             </a>

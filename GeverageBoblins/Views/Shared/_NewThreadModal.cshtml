@@ -1,4 +1,12 @@
 ﻿@model Thread
+@inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> _userManager
+@using System.Security.Claims
+
+@{
+    // Getting the current user
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var currentUser = await _userManager.FindByIdAsync(userId);
+}
 
 <form asp-controller="Thread" asp-action="Create" method="post">
     <div class="modal-body">
@@ -16,7 +24,7 @@
             <span asp-validation-for="Description" class="text-danger m-2-5"></span>
         </div>
 
-        <input type="hidden" asp-for="UserId" value="@Model.UserId" />
+        <input type="hidden" asp-for="UserId" value="@userId" />
         <input type="hidden" asp-for="SubforumId" value="@Model.SubforumId" />
 
         <div class="d-flex">

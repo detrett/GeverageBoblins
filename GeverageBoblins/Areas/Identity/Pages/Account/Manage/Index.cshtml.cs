@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
-
+using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
@@ -31,6 +31,7 @@ namespace GeverageBoblins.Areas.Identity.Pages.Account.Manage
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public string Username { get; set; }
+        public IFormFile UserPhoto { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -111,6 +112,37 @@ namespace GeverageBoblins.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            await _signInManager.RefreshSignInAsync(user);
+            StatusMessage = "Your profile has been updated";
+            return RedirectToPage();
+        }
+
+
+        public async Task<IActionResult> OnPostUploadImageAsync(IFormFile userImage)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                await LoadAsync(user);
+                return Page();
+            }
+
+            if (userImage != null && userImage.Length > 0)
+            {
+                using var memoryStream = new MemoryStream();
+                await userImage.CopyToAsync(memoryStream);
+
+                // If storing in the database
+                user.UserPhoto = memoryStream.ToArray();
+                await _userManager.UpdateAsync(user);
+
+                // If storing in the file system, save the file and store the path in the database
+            }
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
