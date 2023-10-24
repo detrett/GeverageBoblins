@@ -6,15 +6,20 @@
 
 <style>
    
-
+    #Logout {
+        box-shadow: 0 0 4px 1px #FFFEEB, 0 0 6px 2px #f9a3b2 !important;
+        max-width: 550px; 
+        margin: 0 auto;
+    }
     .header-container {
         text-align: center;
-        color: white;
+        color: black;
         margin-bottom: 20px;
     }
 
     .logout-text {
-        color: white;
+        text-align: center;
+        color: black;
         margin-bottom: 20px;
     }
 
@@ -25,26 +30,29 @@
 </style>
 
 <!-- Page-specific content goes here -->
-<div class="header-container">
-    <h1>@ViewData["Title"]</h1>
-</div>
-<div class="logout-text">
-    <p>Are you sure you want to log out?</p>
-</div>
-<div>
-    @{
-        if (User.Identity?.IsAuthenticated ?? false)
-        {
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                <button type="submit" class="btn btn-outline-dark logout-button">Click here to Logout</button>
-            </form>
+<div id="Logout" class="rounded background-dark mt-4 pt-2">
+    <div class="header-container">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+    <div class="logout-text">
+        <p>Are you sure you want to log out?</p>
+    </div>
+    <div class="d-flex justify-content-center"> <!-- Center horizontally -->
+        @{
+            if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                    <button type="submit" class="btn btn-danger logout-button mb-2">Click here to Logout</button>
+                </form>
+            }
+            else
+            {
+                <p>You have successfully logged out of the application.</p>
+            }
         }
-        else
-        {
-            <p>You have successfully logged out of the application.</p>
-        }
-    }
+    </div>
 </div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
