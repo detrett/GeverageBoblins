@@ -32,22 +32,26 @@
             <h2 class="thread-page-title">@Model.Name</h2>
 
             @{
-                if (Model.UserId.ToString() == userId || currentUser.Rank == "Mod" || currentUser.Rank == "Admin")
+                if (User.Identity.IsAuthenticated)
                 {
-                    <button type="button" class="btn card-body std-purple-btn" data-bs-keyboard="false" data-bs-backdrop="static" data-bs-toggle="modal"
-                            data-bs-target="#editThread" id="editThreadBtn">
-                        <i class="fa-solid fa-file-pen"></i>
-                        Edit Topic
-                    </button>
+                    if (Model.UserId.ToString() == userId || currentUser.Rank == "Mod" || currentUser.Rank == "Admin")
+                    {
+                        <button type="button" class="btn card-body std-purple-btn" data-bs-keyboard="false" data-bs-backdrop="static" data-bs-toggle="modal"
+                                data-bs-target="#editThread" id="editThreadBtn">
+                            <i class="fa-solid fa-file-pen"></i>
+                            Edit Topic
+                        </button>
+                    }
+                    if (Model.UserId.ToString() == userId || currentUser.Rank == "Mod" || currentUser.Rank == "Admin")
+                    {
+                        <button type="button" class="btn card-body std-pink-btn" data-bs-keyboard="false" data-bs-backdrop="static" data-bs-toggle="modal"
+                                data-bs-target="#deleteThread" id="deleteThreadBtn">
+                            <i class="fa-solid fa-trash"></i>
+                            Delete
+                        </button>
+                    }
                 }
-                if (Model.UserId.ToString() == userId || currentUser.Rank == "Mod" || currentUser.Rank == "Admin")
-                {
-                    <button type="button" class="btn card-body std-pink-btn" data-bs-keyboard="false" data-bs-backdrop="static" data-bs-toggle="modal"
-                            data-bs-target="#deleteThread" id="deleteThreadBtn">
-                        <i class="fa-solid fa-trash"></i>
-                        Delete
-                    </button>
-                }
+
             }
         </div>
 

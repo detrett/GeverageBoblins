@@ -99,19 +99,23 @@
                         <li>
                             @{
                                 <!--CHANGEME
-                                    If user is the comment's owner or user is moderator/admin -->
-                                if (Model.UserId == currentUser.Id || currentUser.Rank == "Mod" || currentUser.Rank == "Admin")
+              If user is the comment's owner or user is moderator/admin -->
+                                if (User.Identity.IsAuthenticated)
                                 {
-                                    <button class="dropdown-item" id="editBtn-@Model.CommentId" onclick="edit(@Model.CommentId)">
-                                        <i class="fa-solid fa-pen padding-right-icon"></i>
-                                        Edit
-                                    </button>
-                                    <a href="" class="dropdown-item" data-bs-toggle="modal"
-                                       data-bs-target="#deleteModal-@Model.CommentId" data-bs-id="@Model.CommentId">
-                                        <i class="fa-solid fa-eraser padding-right-icon"></i>
-                                        Delete
-                                    </a>
+                                    if (Model.UserId == currentUser.Id || currentUser.Rank == "Mod" || currentUser.Rank == "Admin")
+                                    {
+                                        <button class="dropdown-item" id="editBtn-@Model.CommentId" onclick="edit(@Model.CommentId)">
+                                            <i class="fa-solid fa-pen padding-right-icon"></i>
+                                            Edit
+                                        </button>
+                                        <a href="" class="dropdown-item" data-bs-toggle="modal"
+                                           data-bs-target="#deleteModal-@Model.CommentId" data-bs-id="@Model.CommentId">
+                                            <i class="fa-solid fa-eraser padding-right-icon"></i>
+                                            Delete
+                                        </a>
+                                    }
                                 }
+
                             }
 
                         </li>
