@@ -7,7 +7,7 @@
 }
 
 <partial name="_StatusMessage" for="StatusMessage" />
-<h3>@ViewData["Title"]</h3>
+<h3 class="text-center mt-5">@ViewData["Title"]</h3>
 @{
     var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
     @if (consentFeature?.CanTrack ?? true)
@@ -46,20 +46,22 @@
             <a asp-page="./GenerateRecoveryCodes" class="btn btn-primary">Reset recovery codes</a>
         }
 
-        <h4>Authenticator app</h4>
+        <h4 class="text-center mt-2">Authenticator app</h4>
         @if (!Model.HasAuthenticator)
         {
-            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Add authenticator app</a>
+            <div class="text-center mt-5 mb-5"><a id="enable-authenticator" asp-page="./EnableAuthenticator" class="w-50 std-pink-btn">Add Authenticator</a></div>
         }
         else
         {
-            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Set up authenticator app</a>
-            <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-primary">Reset authenticator app</a>
+            <div class="text-center mt-3 mb-5">
+                <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="w-50 std-purple-btn">Set Up Authenticator</a>
+                <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="w-50 std-pink-btn">Reset Authenticator</a>
+            </div>
         }
     }
     else
     {
-        <div class="alert alert-danger">
+        <div class="alert alert-danger text-center mt-3">
             <strong>Privacy and cookie policy have not been accepted.</strong>
             <p>You must accept the policy before you can enable two factor authentication.</p>
         </div>

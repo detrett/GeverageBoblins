@@ -14,7 +14,7 @@ namespace GeverageBoblins.Models
         
         [NotMapped] // Exclude from database
         public string? Password { get; set; }
-        
+        public byte[]? UserPhoto { get; set; }
         public virtual ICollection<Thread> Threads { get; set; } = new List<Thread>();
         public virtual ICollection<Comment> UserComments { get; set; } = new List<Comment>();
     }

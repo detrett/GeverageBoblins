@@ -1,5 +1,5 @@
 ﻿@{
-    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
     {
         Layout = parentLayout.ToString();
     }
@@ -8,15 +8,16 @@
         Layout = "/Areas/Identity/Pages/Account/Manage/_Layout.cshtml";
     }
 }
+<link href="https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-    #Settings{
-    box-shadow: 0 0 4px 1px #FFFEEB, 0 0 6px 2px #f9a3b2 !important;
+    #Settings {
+        box-shadow: 0 0 4px 1px #FFFEEB, 0 0 6px 2px #f9a3b2 !important;
     }
 </style>
 
-<div id="Settings" class="rounded background-dark mt-4 pt-2">
-    <h2 class="text-center">Manage your account</h2>
+<div id="Settings" class="row inter std-color rounded background-dark mt-100 pt-2 pb-5">
+    <h2 class="text-center p-4">Manage your account</h2>
     <hr />
     <div class="row">
         <div class="col-md-3 border-dark-subtle">

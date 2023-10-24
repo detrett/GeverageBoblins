@@ -1,4 +1,8 @@
 ﻿@model Comment
+
+@{ 
+    var currentUser = await Component.InvokeAsync("CurrentUser");
+}
 <!--Post start-->
 <article class="background-white card post-container" id="comment-@Model.CommentId">
 
@@ -36,7 +40,8 @@
             <ul>
                 <li>
                     <a href="#" class="aside-user-photo-container" title="Go to profile">
-                        <i class="fa-regular fa-circle-user aside-user-photo"></i>
+                        <img src="~/images/ppic.png" alt="Profile Picture" class="img-avatar">
+                        @*<i class="fa-regular fa-circle-user aside-user-photo"></i>*@
                     </a>
                 </li>
                 <li class="margin-bt-20">
@@ -101,7 +106,8 @@
 
                     <div class="post-top-user-photo-automargin">
                         <a href="#" class="post-top-user-photo-container" title="Go to profile">
-                            <i class="fa-regular fa-circle-user post-top-user-photo"></i>
+                            <img src="~/images/ppic.png" alt="Profile Picture" class="img-avatar">
+                            @*<i class="fa-regular fa-circle-user post-top-user-photo"></i>*@
                         </a>
                     </div>
 

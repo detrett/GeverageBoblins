@@ -25,22 +25,24 @@
 <!-- END OF HEAD -->
 
 
-    <h3 class="text-center text-black">@ViewData["Title"]</h3>
+    <h3 class="text-center std-color mt-5">@ViewData["Title"]</h3>
+
     <partial name="_StatusMessage" for="StatusMessage" />
+
     <div class="row justify-content-center mb-4">
         <div class="col-md-6 mb-4">
             <form id="profile-form" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-floating">
+                <div class="form-floating mt-4">
                     <input asp-for="Username" class="form-control mb-1" disabled/>
                     <label asp-for="Username" class="form-label"></label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating mt-3">
                     <input asp-for="Input.PhoneNumber" class="form-control mb-2"/>
                     <label asp-for="Input.PhoneNumber" class="form-label"></label>
                     <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                 </div>
-                <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-outline-dark">Save</button>
+                <button id="update-profile-button m" type="submit" class="w-100 std-pink-btn mt-3">Save</button>
             </form>
         </div>
     </div>

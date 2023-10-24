@@ -469,6 +469,38 @@ a.memberTitle:hover {
 
 }
 
+.inter{
+    font-family: 'Inter', sans-serif;
+}
+
+.usericon-container{
+    
+}
+.usericon-container i {
+        font-size: 48px;
+}
+
+.img-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: solid #505050b0 1px;
+}
+
+.pl-1 {
+    padding-left: 4px !important;
+}
+
+.no-btn {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
 .custom-checkbox {
     margin-left: 7.5%;
 }
@@ -1343,6 +1375,15 @@ ul {
 .mr-50 {
     margin-right: 50px;
 }
+
+.mt-100 {
+    margin-top: 100px;
+}
+
+.palanquin {
+    font-family: "Palanquin Dark", sans-serif;
+}
+
 
 
 /**************************************************************************************************/
