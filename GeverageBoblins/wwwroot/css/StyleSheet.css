@@ -191,6 +191,10 @@ a.memberTitle:hover {
     border-bottom: 1px solid #D8C690;
 }
 
+.teaser-background {
+    background: #FFFFFF8A;
+}
+
 .border-round-bottom {
     border-bottom: 1px solid rgba(255, 0, 0, 0.125);
     border-bottom-left-radius: 0.25rem;

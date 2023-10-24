@@ -447,16 +447,18 @@ namespace GeverageBoblins.DAL
             var subforums = new List<Subforum>
             {
                 new Subforum {
+                    ForumId = 1,
                     Name = "Updates & Announcements",
                     Description = "Information about what's happening in the Beverage Goblins forum.",
                     Threads = new List<Models.Thread>
                     {
                         threads[0],
                         threads[8]
-                    }
+                    }        
                 },
                 new Subforum
                 {
+                    ForumId = 1,
                     Name = "Introduce Yourself",
                     Description = "A space for new members to introduce themselves to the community.",
                     Threads = new List<Models.Thread>
@@ -466,6 +468,7 @@ namespace GeverageBoblins.DAL
                     }
                 },
                 new Subforum {
+                    ForumId = 2,
                     Name = "Soft Drinks",
                     Description = "A place to discuss your favorite carbonated drinks.",
                     Threads = new List<Models.Thread>
@@ -476,6 +479,7 @@ namespace GeverageBoblins.DAL
                 },
                 new Subforum
                 {
+                    ForumId = 2,
                     Name = "Energy Drinks",
                     Description = "For those who are in search of a little boost.",
                     Threads = new List<Models.Thread>
@@ -485,6 +489,7 @@ namespace GeverageBoblins.DAL
                     }
                 },
                 new Subforum {
+                    ForumId = 2,
                     Name = "Water",
                     Description = "This is a space to discuss the importance of staying hydrated in a world full of tasty drinks.",
                     Threads = new List<Models.Thread>
@@ -495,6 +500,7 @@ namespace GeverageBoblins.DAL
                 },
                 new Subforum
                 {
+                    ForumId = 2,
                     Name = "Other Drinks",
                     Description = "Are you into smoothies, tea, kombucha or just plain old coffee? Discuss your love for all drinks that don't belong in the other forums.",
                     Threads = new List<Models.Thread>
@@ -504,6 +510,7 @@ namespace GeverageBoblins.DAL
                     }
                 },
                 new Subforum {
+                    ForumId = 3,
                     Name = "Off Topic",
                     Description = "Any serious topics that are unrelated to beverages should go in here.",
                     Threads = new List<Models.Thread>
@@ -514,6 +521,7 @@ namespace GeverageBoblins.DAL
                 },
                 new Subforum
                 {
+                    ForumId = 3,
                     Name = "Daily Rumble",
                     Description = "Long-running threads in which to discuss the small things about daily life.",
                     Threads = new List<Models.Thread>
@@ -569,6 +577,16 @@ namespace GeverageBoblins.DAL
                 context.SaveChanges();
             }
 
+            Console.WriteLine("In DBInit: Adding Forums");
+
+            if (!context.Forums.Any())
+            {
+                var items = forums;
+
+                context.AddRange(items);
+                context.SaveChanges();
+            }
+
             Console.WriteLine("In DBInit: Adding Subforums");
 
             if (!context.Subforums.Any())
@@ -584,16 +602,6 @@ namespace GeverageBoblins.DAL
             if (!context.Threads.Any())
             {
                 var items = threads;
-
-                context.AddRange(items);
-                context.SaveChanges();
-            }
-
-            Console.WriteLine("In DBInit: Adding Forums");
-
-            if (!context.Forums.Any())
-            {
-                var items = forums;
 
                 context.AddRange(items);
                 context.SaveChanges();

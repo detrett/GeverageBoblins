@@ -28,7 +28,8 @@
 
 <!--Subforum List-->
 <li>
-    <div class="background-@Model.BackgroundColor row std-height">
+    <div class="background-@Model.BackgroundColor row std-height
+         @(@Model.ParentForum.Subforums.LastOrDefault().SubforumId == @Model.SubforumId ? "border-round-bottom" : "")">
         <!--Bubble icon-->
         <div class="col-1 icon-container hidden-mobile">
             <a asp-action="container" asp-controller="subforum" asp-route-id="@Model.SubforumId" title="Go to Subforum">
