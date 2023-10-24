@@ -33,13 +33,21 @@ builder.Services.AddDbContext<ForumDbContext>(options =>
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     {
         options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ ";
-        options.Password.RequiredLength = 4;
-        options.Password.RequireDigit = false;
-        options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireUppercase = false;
-        // ... other configurations if needed
+        options.Password.RequiredLength = 6;
+        options.Password.RequireDigit = true; // Require at least one digit in the password
+        options.Password.RequireNonAlphanumeric = true; // Require at least one non-alphanumeric character
+        options.Password.RequireUppercase = true; // Require at least one uppercase letter
+
     })
     .AddEntityFrameworkStores<ForumDbContext>();
+
+// Configure lockout settings
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15); // Lockout duration
+    options.Lockout.MaxFailedAccessAttempts = 5; // Maximum number of failed attempts before lockout
+    options.Lockout.AllowedForNewUsers = false; // Whether lockout is enabled for new users
+});
 
 
 // Adding the Forum Repository
