@@ -32,6 +32,7 @@ builder.Services.AddDbContext<ForumDbContext>(options =>
 // Add Identity services
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     {
+        options.SignIn.RequireConfirmedAccount = false; 
         options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ ";
         options.Password.RequiredLength = 6;
         options.Password.RequireDigit = true; // Require at least one digit in the password
