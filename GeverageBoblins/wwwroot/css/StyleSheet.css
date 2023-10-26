@@ -1360,6 +1360,21 @@ ul {
     padding: 25px;
 }
 
+.circle-icon-2 {
+    background: #0BCACF;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: middle;
+    padding: 25px;
+}
+
+.fa-question {
+    color: aquamarine;
+}
+
 .fa-triangle-exclamation {
     color: #F83A5B;
 }
