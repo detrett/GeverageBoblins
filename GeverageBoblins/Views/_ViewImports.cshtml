@@ -2,9 +2,15 @@
 @using GeverageBoblins.Models
 @using GeverageBoblins.ViewModels
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> _userManager
+@using System.Security.Claims
 
-@*
-    Allows you to define common statements applied to all other views in the application
-    (Line3) is used to add tag helpers, which enables to create custom HTML elements (tags).
-    Here it enables routing and navigation, e.g., the pattern of “Controller/Action”.
+@*@{
+        // Getting the current user
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var currentUser = await _userManager.FindByIdAsync(userId);
+    }
+        Allows you to define common statements applied to all other views in the application
+        (Line3) is used to add tag helpers, which enables to create custom HTML elements (tags).
+        Here it enables routing and navigation, e.g., the pattern of “Controller/Action”.
 *@

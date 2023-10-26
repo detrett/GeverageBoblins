@@ -1,9 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using System.Security.Claims;
 @model Thread
-@inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> _userManager
-@using System.Security.Claims
-
 @{
     // Getting the current user
     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
