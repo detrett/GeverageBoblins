@@ -14,10 +14,30 @@
     #Settings {
         box-shadow: 0 0 4px 1px #FFFEEB, 0 0 6px 2px #f9a3b2 !important;
     }
+    #backToForum, #backToForum a, #backToForum i.fa-solid {
+        color: black;
+    }
+
+    .header-flex {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+    .header-flex > h2 {
+        flex-grow: 1;
+        text-align: center;
+    }
 </style>
 
 <div id="Settings" class="row inter std-color rounded background-dark mt-100 pt-2 pb-5">
-    <h2 class="text-center p-4">Manage your account</h2>
+    <div class="header-flex w-100 p-4">
+        <div id="backToForum" class="pager-container topic-listing-link">
+            <a asp-action="container" asp-controller="forum" class="">
+                <i class="fa-solid fa-chevron-left"></i> Go back to forum listing
+            </a>
+        </div>
+        <h2>Manage your account</h2>
+    </div>
     <hr />
     <div class="row">
         <div class="col-md-3 border-dark-subtle">
