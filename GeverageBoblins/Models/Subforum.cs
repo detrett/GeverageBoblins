@@ -9,7 +9,7 @@ namespace GeverageBoblins.Models
     public class Subforum
     {
         [Key]
-        public int SubforumId { get; set; }
+        public int SubforumId { get; set; } // All subforums require an Id
 
         [Required(ErrorMessage = "Name is required.")]
         [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{2,20}",
@@ -21,10 +21,10 @@ namespace GeverageBoblins.Models
 
         public string? BackgroundColor { get; set; } // Options: 'dark' or 'light'
 
-        public int ForumId { get; set; }
+        public int ForumId { get; set; }    // Mapping the relationship between forum/subforum
         public virtual Forum? ParentForum { get; set; }
 
-        public int CurrentPage { get; set; }
+        public int CurrentPage { get; set; }    
 
         public virtual List<Models.Thread>? Threads { get; set; } // List of threads inside of a subforum
     }
